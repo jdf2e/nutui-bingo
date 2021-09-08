@@ -1,0 +1,23 @@
+{
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/luckdraw/index",
+          "pathName": "pages/luckdraw/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}
