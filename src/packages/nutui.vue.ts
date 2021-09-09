@@ -1,9 +1,10 @@
 import { App } from 'vue';
 import Luckdraw from './__VUE/luckdraw/index.vue';
 import Luckmarquee from './__VUE/luckmarquee/index.vue';
+import Luckscratch from './__VUE/luckscratch/index.vue';
 
 function install(app: App) {
-  const packages = [Luckdraw,Luckmarquee];
+  const packages = [Luckdraw,Luckmarquee,Luckscratch];
   packages.forEach((item:any) => {
     if (item.install) {
       app.use(item);
@@ -12,5 +13,5 @@ function install(app: App) {
     }
   });
 }
-export { install, Luckdraw,Luckmarquee  };
+export { install, Luckdraw,Luckmarquee,Luckscratch  };
 export default { install, version:'0.0.1'};

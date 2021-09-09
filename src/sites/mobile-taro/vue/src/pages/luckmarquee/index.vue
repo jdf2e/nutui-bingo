@@ -1,7 +1,7 @@
 <template>
   <div class="demo">
     <h2>基础用法</h2>
-    <nut-pm-luckmarquee
+    <nut-bingo-luckmarquee
       :prize-list="prizeList"
       :prize-index="prizeIndex"
       :speed="100"
@@ -10,7 +10,7 @@
       @start-turns="startTurns"
       @end-turns="endTurns"
     >
-    </nut-pm-luckmarquee>
+    </nut-bingo-luckmarquee>
   </div>
 </template>
 

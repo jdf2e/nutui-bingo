@@ -192,8 +192,6 @@ export default create({
     };
     // 转动起来
     const rotate = (index:number) => {
-      console.log(index);
-      
       const turnsTimeNum = turnsTime;
       const rotateAngleValue =
         startRotateDegree.value +

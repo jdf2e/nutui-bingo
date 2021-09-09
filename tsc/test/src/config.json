@@ -113,6 +113,18 @@
             "show": true,
             "desc": "跑马灯抽奖",
             "author": "Ymm0008"
+        },
+        {
+            "version": "1.0.0",
+            "name": "Luckscratch",
+            "taro": true,
+            "tarodoc": false,
+            "sort": 1,
+            "cName": "刮刮卡抽奖",
+            "type": "component",
+            "show": true,
+            "desc": "刮刮卡抽奖",
+            "author": "Ymm0008"
         }
     ]
 }

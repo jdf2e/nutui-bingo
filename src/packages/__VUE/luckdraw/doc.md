@@ -1,9 +1,26 @@
 # LuckDraw 转盘抽奖
 
+### 介绍
+
+用于大转盘滚动抽奖场景，可配置奖品、图片、转盘样式等。
+
+### 安装
+``` javascript
+import { createApp } from 'vue';
+// vue
+import { Luckdraw } from '@nutui/nutui-bingo';
+// taro
+import { Luckdraw } from '@nutui/nutui-bingo-taro';
+
+const app = createApp();
+app.use(Luckdraw);
+```
+
+## 代码示例
 ## 基本用法
 
 ```html
-<nut-pm-luckdraw
+<nut-bingo-luckdraw
   class="drawTable"
   :luck-width="luckWidth"
   :luck-height="luckheight"
@@ -16,7 +33,7 @@
   @start-turns="startTurns"
   @end-turns="endTurns"
 >
-</nut-pm-luckdraw>
+</nut-bingo-luckdraw>
 ```
 
 ```javascript

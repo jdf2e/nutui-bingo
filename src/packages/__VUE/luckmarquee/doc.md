@@ -1,9 +1,27 @@
 # LuckDraw 转盘抽奖
 
+### 介绍
+
+用于跑马灯抽奖场景，可配置奖品、图片等。
+
+### 安装
+``` javascript
+import { createApp } from 'vue';
+// vue
+import { Luckmarquee } from '@nutui/nutui-bingo';
+// taro
+import { Luckmarquee } from '@nutui/nutui-bingo-taro';
+
+const app = createApp();
+app.use(Luckmarquee);
+```
+
+## 代码示例
+
 ## 基本用法
 
 ```html
-<nut-pm-luckmarquee
+<nut-bingo-luckmarquee
   :prize-list="prizeList"
   :prize-index="prizeIndex"
   :speed="100"
@@ -11,7 +29,7 @@
   @start-turns="startTurns"
   @end-turns="endTurns"
 >
-</nut-pm-luckmarquee>
+</nut-bingo-luckmarquee>
 ```
 
 ```javascript

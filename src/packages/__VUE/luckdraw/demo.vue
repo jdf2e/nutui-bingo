@@ -1,7 +1,7 @@
 <template>
   <div class="demo">
     <h2>基础用法</h2>
-    <nut-pm-luckdraw
+    <nut-bingo-luckdraw
       class="drawTable"
       ref="luckDrawPrize"
       :luck-width="luckWidth"
@@ -15,7 +15,7 @@
       @start-turns="startTurns"
       @end-turns="endTurns"
     >
-    </nut-pm-luckdraw>
+    </nut-bingo-luckdraw>
   </div>
 </template>
 
