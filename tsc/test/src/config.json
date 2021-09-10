@@ -125,6 +125,18 @@
             "show": true,
             "desc": "刮刮卡抽奖",
             "author": "Ymm0008"
+        },
+        {
+            "version": "1.0.0",
+            "name": "Luckgiftbox",
+            "taro": true,
+            "tarodoc": false,
+            "sort": 1,
+            "cName": "神秘大礼盒",
+            "type": "component",
+            "show": false,
+            "desc": "神秘大礼盒",
+            "author": "Ymm0008"
         }
     ]
 }
