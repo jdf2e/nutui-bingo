@@ -137,6 +137,18 @@
       "show": true,
       "desc": "神秘大礼盒",
       "author": "Ymm0008"
+    },
+    {
+      "version": "1.0.0",
+      "name": "Lucknine",
+      "taro": true,
+      "tarodoc": true,
+      "sort": 1,
+      "cName": "九宫格抽奖",
+      "type": "component",
+      "show": true,
+      "desc": "九宫格抽奖",
+      "author": "Drjingfubo"
     }
   ]
 }
