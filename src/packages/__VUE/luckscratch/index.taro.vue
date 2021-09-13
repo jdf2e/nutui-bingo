@@ -7,13 +7,13 @@
   >
     <div
       class="lucky-content"
-      v-html="result"
+      v-html="content"
       :style="{ backgroundColor: backgroundColor, fontSize: fontSize + 'px' }"
     ></div>
   </div>
 </template>
 <script lang="ts">
-import { ref, computed, nextTick, onMounted, reactive ,watch} from 'vue';
+import { ref, computed, nextTick, onMounted, reactive } from 'vue';
 import { createComponent } from '../../utils/create';
 const { componentName, create } = createComponent('luckscratch');
 import LuckyCard from './luckycard.js';
@@ -63,10 +63,8 @@ export default create({
         [prefixCls]: true,
       };
     });
-    const result=ref(props.content)
     const state:any = reactive({
-      luckcard: null,
-    
+      luckcard: null
     });
     const clearCover = () => {
       state.luckcard.clearCover();
@@ -89,16 +87,8 @@ export default create({
         ) as any;
       });
     });
-   watch(
-      () => props.content,
-      (val) => {
-        console.log("bian")
-        result.value=val;
-      }
-    );
+
     return {
-      ...state,
-      result,
       classes,
       luckycardDom
     };
