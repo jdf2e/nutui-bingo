@@ -1,7 +1,9 @@
 import Luckdraw from './__VUE/luckdraw/index.taro.vue';
 import Luckmarquee from './__VUE/luckmarquee/index.taro.vue';
+import Luckscratch from './__VUE/luckscratch/index.taro.vue';
+import Luckgiftbox from './__VUE/luckgiftbox/index.taro.vue';
 function install(app) {
-    const packages = [Luckdraw, Luckmarquee];
+    const packages = [Luckdraw, Luckmarquee, Luckscratch, Luckgiftbox];
     packages.forEach((item) => {
         if (item.install) {
             app.use(item);
@@ -11,5 +13,5 @@ function install(app) {
         }
     });
 }
-export { Luckdraw, Luckmarquee };
+export { Luckdraw, Luckmarquee, Luckscratch, Luckgiftbox };
 export default { install, version: '0.0.1' };
