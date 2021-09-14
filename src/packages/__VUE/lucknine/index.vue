@@ -14,7 +14,7 @@
       >
         <img
           :class="{ rotate: loadingDataState }"
-          src="//img13.360buyimg.com/imagetools/jfs/t1/190805/24/20092/1136/6126fce9E6c61cf21/acd44eec9fc694bd.png"
+          src="https://img13.360buyimg.com/imagetools/jfs/t1/190805/24/20092/1136/6126fce9E6c61cf21/acd44eec9fc694bd.png"
           alt="refresh.png"
         />
         <span>{{ drawTitle }}</span>
@@ -23,7 +23,7 @@
       <template v-else>
         <div class="front" @click="isStartDraw ? startFlop(index) : ''">
           <img
-            src="//img11.360buyimg.com/imagetools/jfs/t1/73511/35/17197/9388/613852cdE75dc6822/ddb31e0f3cfdcb81.png"
+            src="https://img11.360buyimg.com/imagetools/jfs/t1/73511/35/17197/9388/613852cdE75dc6822/ddb31e0f3cfdcb81.png"
           />
         </div>
         <div class="back">
