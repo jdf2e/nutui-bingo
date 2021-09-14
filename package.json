@@ -40,7 +40,7 @@
     "dev:taro:h5": "npm run checked:taro:vue && cd src/sites/mobile-taro/vue/ && npm run dev:h5",
     "build:site": "npm run checked && vite build",
     "build:gh-pages": "npm run checked && vite build --base=/nutui/",
-    "build:site:oss": "npm run checked && vite build --base=/nutui/3x/",
+    "build:site:oss": "npm run checked && vite build --base=/nutui/nutui-bingo/3x/",
     "build": "npm run checked && vite build --config vite.config.build.ts && npm run generate:types && npm run generate:themes",
     "build:taro:vue": "npm run checked:taro:vue && vite build --config vite.config.build.taro.vue.ts && npm run generate:types && npm run generate:themes",
     "build:disperse": "vite build --config vite.config.build.disperse.ts",

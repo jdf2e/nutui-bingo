@@ -142,7 +142,7 @@
             "version": "1.0.0",
             "name": "Lucknine",
             "taro": true,
-            "tarodoc": true,
+            "tarodoc": false,
             "sort": 1,
             "cName": "九宫格抽奖",
             "type": "component",
