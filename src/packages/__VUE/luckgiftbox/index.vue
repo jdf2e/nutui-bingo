@@ -8,22 +8,18 @@
   </view>
 </template>
 <script lang="ts">
-import { computed } from 'vue';
+import { computed, ref, watch, watchEffect } from 'vue';
 import { createComponent } from '../../utils/create';
 const { componentName, create } = createComponent('luckgiftbox');
 
 export default create({
   props: {
-    openActive: {
-      type: Boolean,
-      default: false
-    },
-    canGift: {
+    initPrize: {
       type: Boolean,
       default: true
     }
   },
-  emits: ['click'],
+  emits: ['start-turns', 'end-turns'],
 
   setup(props, { emit }) {
     const classes = computed(() => {
@@ -34,12 +30,42 @@ export default create({
       };
     });
 
+    const openActive = ref(false);
+
     const handleClick = (event: Event) => {
-      console.log(123);
+      if (openActive.value) {
+        return false
+      }
+      emit('start-turns');
+      openActive.value = true;
+      gift();
     };
+
+    const init = () => {
+      openActive.value = false;
+    }
+
+    const gift = () => {
+      let transitionFlag = true;
+      let gift: HTMLElement = document.getElementById('giftAnimate') as HTMLElement;
+      gift.addEventListener("webkitTransitionEnd", function(e){
+        if(e.target === e.currentTarget && transitionFlag) {
+          transitionFlag = false;
+          emit('end-turns');
+          removeListen();
+        }
+      });
+    }
+    
+    const removeListen = () => {
+      let gift: HTMLElement = document.getElementById('giftAnimate') as HTMLElement;
+      gift.removeEventListener("webkitTransitionEnd", function(){});
+    }
 
     return {
       classes,
+      init,
+      openActive,
       handleClick
     };
   }

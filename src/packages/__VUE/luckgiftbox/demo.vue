@@ -2,10 +2,12 @@
   <div class="demo">
     <h2>基础用法</h2>
     <nut-bingo-luckgiftbox
-    :openActive="open" @showPrize="showPrize" :canGift="this.isLocking"
+      ref="refChild"
+      @start-turns="startTurns"
+      @end-turns="endTurns"
     >
     </nut-bingo-luckgiftbox>
-    <nut-button type="primary" @click="openBox">开礼盒</nut-button>
+    <nut-button type="primary" @click="initBox">再来一次</nut-button>
   </div>
 </template>
 
@@ -16,13 +18,21 @@ const { createDemo } = createComponent('luckgiftbox');
 export default createDemo({
   props: {},
   setup() {
-    const open = ref(false);
-    const openBox = () => {
-      open.value = true;
+    const refChild = ref();
+    const initBox = () => {
+      refChild.value.init();
+    }
+    const startTurns = () => {
+      console.log('开始');
+    }
+    const endTurns = () => {
+      console.log('结束');
     }
     return {
-      open,
-      openBox,
+      refChild,
+      initBox,
+      startTurns,
+      endTurns
     };
   }
 });

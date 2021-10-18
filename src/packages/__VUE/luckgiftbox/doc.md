@@ -1,64 +1,65 @@
-# Temp xx组件
+# LuckGiftbox 神秘大礼盒
 
 ### 介绍
 
-基于 xxxxxxx
+用于礼盒抽奖长江，可配置图片、开始结束回调等。
 
 ### 安装
-
 ``` javascript
 import { createApp } from 'vue';
-import { Temp } from '@nutui/nutui';
+// vue
+import { Luckgiftbox } from '@nutui/nutui-bingo';
+// taro
+import { Luckgiftbox } from '@nutui/nutui-bingo-taro';
 
 const app = createApp();
-app.use(Temp);
-
+app.use(Luckgiftbox);
 ```
 
-## 代码演示
-
-### 基础用法1
-
-`Icon` 的 `name` 属性支持传入图标名称或图片链接。
+## 代码示例
+## 基本用法
 
 ```html
-<nut-temp name="wifi"></nut-temp>
-<nut-temp name="mail"></nut-temp>
+<nut-bingo-Luckgiftbox
+  ref="refChild"
+  @start-turns="startTurns"
+  @end-turns="endTurns"
+>
+</nut-bingo-Luckgiftbox>
+<nut-button type="primary" @click="initBox">再来一次</nut-button>
 ```
 
-### 基础用法2
-
-`Icon` 的 `name` 属性支持传入图标名称或图片链接。
-
-```html
-<nut-temp name="wifi"></nut-temp>
-<nut-temp name="mail"></nut-temp>
+```javascript
+export default {
+  setup() {
+    const refChild = ref();
+    const initBox = () => {
+      refChild.value.init();
+    }
+    const startTurns = () => {
+      console.log('开始');
+    }
+    const endTurns = () => {
+      console.log('结束');
+    }
+    return {
+      refChild,
+      initBox,
+      startTurns,
+      endTurns
+    };
+  }
+}
 ```
 
-### 基础用法3
-
-`Icon` 的 `name` 属性支持传入图标名称或图片链接。
-
-```html
-<nut-temp name="wifi"></nut-temp>
-<nut-temp name="mail"></nut-temp>
-```
 
 
-## API
-
-### Props
-
-| 参数         | 说明                             | 类型   | 默认值           |
-|--------------|----------------------------------|--------|------------------|
-| name         | 图标名称或图片链接               | String | -                |
-| color        | 图标颜色                         | String | -                |
-| size         | 图标大小，如 `20px` `2em` `2rem` | String | -                |
-| class-prefix | 类名前缀，用于使用自定义图标     | String | `nutui-iconfont` |
-| tag          | HTML 标签                        | String | `i`              |
 
 ### Events
 
-| 事件名 | 说明           | 回调参数     |
-|--------|----------------|--------------|
-| click  | 点击图标时触发 | event: Event |
+| 字段 | 说明 | 回调参数
+|----- | ----- | -----
+| init | 礼盒初始化 | - 
+| start-turns | 礼盒打开时候的回调函数 | - 
+| end-turns | 礼盒打开后的回调函数 | - 
+
