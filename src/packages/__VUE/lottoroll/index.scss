@@ -1,0 +1,43 @@
+.nut-bingo-lotto-roll {
+  display: block;
+  width: 100%;
+  .lotto-roll-content {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    .lotto-list {
+      position: absolute;
+      float: left;
+      display: block;
+      // will-change: top;
+      // transition: all linear 2s;
+      // transform: translateY(0);
+      // width: 100%;
+      // animation-name: example;
+      // animation-duration: 2s;
+      // animation-iteration-count: 2;
+      // animation-timing-function: linear;
+      // animation-fill-mode: forwards;
+    }
+  }
+  .lotto-item {
+    display: block;
+    width: 100px;
+    height: 100px;
+    .lotto-item-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+@keyframes example {
+  0%   {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-83.33333333%);
+  }
+}

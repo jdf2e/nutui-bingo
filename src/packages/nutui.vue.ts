@@ -1,12 +1,13 @@
 import { App } from 'vue';
 import Luckdraw from './__VUE/luckdraw/index.vue';
 import Luckmarquee from './__VUE/luckmarquee/index.vue';
+import Lucknine from './__VUE/lucknine/index.vue';
 import Luckscratch from './__VUE/luckscratch/index.vue';
 import Luckgiftbox from './__VUE/luckgiftbox/index.vue';
-import Lucknine from './__VUE/lucknine/index.vue';
+import lottoRoll from './__VUE/lottoroll/index.vue';
 
 function install(app: App) {
-  const packages = [Luckdraw,Luckmarquee,Luckscratch,Luckgiftbox,Lucknine];
+  const packages = [Luckdraw,Luckmarquee,Lucknine,Luckscratch,Luckgiftbox,lottoRoll];
   packages.forEach((item:any) => {
     if (item.install) {
       app.use(item);
@@ -15,5 +16,5 @@ function install(app: App) {
     }
   });
 }
-export { install, Luckdraw,Luckmarquee,Luckscratch,Luckgiftbox,Lucknine  };
+export { install, Luckdraw,Luckmarquee,Lucknine,Luckscratch,Luckgiftbox,lottoRoll  };
 export default { install, version:'0.0.1'};
