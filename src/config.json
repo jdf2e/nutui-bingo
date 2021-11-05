@@ -116,6 +116,18 @@
     },
     {
       "version": "1.0.0",
+      "name": "Lucknine",
+      "taro": true,
+      "tarodoc": false,
+      "sort": 1,
+      "cName": "九宫格抽奖",
+      "type": "component",
+      "show": true,
+      "desc": "九宫格抽奖",
+      "author": "Drjingfubo"
+    },
+    {
+      "version": "1.0.0",
       "name": "Luckscratch",
       "taro": true,
       "tarodoc": false,
@@ -140,15 +152,15 @@
     },
     {
       "version": "1.0.0",
-      "name": "Lucknine",
+      "name": "lottoRoll",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
-      "cName": "九宫格抽奖",
+      "cName": "摇奖机",
       "type": "component",
       "show": true,
-      "desc": "九宫格抽奖",
-      "author": "Drjingfubo"
+      "desc": "摇奖机",
+      "author": "Ymm0008"
     },
     {
       "version": "1.0.0",
