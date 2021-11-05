@@ -149,6 +149,18 @@
             "show": true,
             "desc": "九宫格抽奖",
             "author": "Drjingfubo"
+        },
+        {
+            "version": "1.0.0",
+            "name": "Luckeggs",
+            "taro": true,
+            "tarodoc": false,
+            "sort": 1,
+            "cName": "砸金蛋",
+            "type": "component",
+            "show": true,
+            "desc": "砸金蛋",
+            "author": "Drjingfubo"
         }
     ]
 }
