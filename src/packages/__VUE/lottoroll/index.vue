@@ -1,57 +1,50 @@
 <template>
-  <view class="nut-bingo-lotto-roll">
-    <view class="lotto-roll-content">
-      <view class="lotto-list"
-        v-for="(m, x) of rollList"
-        :key="m+x"
-        :style="{left: calLeft(x), transitionDelay: (500 * x) + 'ms', ...eleStyle[x]}"
-      >
-        <view class="lotto-item" v-for="(item, index) of prizeList" :key="'lottoroll' + index">
-          <img
-            class="lotto-item-img"
-            :src="item || 'https://img13.360buyimg.com/imagetools/jfs/t1/199182/28/5762/5964/612d8fc1E1b0ca970/036488ce58b4ae90.png'"
-          >
-        </view>
-        <view class="lotto-item" :key="'lottoroll-last'">
-          <img
-            class="lotto-item-img" 
-            :src="prizeList[0] || 'https://img13.360buyimg.com/imagetools/jfs/t1/199182/28/5762/5964/612d8fc1E1b0ca970/036488ce58b4ae90.png'"/>
-        </view>
-      </view>
-    </view>
-    <nut-button type="danger" @click="startRole">抽奖</nut-button>
-  </view>
+  <div class="nut-bingo-lotto-roll">
+    <div class="lotto-roll-wrap" v-for="(s, index) of 3" :key="index">
+      <div class="lotto-roll-content">
+        <div class="lotto-wrap">
+          <div class="lotto-item" v-for="(item, idx) in [...list, ...list]" :key="`'lotto'-${index}-${idx}`">
+            <div class="lotto-item-image" v-if="item.imagePath">
+              <img
+                class="lotto-item-img"
+                v-if="item.imagePath"
+                :src="item.imagePath"/>
+            </div>
+            <div class="lotto-item-content" v-if="item.text">{{item.text}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nut-button type="danger" @click="start">抽奖</nut-button>
 </template>
-<script lang="ts">
+
+<script>
 import { reactive, toRefs, ref, onMounted, onUnmounted, nextTick, watch, computed } from 'vue';
 import { createComponent } from '../../utils/create';
-const { componentName, create } = createComponent('lotto-roll');
+const { create } = createComponent('lotto-roll');
 
 export default create({
   props: {
     prizeList: {
-      required: true,
       type: Array,
       default: () => []
     },
     turnsTime: {
       type: Number,
-      default: 200
+      default: 0
+    },
+    turnsNumber: {
+      type: Number,
+      default: 0
     },
     prizeIndex: {
       type: Number,
       default: -1
     },
   },
-  components: {},
   emits: ["click", "start-turns", "end-turns"],
   setup(props, { emit }) {
-    const lock = ref(false);
-
-    const rollList = reactive([
-      'rollList1', 'rollList2', 'rollList3'
-    ])
-
     const prize = ref(props.prizeIndex);
     watch(
       () => props.prizeIndex,
@@ -60,142 +53,102 @@ export default create({
       }
     );
 
-    const eleStyle = reactive<any>([]);
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame 
+    const animationFun = window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      window.oRequestAnimationFrame || function(cb) { window.setTimeout(cb, 1000/60) }
 
-    const run1 = ref(0);
-    const run2 = ref(0);
-    const run3 = ref(0);
-    watch(
-      () => run1.value,
-      (val, prevVal) => {
-        eleStyle[0] = {
-          transition: val == 0 ? 'none' : `all linear ${props.turnsTime}ms`,
-          transform: `translateY(-${100 * val}px)`,
-        };
-        // 保证图片重置后再次进行循环滚动
-        setTimeout(() => {
-          if (val == 0) {
-            runStep1();
-          }
-        }, 20)
+    const list = props.prizeList; // 奖品列表
+    const options = ref(null); // 可视区域每列展示的奖品数
+    const startTime = ref(null);
+    const lock = ref(false); //上锁
+
+    const start = () => {
+      if (lock.value) {
+        return false;
       }
-    );
-    watch(
-      () => run2.value,
-      (val, prevVal) => {
-        eleStyle[1] = {
-          transition: val == 0 ? 'none' : `all linear ${props.turnsTime}ms`,
-          transform: `translateY(-${100 * val}px)`,
-        };
-        // 保证图片重置后再次进行循环滚动
-        setTimeout(() => {
-          if (val == 0) {
-            runStep2();
-          }
-        }, 20)
-      }
-    );
-    watch(
-      () => run3.value,
-      (val, prevVal) => {
-        eleStyle[2] = {
-          transition: val == 0 ? 'none' : `all linear ${props.turnsTime}ms`,
-          transform: `translateY(-${100 * val}px)`,
-        };
-        // 保证图片重置后再次进行循环滚动
-        setTimeout(() => {
-          if (val == 0) {
-            runStep3();
-          }
-        }, 20)
-      }
-    );
-
-    onMounted(() => {
-    });
-
-    onUnmounted(() => {
-    });
-
-    const calLeft = (index:number) => {
-      return `${index * 100 + 10 * index}px`;
-    }
-
-    const startRole = () => {
-      if(lock.value) {
+      emit("start-turns");
+      lock.value = true;
+      if (options.value) {
+        // 增加动画过程中，再次点击开始，立即结束动画，且置为对应中位置
+        options.value.forEach(item => {
+          item.isFinished = true;
+          const v = -item.location;
+          item.el.style.transform = "translateY(" + v + "px)";
+        })
         return;
       }
-      lock.value = true;
-      emit('start-turns');
-      nextTick(() => {
-        rollList.forEach((ele: string, index: number) => {
-          eleStyle.push({
-            transition: `all linear ${props.turnsTime}ms`,
-            transform: `translateY(-${100 * run1.value}px)`,
-          });
-        });
-        runStep1();
-        setTimeout(() => {
-          runStep2();
-        }, 300);
-        setTimeout(() => {
-          runStep3();
-        }, 700);
+      options.value = Array.from(document.getElementsByClassName("lotto-roll-wrap")).map((data, i) => {
+        const dom = document.getElementsByClassName("lotto-roll-wrap")[i];
+        const itemHeight = document.getElementsByClassName('lotto-item')[0].offsetHeight;
+        const prizeIndex = prize.value; // 中奖编号
+        if (prizeIndex < 0) {
+          prizeIndex = Math.floor(Math.random() * list.length);
+        }
+        // const prizeIndex = Math.floor(Math.random() * list.length); // 随机生成整数，测试用
+        const opts = {
+          el: dom.querySelector(".lotto-wrap"), //指向奖项元素的父级
+          location: prizeIndex * itemHeight, // 奖品滚动到指定的位置
+          rollTimes: 2000 + Math.random() * 500 + i * 500 + 1000 * props.turnsNumber, // 转圈数
+          height: list.length * itemHeight, // 总的高度
+          duration: 6000 + i * 2000 + props.turnsTime, // 动画时间，毫秒数
+          isFinished: false,
+        };
+        return opts;
       })
+      animationFun(animate);
     }
 
-    const runStep1 = () => {
-      run1.value++;
-      let timer:any = null;
-      clearInterval(timer);
-      timer = setInterval(() => {
-        if(run1.value > 4) {
-          run1.value = 0;
-          clearInterval(timer);
-        }else{
-          run1.value++;
+    const animate = (timestamp) => {
+      if(!options.value) {
+        return false;
+      }
+      // timestamp 当前的方法持续的毫秒数
+      if (startTime.value == null) {
+        startTime.value = timestamp; // 动画初始时间
+      }
+      const timeDiff = timestamp - startTime.value; //动画持续的时间
+      options.value.forEach((item) => {
+        if (item.isFinished) {
+          return;
         }
-      }, props.turnsTime);
-    }
-
-    const runStep2 = () => {
-      run2.value++;
-      let timer:any = null;
-      clearInterval(timer);
-      timer = setInterval(() => {
-        if(run2.value > 4) {
-          run2.value = 0;
-          clearInterval(timer);
-        }else{
-          run2.value++;
+        const time = Math.max(item.duration - timeDiff, 0); // 总的持续时间 - 动画持续时间 = 剩下的时间, 0 表示结束
+        const power = 3;
+        // Math.pow(time, power)表示: time 的 3 次幂;
+        const offset = (Math.pow(time, power) / Math.pow(item.duration, power)) * item.rollTimes;
+        let distance = -1 * Math.floor((offset + item.location) % item.height);
+        // 指定到同一个位置中奖
+        // if (time == 0) {
+          // let oneHeight = item.height / list.length;
+          // console.log(-1 * item.height + distance + Math.abs(distance - prize.value * oneHeight));
+          // console.log(distance, prize.value * oneHeight);
+        // }
+        item.el.style.transform = "translateY(" + distance + "px)";
+        if (timeDiff > item.duration) {
+          item.isFinished = true;
         }
-      }, props.turnsTime);
+      })
+      if (options.value.every((m) => m.isFinished)) {
+        emit("end-turns");
+        lock.value = false;
+        options.value = null;
+        startTime.value = null;
+      } else {
+        animationFun(animate);
+      }
     }
-
-    const runStep3 = () => {
-      run3.value++;
-      let timer:any = null;
-      clearInterval(timer);
-      timer = setInterval(() => {
-        if(run3.value > 4) {
-          run3.value = 0;
-          clearInterval(timer);
-        }else{
-          run3.value++;
-        }
-      }, props.turnsTime);
-    }
-
+    
     return {
-      rollList,
-      eleStyle,
-      calLeft,
-      startRole,
-      run1
-    };
+      list,
+      start,
+    }
   }
+
 });
 </script>
-<style lang="scss">
-@import 'index.scss';
+<style lang="scss" scoped>
+@import './index.scss'
 </style>
+
