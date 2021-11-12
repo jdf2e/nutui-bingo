@@ -161,6 +161,18 @@
             "show": true,
             "desc": "摇奖机",
             "author": "Ymm0008"
+        },
+        {
+            "version": "1.0.0",
+            "name": "Luckshake",
+            "taro": true,
+            "tarodoc": false,
+            "sort": 1,
+            "cName": "摇一摇",
+            "type": "component",
+            "show": true,
+            "desc": "摇一摇",
+            "author": "ailululu"
         }
     ]
 }
