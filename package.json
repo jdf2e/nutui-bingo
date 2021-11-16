@@ -64,8 +64,10 @@
     }
   },
   "dependencies": {
+    "@jd/upload-oss-tools": "^1.1.21",
     "@nutui/nutui": "^3.1.4",
     "sass": "^1.34.0",
+    "vconsole": "^3.9.4",
     "vue": "^3.0.5",
     "vue-router": "^4.0.4"
   },
