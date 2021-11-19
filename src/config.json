@@ -194,6 +194,18 @@
       "show": true,
       "desc": "摇一摇",
       "author": "ailululu"
+    },
+    {
+      "version": "1.0.0",
+      "name": "Dollmachine",
+      "taro": true,
+      "tarodoc": false,
+      "sort": 1,
+      "cName": "娃娃机",
+      "type": "component",
+      "show": true,
+      "desc": "娃娃机",
+      "author": "Ymm0008"
     }
   ]
 }

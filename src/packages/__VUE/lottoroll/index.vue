@@ -83,14 +83,14 @@ export default create({
       options.value = Array.from(document.getElementsByClassName("lotto-roll-wrap")).map((data, i) => {
         const dom = document.getElementsByClassName("lotto-roll-wrap")[i];
         const itemHeight = document.getElementsByClassName('lotto-item')[0].offsetHeight;
-        const prizeIndex = prize.value; // 中奖编号
-        if (prizeIndex < 0) {
-          prizeIndex = Math.floor(Math.random() * list.length);
+        let prizeIdx = prize.value; // 中奖编号
+        if (prizeIdx < 0) {
+          prizeIdx = Math.floor(Math.random() * list.length);
         }
         // const prizeIndex = Math.floor(Math.random() * list.length); // 随机生成整数，测试用
         const opts = {
           el: dom.querySelector(".lotto-wrap"), //指向奖项元素的父级
-          location: prizeIndex * itemHeight, // 奖品滚动到指定的位置
+          location: prizeIdx * itemHeight, // 奖品滚动到指定的位置
           rollTimes: 2000 + Math.random() * 500 + i * 500 + 1000 * props.turnsNumber, // 转圈数
           height: list.length * itemHeight, // 总的高度
           duration: 6000 + i * 2000 + props.turnsTime, // 动画时间，毫秒数
