@@ -59,7 +59,7 @@ export default create({
     // 红包雨时间
     rainTime: {
       type: Number,
-      default: 10000,
+      default: 30000,
     },
     // 红包数量
     rainNum: {
