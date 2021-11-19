@@ -1,0 +1,52 @@
+.nut-bingo-luckshake {
+  width: 100%;
+  padding-top: 210px;
+  .shake-box {
+    margin: 0 auto;
+  }
+  .shake-box-img {
+    width: 195px;
+    height: 166px;
+    margin: 0 auto;
+    animation: rockit .6s ease infinite alternate;
+    img {
+      width: 100%;
+    }
+  }
+  .shake-num {
+    width: 140px;
+    margin: 20px auto 0;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+  }
+  .pointer {
+    position: absolute;
+    right: 36px;
+    top: 160px;
+    z-index: 99;
+    animation: clickShake .6s ease infinite alternate;
+    transform-origin: 80% 80%;
+    transform: rotate(23deg);
+    img {
+      width: 100%;
+    }
+  }
+}
+@keyframes rockit {
+  0% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes clickShake {
+  0%, 100% {
+    transform: rotate(23deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+}
