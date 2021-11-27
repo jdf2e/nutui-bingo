@@ -1,22 +1,22 @@
 <template>
   <view :class="classes">
     <view class="shake-box" :style="styles">
-      <view class="shake-box-img">
-        <img :src="luckImg" />
+      <view class="shake-box-img" :class="[loading ? 'animation': 'rockit']">
+        <img class="img-top" :src="luckImgTop" />
+        <img class="img-bottom" :src="luckImgBottom" />
       </view>
     </view>
     <slot name="shake-num"></slot>
-    <view v-if="clickPoint" class="pointer" :style="pointerStyle" @click="clickShake">
+    <view v-if="clickPoint" class="pointer" :class="[loading ? '' : 'clickShake']" :style="pointerStyle" @click="clickShake">
       <img :src="clickPoint" />
     </view>
     <slot></slot>
   </view>
 </template>
 <script lang="ts">
-import { ref, toRefs, watch, computed, onMounted, onUnmounted, watchEffect, reactive } from 'vue';
+import { ref, computed, onMounted, onUnmounted, reactive } from 'vue';
 import { createComponent } from '../../utils/create';
 const { componentName, create } = createComponent('luckshake');
-import { Toast } from "@nutui/nutui";
 import Vconsole from 'vconsole'
 // let vConsole = new Vconsole()
 
@@ -31,15 +31,35 @@ export default create({
       type: String,
       default: '106px'
     },
-    luckImg: {
+    luckImgTop: {
       type: String,
-      default: '//img10.360buyimg.com/imagetools/jfs/t1/170552/22/23757/62926/6184db02Ef8e39eb2/d75b18ebfc850ff0.png'
+      default: '//img13.360buyimg.com/imagetools/jfs/t1/203344/20/16885/31149/61a07610E2520903c/899a906f039535b0.png'
+    },
+    luckImgBottom: {
+      type: String,
+      default: '//img13.360buyimg.com/imagetools/jfs/t1/208979/10/10371/28087/61a07610Ee1e2f1b4/5b6fa12658906939.png'
+    },
+    luckImgLeft: {
+      type: String,
+      default: '//img10.360buyimg.com/imagetools/jfs/t1/155853/24/24382/2453/61a088d9Eea945287/8e952421cb2ce208.png'
+    },
+    luckImgRight: {
+      type: String,
+      default: '//img10.360buyimg.com/imagetools/jfs/t1/135987/21/24696/2463/61a088d9Ebff19f9c/10d756c1d75ee03f.png'
     },
     clickPoint: {
       type: String,
       default: '//img11.360buyimg.com/ling/jfs/t1/104643/13/16899/24402/5e830316E70f93784/3f9e9b0d6e11db14.png'
     },
+    shakeNum: {
+      type: Number,
+      default: 3
+    },
     durationTime: {
+      type: Number,
+      default: 1000
+    },
+    durationAnimation: {
       type: Number,
       default: 1000
     },
@@ -54,7 +74,32 @@ export default create({
   },
   emits: ["click-shake", "shake-event"],
   setup(props: any, { emit }: any) {
-    let { luckWidth, luckHeight, durationTime } = reactive(props);
+    let { luckWidth, luckHeight, shakeNum, durationTime, durationAnimation } = reactive(props);
+
+    let loading = ref(false);
+
+    let shakeInfo = ref({
+      openFlag: false,  // 是否开启摇一摇，如果是小程序全局监听摇一摇，这里默认为true
+      shakeSpeed: 110,  // 设置阈值，越小越灵敏
+      lastTime: 0,  // 此变量用来记录上次摇动的时间
+      x: 0,
+      y: 0,
+      z: 0, // 记录对应 x、y、z 三轴的数值
+      lastX: 0,
+      lastY: 0,
+      lastZ: 0, // 记录对应 x、y、z 三轴上次的数值
+    });
+
+    onMounted(() => {
+      openShakeEvent();  // 打开摇一摇功能
+      shakeChange()  //开启摇一摇
+    });
+
+    // 页面销毁时，取消监听
+    onUnmounted(() => {
+      window.removeEventListener("devicemotion", shake, false);
+      closeShakeEvent()  // 关闭摇一摇功能
+    });
 
     const classes = computed(() => {
       const prefixCls = componentName;
@@ -70,162 +115,94 @@ export default create({
       }
     })
 
-    onMounted(() => {
-      init();
-    });
-
-    // 页面销毁时，取消监听
-    onUnmounted(() => {
-      
-    });
-
-    // 摇一摇抽奖次数
-    let shakeIndex = ref(0);
-
-    let isStartShake = ref(false);
-    
-    const init = () => {
-      console.log('00')
-      // 监听震动事件
-      // IOS 13.3 需要用户触发，再能开启摇一摇 
-      if (isStartShake.value) return;
-      console.log('11')
-      isStartShake.value = true;
-      shakeIndex.value = addShake(() => {
-        console.log('22')
-        emit('shake-event');
-      })
-    };
-
-    const clickShake = () => {
-      // IOS 13.3 需要用户触发，再能开启摇一摇 
-      mobileShake(durationTime);
-      
-    };
-
-    /*
-      addShake 添加摇一摇功能
-      参数：cbShake 类型 fn 当用户进行了摇一摇之后要做的事情
-      返回值：shakeIndex 开启的第几个摇一摇功能的索引，用来删除监听
-    */
-    const addShake = (cbShake: { (): void; (arg0: any): void; }) => {
-      const maxRange = 60; // 当用户的两次加速度差值大于这个幅度，判定用户进行了摇一摇功能
-      const minRange = 10; // 当用户的两次加速度差值小于这个幅度，判定用户停止摇动手机
-      let isShake = false; // 记录用户是否摇动手机
-      let lastX = 0,
-          lastY = 0,
-          lastZ = 0;
-      let toShake = (e: any) => {
-        let motion = e.acceleration;
-        let { x, y, z } = motion;
-        let range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
-        if (range > maxRange) { // 用户进行了摇一摇
-          isShake = true;
-        }
-        if (range < minRange && isShake) { // 停止摇一摇
-          cbShake(e);
-          isShake = false;
-        }
-        lastX = x;
-        lastY = y;
-        lastZ = z;
-      }
-      const _window = window as any;
-      if (!_window.shakeEvent) { // 建立 shakeEvent 存储所有的摇一摇的处理函数，方便一会取消
-        _window.shakeEvent = [];
-      }
-      console.log('33')
-      // toShake = throttle(toShake);
-      _window.shakeEvent.push(toShake);
-      setDeviceMotion(toShake, (errMessage: any) => {
-        (Toast as any).text(errMessage);
-      })
-      return _window.shakeEvent.length - 1;//返回该次摇一摇处理的索引
+    // 开启摇一摇
+    const openShakeEvent = () => {
+      shakeInfo.value.openFlag = true;
     }
-    
-    /*
-      setDeviceMotion 添加陀螺仪监控
-      参数： cb devicemotion的事件处理函数; errCb 不支持devicemotion时的处理回调
-    */
-    const setDeviceMotion = (cb: { (e: any): void; (this: Window, ev: DeviceMotionEvent): any; (this: Window, ev: DeviceMotionEvent): any; }, errCb: { (errMessage: any): void; (arg0: string): void; }) => {
-      console.log('55')
-      if (!window.DeviceMotionEvent) {
-        console.log('66')
-        errCb("设备不支持DeviceMotion");
+
+    // 关闭摇一摇
+    const closeShakeEvent = () => {
+      shakeInfo.value.openFlag = false;
+    }
+
+    //摇一摇成功
+    const shakeOk = () => {
+      // closeShakeEvent();
+      loading.value = true;
+    }
+
+    // 开启摇一摇
+    const shakeChange = () => {
+      // 防止多次点击触发
+      if(loading.value) return
+      // loading.value = true;
+      if (window.DeviceMotionEvent) {
+        window.addEventListener('devicemotion', shake, false) //devicemotion:获取设备的运动状态
+      }
+    }
+
+    // 判断是否为摇一摇
+    const shake = (eventData: any) => {
+      if (!shakeInfo.value.openFlag) {
         return;
       }
-      console.log('77')
-      if (typeof DeviceMotionEvent.requestPermission === 'function') {
-        // IOS13 设备
-        console.log('88')
-        DeviceMotionEvent.requestPermission()
-          .then(permissionState => {
-            if (permissionState === 'granted') {
-              console.log('888')
-              window.addEventListener('devicemotion', cb);
-            }
-          })
-          .catch((err: any) => {
-            console.log('889')
-            errCb("用户未允许权限");
-          });
-      } else {
-        console.log('99')
-        // 其他支持加速度检测的系统
-        let timer = setTimeout(function () {
-          errCb("用户未开启权限");
-        }, 1000);
-        window.addEventListener("devicemotion", (e) => {
-          clearTimeout(timer);
-        }, { once: true });
-        window.addEventListener("devicemotion", cb);
+      let acceleration = eventData.accelerationIncludingGravity;
+      let nowTime = new Date().getTime();// 当前时间戳
+      if (nowTime - shakeInfo.value.lastTime > 100) {//手机抖动的时间要大于100ms,防止用户拿手机时，突然抖动而触发摇一摇功能
+        let diffTime = nowTime - shakeInfo.value.lastTime;
+        shakeInfo.value.lastTime = nowTime;
+        shakeInfo.value.x = acceleration.x;// 表示x轴（西到东）上的加速度
+        shakeInfo.value.y = acceleration.y;// 表示y轴（南到北）上的加速度
+        shakeInfo.value.z = acceleration.z;// 表示z轴（下到上）上的加速度
+        // 计算摇一摇的速度
+        let speed =
+          (Math.abs(
+            shakeInfo.value.x + shakeInfo.value.y + shakeInfo.value.z - shakeInfo.value.lastX - shakeInfo.value.lastY - shakeInfo.value.lastZ
+          ) /
+            diffTime) *
+          10000;
+        if (speed > shakeInfo.value.shakeSpeed) { // 速度要大于设置的阈值，证明用户是在快速摇手机
+          shakeOk();
+          // 使手机震动
+          mobileShake(durationTime);
+          setTimeout(() => {
+            emit('shake-event');
+            loading.value = false;
+            console.log('loading.value', loading.value)
+          }, durationAnimation)
+        }
+        // 赋值，为下一次计算做准备
+        shakeInfo.value.lastX = shakeInfo.value.x;
+        shakeInfo.value.lastY = shakeInfo.value.y;
+        shakeInfo.value.lastZ = shakeInfo.value.z;
       }
     }
+    
+    const clickShake = () => {
+      // 防止多次点击触发
+      if(loading.value) return
+      loading.value = true;
+      // 使手机震动
+      mobileShake(durationTime);
+      setTimeout(() => {
+        emit('click-shake');
+        loading.value = false;
+      }, durationAnimation)
+    };
 
-    // 开始震动
-    const mobileShake = (duration: number) => {
+    // 使手机震动
+    const mobileShake = (duration: any) => {
       if (navigator.vibrate) {
         navigator.vibrate(duration);
       }
-      // console.log("摇一摇成功");
-      emit('click-shake');
     }
-    
-    /*
-        throttle 节流函数
-        参数：
-            fn 要节流的函数
-            interval 节流间隔时间
-            start 是否在节流开始时执行 (true在开始时执行，false在结束时执行)
-        返回值：
-            经过节流处理的函数
-    */
-    const throttle = (fn: { (e: any): void; apply?: any; }, interval = 200, start = true) => {
-      if (typeof fn !== "function") {
-        return console.error("请传入一个函数");
-      }
-      let timer = 0;
-      return  (...arg: any) => {
-        let _this = this;
-        if (timer) {
-          return;
-        }
-        start && fn.apply(_this, arg);
-        timer = setTimeout(() => {
-          (!start) && fn.apply(_this, arg);
-          timer = 0;
-        }, interval);
-      }
-    }
-
 
     return {
       classes,
       styles,
-      shakeIndex,
-      isStartShake,
       mobileShake,
-      clickShake
+      clickShake,
+      loading,
     };
   }
 });

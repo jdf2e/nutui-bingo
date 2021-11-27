@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -14,6 +15,12 @@
         {
           "name": "pages/luckdraw/index",
           "pathName": "pages/luckdraw/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/luckshake/index",
+          "pathName": "pages/luckshake/index",
           "query": "",
           "scene": null
         }
