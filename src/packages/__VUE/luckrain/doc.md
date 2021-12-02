@@ -26,6 +26,7 @@ app.use(Luckrain);
   @start="start"
   @click="click"
 >
+// 也可以通过ref实例去调用开始游戏方法
   <template #customize="{ onStart }" v-if="!isStart">
     <div class="start" @click="onStart">开始</div>
   </template>
@@ -43,19 +44,11 @@ setup() {
     }
     const click=()=>{
       console.log('点击');
-
     }
     return { gameOver ,isStart,start,click};
   },
 ```
 
-  width: string; // 容器宽度
-  height:string // 容器高度
-  rainTime: number; // 持续时间
-  rainNum: number; // 一页最多展示多少红包
-  rainImg: string; // 红包图片
-  rainWidth:number; // 红包宽度
-  rainHeight:number; // 红包高度
 ## API
 
 ### Props

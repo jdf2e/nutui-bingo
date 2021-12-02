@@ -1,16 +1,39 @@
 .nut-bingo-luckshake {
+  position: relative;
   width: 100%;
   padding-top: 210px;
   .shake-box {
     margin: 0 auto;
   }
   .shake-box-img {
-    width: 195px;
+    position: relative;
+    width: 188px;
     height: 166px;
     margin: 0 auto;
-    animation: rockit .6s ease infinite alternate;
-    img {
-      width: 100%;
+    text-align: center;
+    font-size: 0;
+    .img-top, .img-bottom {
+      position: relative;
+      width: 130px;
+      height: 71px;
+      z-index: 2;
+    }
+    .img-left, .img-right {
+      position: absolute;
+      width: 30px;
+      transform-origin: 100% 32%;
+      z-index: 1;
+    }
+    &.rockit {
+      animation: rockit .6s ease infinite alternate;
+    }
+    &.animation {
+      .img-top {
+        animation: toTop 1s ease 1 alternate;
+      }
+      .img-bottom {
+        animation: toBottom 1s ease 1 alternate;
+      }
     }
   }
   .shake-num {
@@ -25,11 +48,14 @@
     right: 36px;
     top: 160px;
     z-index: 99;
-    animation: clickShake .6s ease infinite alternate;
-    transform-origin: 80% 80%;
-    transform: rotate(23deg);
+    &.clickShake {
+      transform-origin: 80% 80%;
+      transform: rotate(23deg);
+      animation: clickShake .6s ease infinite alternate;
+    }
     img {
       width: 100%;
+      height: 100%;
     }
   }
 }
@@ -48,5 +74,29 @@
   }
   50% {
     transform: rotate(-5deg);
+  }
+}
+
+@keyframes toTop {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -80px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes toBottom {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 80px);
+  }
+  100% {
+    transform: translate(0, 0);
   }
 }

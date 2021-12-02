@@ -1,86 +1,104 @@
 <template>
-  <view :class="classes" ref="luckdrawDom" :style="{ width: luckWidth, height: luckHeight }">
-    <view class="lucktable" :style="{ transform: rotateAngle, transition: rotateTransition }">
-      <canvas id="canvasWx" :class="envApp == 'WEAPP' ? '':'mlcanvas'" canvas-id="canvasWx" ref="canvasDom" type="33" :style="envApp == 'WEAPP' ? '' : getRotateAngle(0)">
-      </canvas>
-      <!-- <canvas id="canvasWx" canvas-id="canvasWx" ref="canvasDom" type="2d" :style="getRotateAngle(0)">
-      </canvas> -->
-      <view class="prize">
-        <view v-for="(item, index) in prizeList" class="item" :style="getRotateAngle(index)" :key="index">
-          <view class="drawTable-name">{{ item.prizeName }}</view>
-          <view class="drawTable-img">
-            <img :src="item.prizeImg" />
-          </view>
-        </view>
+  <view :class="classes">
+    <view class="shake-box" :style="styles">
+      <view class="shake-box-img" :class="[loading ? 'animation': 'rockit']">
+        <img class="img-top" :src="luckImgTop" />
+        <img class="img-bottom" :src="luckImgBottom" />
       </view>
     </view>
-    <view class="pointer" :style="pointerStyle" @click="startTurns"></view>
+    <slot name="shake-num"></slot>
+    <view v-if="clickPoint" class="pointer" :class="[loading ? '' : 'clickShake']" :style="pointerStyle" @click="clickShake">
+      <img :src="clickPoint" />
+    </view>
+    <slot></slot>
   </view>
 </template>
-
 <script lang="ts">
-
 import Taro from "@tarojs/taro";
-// import { View, Canvas, Image, CoverView } from "@tarojs/components";
-import { ref, toRefs, watch, computed, onMounted, nextTick, reactive } from 'vue';
+import { ref, computed, onMounted, onUnmounted, reactive } from 'vue';
 import { createComponent } from '../../utils/create';
-const { componentName, create } = createComponent('luckdraw');
+const { componentName, create } = createComponent('luckshake');
+
 
 export default create({
   props: {
     luckWidth: {
-      required: true
+      type: String,
+      default: '200px'
     },
     luckHeight: {
-      required: true
+      type: String,
+      default: '106px'
     },
-    prizeList: {
-      required: true
+    luckImgTop: {
+      type: String,
+      default: '//img13.360buyimg.com/imagetools/jfs/t1/203344/20/16885/31149/61a07610E2520903c/899a906f039535b0.png'
     },
-    prizeIndex: {
+    luckImgBottom: {
+      type: String,
+      default: '//img13.360buyimg.com/imagetools/jfs/t1/208979/10/10371/28087/61a07610Ee1e2f1b4/5b6fa12658906939.png'
+    },
+    luckImgLeft: {
+      type: String,
+      default: '//img10.360buyimg.com/imagetools/jfs/t1/155853/24/24382/2453/61a088d9Eea945287/8e952421cb2ce208.png'
+    },
+    luckImgRight: {
+      type: String,
+      default: '//img10.360buyimg.com/imagetools/jfs/t1/135987/21/24696/2463/61a088d9Ebff19f9c/10d756c1d75ee03f.png'
+    },
+    clickPoint: {
+      type: String,
+      default: '//img11.360buyimg.com/ling/jfs/t1/104643/13/16899/24402/5e830316E70f93784/3f9e9b0d6e11db14.png'
+    },
+    shakeNum: {
       type: Number,
-      default: -1
+      default: 3
     },
-    turnsNumber: {
+    durationTime: {
       type: Number,
-      default: 5
+      default: 1000
     },
-    styleOpt: {
-      default: () => {
-        return {
-          // 每一块扇形的背景色,默认值,可通过父组件来改变
-          prizeBgColors: [
-            'rgb(255, 231, 149)',
-            'rgb(255, 247, 223)',
-            'rgb(255, 231, 149)',
-            'rgb(255, 247, 223)',
-            'rgb(255, 231, 149)',
-            'rgb(255, 247, 223)'
-          ],
-          // 每一块扇形的外边框颜色,默认值,可通过父组件来改变
-          borderColor: '#ff9800'
-        };
-      }
-    },
-    turnsTime: {
-      // 转动需要持续的时间(秒)
-      default: 5
+    durationAnimation: {
+      type: Number,
+      default: 1000
     },
     pointerStyle: {
       default:() => {
         return {
-          width: '80px',
-          height: '80px',
-          backgroundImage: 'url("https://img11.360buyimg.com/imagetools/jfs/t1/89512/11/15244/137408/5e6f15edEf57fa3ff/cb57747119b3bf89.png")',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat'
+          width: '90px',
+          height: '90px'
         }
       }
     }
   },
-  emits: ["click", "start-turns", "end-turns"],
-  setup(props, { emit }) {
-    let { luckWidth, luckHeight, prizeList, turnsNumber, styleOpt, turnsTime, pointerStyle } = reactive(props);
+  emits: ["click-shake", "shake-event"],
+  setup(props: any, { emit }: any) {
+    let { luckWidth, luckHeight, shakeNum, durationTime, durationAnimation } = reactive(props);
+
+    let loading = ref(false);
+
+    let shakeInfo = ref({
+      openFlag: false,  // 是否开启摇一摇，如果是小程序全局监听摇一摇，这里默认为true
+      shakeSpeed: 110,  // 设置阈值，越小越灵敏
+      lastTime: 0,  // 此变量用来记录上次摇动的时间
+      x: 0,
+      y: 0,
+      z: 0, // 记录对应 x、y、z 三轴的数值
+      lastX: 0,
+      lastY: 0,
+      lastZ: 0, // 记录对应 x、y、z 三轴上次的数值
+    });
+
+    onMounted(() => {
+      openShakeEvent();  // 打开摇一摇功能
+      shakeChange()  //开启摇一摇
+    });
+
+    // 页面销毁时，取消监听
+    onUnmounted(() => {
+      Taro.offAccelerometerChange()  
+      closeShakeEvent()  // 关闭摇一摇功能
+    })
 
     const classes = computed(() => {
       const prefixCls = componentName;
@@ -88,182 +106,103 @@ export default create({
         [prefixCls]: true,
       };
     });
-    var getRandomColor = function () {
-      var r = Math.floor(Math.random() * 256);
-      var g = Math.floor(Math.random() * 256);
-      var b = Math.floor(Math.random() * 256);
-      return 'rgb(' + r + ',' + g + ',' + b + ')';
-    }
-    onMounted(() => {
-      envApp.value = Taro.getEnv();
-      setTimeout(() => {
-        init();
-        // initWeapp();
-        // const context:any = Taro.createCanvasContext('canvasWx');
-        // const angle = (Math.PI * 2) / 6; // 每个奖项所占角度数
-        // for (var i = 0; i < 6; i++) {
-        //   var startAngle = i * angle;
-        //   var endAngle = (i + 1) * angle;
-        //   context.beginPath();
-        //   context.moveTo(150, 150);
-        //   context.arc(150, 150, 150, startAngle, endAngle, false);
-        //   /*随机颜色*/
-        //   context.fillStyle = getRandomColor();
-        //   // context.setFillStyle('blue')
-        //   context.fill();
-        // }
-        // context.draw()
-      }, 800);
-    });
 
-    watch(
-      () => props.prizeList,
-      (list, prevList) => {
-        prizeList = list;
-        init();
-      }
-    );
-
-    watch(
-      () => props.prizeIndex,
-      (nIndex, prevIndex) => {
-        rotate(nIndex);
-      }
-    );
-
-    const envApp = ref("WEB");
-    // 用来锁定转盘，避免同时多次点击转动
-    const lock = ref(false);
-    // 剩余抽奖次数
-    const num = ref(5);
-    // 开始转动的角度
-    const startRotateDegree = ref(0);
-    // 设置指针默认指向的位置,现在是默认指向2个扇形之间的边线上
-    const rotateAngle = ref<string|number>(0);
-    const rotateTransition = ref("");
-
-    const luckdrawDom:any = ref(null);
-    const canvasDom:any = ref(null);
-    const rorateDeg = ref(360 / prizeList.length);
-
-    
-    // 根据index计算每一格要旋转的角度的样式
-    const getRotateAngle = (index: number) => {
-      const angle = (360 / prizeList.length) * index + 180 / prizeList.length;
+    const styles = computed(()=>{
       return {
-        transform: `rotate(${angle}deg)`
-      };
-    };
-    // 初始化圆形转盘canvas
-    const init = () => {
-      const data = styleOpt;
-      const prizeNum = prizeList.length;
-      const { prizeBgColors, borderColor } = data;
-      // 开始绘画
-      const canvas = canvasDom.value;
-      const luckdraw = luckdrawDom.value;
-      // const ctx = canvas.getContext('2d');
-      const ctx:any = Taro.createCanvasContext('canvasWx');
-      // const canvasW = (canvas.width = luckdraw.clientWidth); // 画板的高度
-      // const canvasH = (canvas.height = luckdraw.clientHeight); // 画板的宽度
-      const canvasW = luckWidth.replace(/px/g, ""); // 画板的高度
-      const canvasH = luckHeight.replace(/px/g, ""); // 画板的宽度
-      if(envApp.value == "WEAPP") {
-        // translate方法重新映射画布上的 (0,0) 位置
-        ctx.translate(0, canvasH);
-        // rotate方法旋转当前的绘图，因为文字是和当前扇形中心线垂直的
-        ctx.rotate((-90 * Math.PI) / 180);
+        width: luckWidth,
+        height: luckHeight,
       }
-      // 圆环的外圆的半径,可用来调整圆盘大小来适应外部盒子的大小
-      // const outRadius = canvasW / 2 - 1;
-      // 圆环的内圆的半径
-      // const innerRadius = 0;
-      const baseAngle = (Math.PI * 2) / prizeNum; // 每个奖项所占角度数
-      // ctx.clearRect(0, 0, canvasW, canvasH); //去掉背景默认色
-      // ctx.strokeStyle = borderColor; // 设置画图线的颜色
-      for (let index = 0; index < prizeNum; index++) {
-        var startAngle = index * baseAngle;
-        var endAngle = (index + 1) * baseAngle;
-        ctx.beginPath();
-        if(envApp.value == "WEAPP") {
-          ctx.moveTo(canvasW/2, canvasH/2);
-          ctx.arc(canvasW/2, canvasH/2, canvasH/2, startAngle, endAngle, false);
-        }else {
-          ctx.moveTo(canvasW/2, canvasH/4);
-          ctx.arc(canvasW/2, canvasH/4, canvasH/4, startAngle, endAngle, false);
-        }
-        /*随机颜色*/
-        if (prizeList[index]['prizeColor']) {
-          ctx.fillStyle = prizeList[index]['prizeColor']; //设置每个扇形区域的颜色,根据每条数据中单独设置的优先
-        } else {
-          ctx.fillStyle = prizeBgColors[index]; //设置每个扇形区域的颜色
-          // ctx.fillStyle = getRandomColor(); //设置每个扇形区域的颜色
-        }
-        ctx.fill();
+    })
+
+    // 开启摇一摇
+    const openShakeEvent = () => {
+      shakeInfo.value.openFlag = true;
+    }
+
+    // 关闭摇一摇
+    const closeShakeEvent = () => {
+      shakeInfo.value.openFlag = false;
+    }
+
+    //摇一摇成功
+    const shakeOk = () => {
+      // closeShakeEvent();
+      loading.value = true;
+    }
+
+    // 开启摇一摇
+    const shakeChange = () => {
+      // 防止多次点击触发
+      if(loading.value) return
+      // loading.value = true;
+      Taro.onAccelerometerChange(function(res) {
+        shake(res, function() {
+          shakeOk();
+          // 使手机震动
+          mobileShake();
+          setTimeout(() => {
+            emit('shake-event');
+            loading.value = false;
+            console.log('loading.value', loading.value)
+          }, durationAnimation)
+        });
+      });
+    }
+
+
+    // 判断是否为摇一摇
+    const shake = (res: any, successCallback: any) => {
+      if (!shakeInfo.value.openFlag) {
+        return;
       }
-      ctx.draw();
+      var nowTime = new Date().getTime(); // 记录当前时间
+      // 如果这次摇的时间距离上次摇的时间有一定间隔 才执行
+      if (nowTime - shakeInfo.value.lastTime > 100) {
+        var diffTime = nowTime - shakeInfo.value.lastTime; //记录时间段
+        shakeInfo.value.lastTime = nowTime; // 记录本次摇动时间
+        shakeInfo.value.x = res.x; // 获取 x 轴数值
+        shakeInfo.value.y = res.y; // 获取 y 轴数值
+        shakeInfo.value.z = res.z; // 获取 z 轴数值
+        // 计算摇一摇的速度
+        var speed = Math.abs(shakeInfo.value.x + shakeInfo.value.y + shakeInfo.value.z - shakeInfo.value.lastX - shakeInfo.value.lastY - shakeInfo.value.lastZ) / diffTime * 10000;
+        if (speed > shakeInfo.value.shakeSpeed) { // 速度要大于设置的阈值，证明用户是在快速摇手机
+          successCallback();
+        }
+        // 赋值，为下一次计算做准备
+        shakeInfo.value.lastX = shakeInfo.value.x;
+        shakeInfo.value.lastY = shakeInfo.value.y;
+        shakeInfo.value.lastZ = shakeInfo.value.z; 
+      }
+    }
+
+    const clickShake = () => {
+      // 防止多次点击触发
+      if(loading.value) return
+      loading.value = true;
+      // 使手机震动
+      mobileShake();
+      setTimeout(() => {
+        emit('click-shake');
+        loading.value = false;
+      }, durationAnimation)
     };
 
-    // 判断是否可以转动
-    const canBeRotated = () => {
-      if (num.value <= 0) {
-        // alert('已经没有次数了,继续加油赚积分吧！');
-        return false;
-      }
-      if (lock.value) {
-        return false;
-      }
-      return true;
-    };
-    const startTurns = () => {
-      // 如果还不可以转动
-      if (!canBeRotated()) {
-        return false;
-      }
-      // 开始转动
-      // 先上锁
-      lock.value = true;
-      // 设置在哪里停下，应该与后台交互，这里随机抽取0~5 ,这里应该是后台返回的中奖信息,现在是测试
-      // const index = Math.floor(Math.random() * prizeList.length);
-      // 成功后次数减少一次
-      // num.value--;
-      // prizeIndex = index;
-      emit('start-turns');
-      // rotate(prizeIndex);
-    };
-    // 转动起来
-    const rotate = (index:number) => {
-      const turnsTimeNum = turnsTime;
-      const rotateAngleValue =
-        startRotateDegree.value +
-        turnsNumber * 360 +
-        360 -
-        (180 / prizeList.length + (360 / prizeList.length) * index) -
-        (startRotateDegree.value % 360);
-      startRotateDegree.value = rotateAngleValue;
-      rotateAngle.value = `rotate(${rotateAngleValue}deg)`;
-      rotateTransition.value = `transform ${turnsTimeNum}s cubic-bezier(0.250, 0.460, 0.455, 0.995)`;
-      setTimeout(() => {
-        emit('end-turns');
-        lock.value = false;
-      }, turnsTimeNum * 1000 + 500);
-    };
+    // 使手机震动
+    const mobileShake = () => {
+      Taro.vibrateLong()
+    }
 
     return {
       classes,
-      envApp,
-      luckdrawDom,
-      canvasDom,
-      rorateDeg,
-      getRotateAngle,
-      rotateAngle,
-      rotateTransition,
-      pointerStyle,
-      startTurns
+      styles,
+      mobileShake,
+      clickShake,
+      loading,
     };
   }
 });
 </script>
+
 
 <style lang="scss">
 @import 'index.scss';

@@ -1,10 +1,9 @@
-@import './animation.scss';
 .nut-ninegrid {
   height: 357px;
   width: 100%;
   flex-shrink: 0;
-  background-image: url('//img10.360buyimg.com/imagetools/jfs/t1/182262/4/21143/406696/6126fceeEccce5223/61a6b338777fd857.png');
-  background-size: 100% 100%;
+  // background-image: url('//img10.360buyimg.com/imagetools/jfs/t1/182262/4/21143/406696/6126fceeEccce5223/61a6b338777fd857.png');
+  // background-size: 100% 100%;
   overflow: auto;
   display: flex;
   flex-wrap: wrap;
@@ -13,7 +12,7 @@
   box-sizing: border-box;
   perspective: 1000;
 
-  .nine-ninegrid_item {
+  .nine-ninegrid__item {
     position: relative;
     width: 103px;
     height: 103px;
@@ -81,10 +80,6 @@
       transform: rotateY(-180deg);
     }
 
-    &.d {
-      transform: rotate(3deg);
-    }
-
     &.active {
       .front {
         transform: rotateY(180deg);
@@ -95,11 +90,7 @@
       }
     }
 
-    &.shake {
-      animation: shake-rotate 0.5s 1;
-    }
-
-    .center {
+    .nine-ninegrid__item__center {
       border-radius: 8px;
       overflow: hidden;
       background-image: linear-gradient(#ff733e, #ff4e57);
@@ -122,7 +113,7 @@
         }
       }
 
-      > span {
+     > span {
         font-family: PingFangSC-Medium;
         font-size: 16px;
         color: rgba(255, 212, 167, 1);
@@ -134,5 +125,15 @@
         color: rgba(255, 212, 167, 1);
       }
     }
+  }
+}
+
+
+@keyframes box-rotate {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(360deg);
   }
 }

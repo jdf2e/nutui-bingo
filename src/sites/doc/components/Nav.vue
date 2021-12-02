@@ -60,7 +60,6 @@ export default defineComponent({
         return value == name.toLowerCase();
       };
     });
-    console.log(nav);
     
     return {
       isActive,
