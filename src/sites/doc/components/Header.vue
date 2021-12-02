@@ -4,7 +4,7 @@
     <div class="header-logo">
       <a class="logo-link" href="#" @click="toHome"></a>
       <span class="logo-border"></span>
-      <span class="version">v{{ version }}</span>
+      <span class="version">{{ version }}</span>
     </div>
     <div class="header-nav">
       <Search />
@@ -165,10 +165,10 @@ export default defineComponent({
   &-logo {
     position: relative;
     display: inline-block;
-    width: 240px;
+    width: 260px;
     height: 64px;
     .logo-link {
-      width: 120px;
+      width: 200px;
       height: 46px;
       vertical-align: middle;
       position: absolute;
@@ -179,13 +179,15 @@ export default defineComponent({
       width: 1px;
       height: 26px;
       position: absolute;
-      right: 0;
+      right: -10px;
       top: 50%;
       margin-top: -13px;
     }
     .version {
       position: absolute;
-      right: 76px;
+      right: 20px;
+      top: 50%;
+      margin-top: -30px;
       font-size: 14px;
     }
   }
@@ -194,7 +196,7 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     float: right;
-    width: calc(100% - 240px);
+    width: calc(100% - 260px);
     min-width: 900px;
     padding: 0 40px;
     .nav-box {
@@ -224,13 +226,14 @@ export default defineComponent({
           &:after {
             content: '';
             display: inline-block;
-            width: 35px;
-            height: 13px;
+            width: 20px;
+            height: 14px;
             position: absolute;
-            bottom: 3px;
-            left: 50%;
-            margin-left: -17.5px;
-            background: url('../../assets/images/item-active.png');
+            bottom: 13px;
+            left: 57%;
+            // margin-left: -17.5px;
+            background: url('../../assets/images/nav-item-active.png');
+            background-size: 100% 100%;
           }
         }
         &:last-of-type {
@@ -304,7 +307,7 @@ export default defineComponent({
     .header {
       &-logo {
         .logo-link {
-          background: url('../../assets/images/logo-header-white.png') no-repeat
+          background: url('../../assets/images/logo.png') no-repeat
             center/100%;
         }
         .logo-border {
@@ -383,7 +386,7 @@ export default defineComponent({
     .header {
       &-logo {
         .logo-link {
-          background: url('../../assets/images/logo-header-red.png') no-repeat
+          background: url('../../assets/images/logo.png') no-repeat
             center/100%;
         }
         .logo-border {
@@ -462,7 +465,7 @@ export default defineComponent({
     .header {
       &-logo {
         .logo-link {
-          background: url('../../assets/images/logo-header-red.png') no-repeat
+          background: url('../../assets/images/logo.png') no-repeat
             center/100%;
         }
         .logo-border {

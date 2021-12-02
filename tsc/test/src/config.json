@@ -174,7 +174,17 @@
             "author": "Drjingfubo"
         },
         {
-            "version": "1.0.0",
+            "name": "LuckRain",
+            "taro": true,
+            "tarodoc": false,
+            "sort": 1,
+            "cName": "红包雨",
+            "type": "component",
+            "show": true,
+            "desc": "红包雨",
+            "author": "Drjingfubo"
+        },
+        {
             "name": "Luckshake",
             "taro": true,
             "tarodoc": false,

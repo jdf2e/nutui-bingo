@@ -3,7 +3,7 @@
     <input
       type="text"
       class="search-input"
-      placeholder="在 NutUI 中搜索"
+      placeholder="在 Bingo 中搜索"
       v-model="data.searchVal"
       @focus="onfocus"
       @blur="onblur"
