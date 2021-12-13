@@ -22,6 +22,10 @@ const { componentName, create } = createComponent('luckshake');
 
 export default create({
   props: {
+    isShake: {
+      type: Boolean,
+      default: false
+    },
     luckWidth: {
       type: String,
       default: '200px'
@@ -38,25 +42,13 @@ export default create({
       type: String,
       default: '//img13.360buyimg.com/imagetools/jfs/t1/208979/10/10371/28087/61a07610Ee1e2f1b4/5b6fa12658906939.png'
     },
-    luckImgLeft: {
-      type: String,
-      default: '//img10.360buyimg.com/imagetools/jfs/t1/155853/24/24382/2453/61a088d9Eea945287/8e952421cb2ce208.png'
-    },
-    luckImgRight: {
-      type: String,
-      default: '//img10.360buyimg.com/imagetools/jfs/t1/135987/21/24696/2463/61a088d9Ebff19f9c/10d756c1d75ee03f.png'
-    },
     clickPoint: {
       type: String,
       default: '//img11.360buyimg.com/ling/jfs/t1/104643/13/16899/24402/5e830316E70f93784/3f9e9b0d6e11db14.png'
     },
-    shakeNum: {
+    shakeSpeed: {
       type: Number,
-      default: 3
-    },
-    durationTime: {
-      type: Number,
-      default: 1000
+      default: 110
     },
     durationAnimation: {
       type: Number,
@@ -73,13 +65,13 @@ export default create({
   },
   emits: ["click-shake", "shake-event"],
   setup(props: any, { emit }: any) {
-    let { luckWidth, luckHeight, shakeNum, durationTime, durationAnimation } = reactive(props);
+    let { isShake, luckWidth, luckHeight, shakeSpeed, durationAnimation } = reactive(props);
 
     let loading = ref(false);
 
     let shakeInfo = ref({
       openFlag: false,  // 是否开启摇一摇，如果是小程序全局监听摇一摇，这里默认为true
-      shakeSpeed: 110,  // 设置阈值，越小越灵敏
+      shakeSpeed: shakeSpeed,  // 设置阈值，越小越灵敏
       lastTime: 0,  // 此变量用来记录上次摇动的时间
       x: 0,
       y: 0,
@@ -91,7 +83,7 @@ export default create({
 
     onMounted(() => {
       openShakeEvent();  // 打开摇一摇功能
-      shakeChange()  //开启摇一摇
+      shakeChange()  // 开启摇一摇
     });
 
     // 页面销毁时，取消监听
@@ -136,6 +128,7 @@ export default create({
       if(loading.value) return
       // loading.value = true;
       Taro.onAccelerometerChange(function(res) {
+        isShake = true;
         shake(res, function() {
           shakeOk();
           // 使手机震动
@@ -147,6 +140,7 @@ export default create({
           }, durationAnimation)
         });
       });
+      // console.log('isShake', isShake)
     }
 
 

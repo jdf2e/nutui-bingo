@@ -91,11 +91,15 @@ export default {
 
 | 字段 | 说明 | 类型 | 默认值
 |----- | ----- | ----- | ----- 
-| luck-width | 红包的宽度 | String | 200px
-| luck-height | 红包的高度 | String | 160px
-| luck-img | 红包图片 | String | -
-| click-point | 红包图片 | String | -
-| duration-time | 震动持续时间 | Number | -
+| is-shake | 当前环境是否支持摇一摇 | String | -
+| luck-width | 红包图片的宽度 | String | 200px
+| luck-height | 红包图片的高度 | String | 160px
+| luck-img-top | 红包上半部分图片 | String | ''
+| luck-img-bottom | 红包下半部分图片 | String | ''
+| click-point | 点击手势图片，不需要可设置为false | String，Boolean | ''
+| shake-speed | 摇手机的阙值，越小越灵敏 | Number | 110
+| duration-time | 震动持续时间，小程序不可设置此参数 | Number | 1000
+| duration-animation | 触发摇一摇后距离回调函数的时间 | Number | 1000
 | pointer-style | 点击图片的样式 | Object | {width: '90px',height: '90px'}
 
 ### Events

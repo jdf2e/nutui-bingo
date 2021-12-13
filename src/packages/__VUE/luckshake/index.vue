@@ -23,6 +23,10 @@ import Vconsole from 'vconsole'
 
 export default create({
   props: {
+    isShake: {
+      type: Boolean,
+      default: false
+    },
     luckWidth: {
       type: String,
       default: '200px'
@@ -39,21 +43,13 @@ export default create({
       type: String,
       default: '//img13.360buyimg.com/imagetools/jfs/t1/208979/10/10371/28087/61a07610Ee1e2f1b4/5b6fa12658906939.png'
     },
-    luckImgLeft: {
-      type: String,
-      default: '//img10.360buyimg.com/imagetools/jfs/t1/155853/24/24382/2453/61a088d9Eea945287/8e952421cb2ce208.png'
-    },
-    luckImgRight: {
-      type: String,
-      default: '//img10.360buyimg.com/imagetools/jfs/t1/135987/21/24696/2463/61a088d9Ebff19f9c/10d756c1d75ee03f.png'
-    },
     clickPoint: {
       type: String,
       default: '//img11.360buyimg.com/ling/jfs/t1/104643/13/16899/24402/5e830316E70f93784/3f9e9b0d6e11db14.png'
     },
-    shakeNum: {
+    shakeSpeed: {
       type: Number,
-      default: 3
+      default: 110
     },
     durationTime: {
       type: Number,
@@ -74,13 +70,13 @@ export default create({
   },
   emits: ["click-shake", "shake-event"],
   setup(props: any, { emit }: any) {
-    let { luckWidth, luckHeight, shakeNum, durationTime, durationAnimation } = reactive(props);
+    let { isShake, luckWidth, luckHeight, shakeSpeed, durationTime, durationAnimation } = reactive(props);
 
     let loading = ref(false);
 
     let shakeInfo = ref({
       openFlag: false,  // 是否开启摇一摇，如果是小程序全局监听摇一摇，这里默认为true
-      shakeSpeed: 110,  // 设置阈值，越小越灵敏
+      shakeSpeed: shakeSpeed,  // 设置阈值，越小越灵敏
       lastTime: 0,  // 此变量用来记录上次摇动的时间
       x: 0,
       y: 0,
@@ -92,7 +88,7 @@ export default create({
 
     onMounted(() => {
       openShakeEvent();  // 打开摇一摇功能
-      shakeChange()  //开启摇一摇
+      shakeChange()  // 开启摇一摇
     });
 
     // 页面销毁时，取消监听
@@ -137,8 +133,12 @@ export default create({
       if(loading.value) return
       // loading.value = true;
       if (window.DeviceMotionEvent) {
-        window.addEventListener('devicemotion', shake, false) //devicemotion:获取设备的运动状态
+        isShake = true;
+        window.addEventListener('devicemotion', shake, false) // devicemotion:获取设备的运动状态
+      } else {
+        isShake = false;
       }
+      // console.log('isShake', isShake)
     }
 
     // 判断是否为摇一摇
@@ -147,13 +147,13 @@ export default create({
         return;
       }
       let acceleration = eventData.accelerationIncludingGravity;
-      let nowTime = new Date().getTime();// 当前时间戳
-      if (nowTime - shakeInfo.value.lastTime > 100) {//手机抖动的时间要大于100ms,防止用户拿手机时，突然抖动而触发摇一摇功能
+      let nowTime = new Date().getTime(); // 当前时间戳
+      if (nowTime - shakeInfo.value.lastTime > 100) { // 手机抖动的时间要大于100ms,防止用户拿手机时，突然抖动而触发摇一摇功能
         let diffTime = nowTime - shakeInfo.value.lastTime;
         shakeInfo.value.lastTime = nowTime;
-        shakeInfo.value.x = acceleration.x;// 表示x轴（西到东）上的加速度
-        shakeInfo.value.y = acceleration.y;// 表示y轴（南到北）上的加速度
-        shakeInfo.value.z = acceleration.z;// 表示z轴（下到上）上的加速度
+        shakeInfo.value.x = acceleration.x; // 表示x轴（西到东）上的加速度
+        shakeInfo.value.y = acceleration.y; // 表示y轴（南到北）上的加速度
+        shakeInfo.value.z = acceleration.z; // 表示z轴（下到上）上的加速度
         // 计算摇一摇的速度
         let speed =
           (Math.abs(
