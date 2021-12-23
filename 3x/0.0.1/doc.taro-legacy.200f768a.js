@@ -1,0 +1,1 @@
+System.register(["./vendor-legacy.97cc0974.js"],(function(e){"use strict";var t,n,c;return{setters:[function(e){t=e.e,n=e.o,c=e.g}],execute:function(){const s={class:"markdown-body"},u=[c("h1",null,"luckycard",-1),c("h3",null,"介绍",-1),c("p",null,"由于 taro 对原生 canvas 的转换未完成。暂时不支持该组件转小程序的应用",-1)];e("default",{setup:e=>(e,c)=>(n(),t("div",s,u))})}}}));
