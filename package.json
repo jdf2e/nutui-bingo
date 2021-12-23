@@ -1,6 +1,6 @@
 {
   "name": "@nutui/nutui-bingo",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "nutui生态之一营销组件库（支持小程序开发）",
   "main": "dist/nutui.umd.js",
   "module": "dist/nutui.es.js",

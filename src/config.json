@@ -33,16 +33,6 @@
       "path": "#/button"
     },
     {
-      "name": "example",
-      "cName": "示例",
-      "path": "demo.html"
-    },
-    {
-      "name": "resource",
-      "cName": "资源",
-      "path": "#/resource"
-    },
-    {
       "name": "joinus",
       "cName": "加入我们",
       "path": "#/joinus"
