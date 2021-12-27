@@ -19,7 +19,7 @@
           </div>
           <iframe
             style="margin-left: 20px"
-            src="https://ghbtns.com/github-btn.html?user=jdf2e&repo=nutui&type=star&count=true&size=large"
+            src="https://ghbtns.com/github-btn.html?user=jdf2e&repo=nutui-bingo&type=star&count=true&size=large"
             frameborder="0"
             scrolling="0"
             width="170"
@@ -350,7 +350,7 @@ export default defineComponent({
       .qrcodepart {
         display: none;
         position: absolute;
-        right: -10px;
+        right: 13px;
         top: 50px;
         padding: 4px;
         width: 166px;

@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts">
+import { Dialog } from "@nutui/nutui";
 import { ref } from 'vue';
 import { createComponent } from '../../utils/create';
 import { reactive } from '@vue/reactivity';
@@ -29,20 +30,16 @@ export default createDemo({
         text: "大鸡腿"
       },
       {
+        imagePath: "https://img12.360buyimg.com/imagetools/jfs/t1/221361/4/7410/16458/61c9261eE45802396/27b64caa9e7c9bac.png",
+        text: "JOY"
+      },
+      { 
         imagePath: "https://img11.360buyimg.com/imagetools/jfs/t1/128607/26/6643/6790/5f06cd27E9b5e15f7/7509bc7ce2da66b8.png",
         text: "VIP"
       },
       {
-        imagePath: "https://img11.360buyimg.com/imagetools/jfs/t1/105385/19/15140/111093/5e6f1506E48bd0dfb/829a98a8cdb4c27f.png",
-        text: "Apple watch"
-      },
-      {
-        imagePath: "https://img14.360buyimg.com/imagetools/jfs/t1/90507/38/15165/448364/5e6f15b4E5df0c718/4bd4c3d375eec312.png",
-        text: "坚果礼盒"
-      },
-      {
-        imagePath: "https://img14.360buyimg.com/imagetools/jfs/t1/104165/34/15186/96522/5e6f1435E46bc0cb0/d4e878a15bfd9362.png",
-        text: "手机"
+        imagePath: "https://img12.360buyimg.com/imagetools/jfs/t1/221361/4/7410/16458/61c9261eE45802396/27b64caa9e7c9bac.png",
+        text: "JOY"
       },
     ]);
 
@@ -54,6 +51,16 @@ export default createDemo({
 
     const endTurns = () => {
       console.log('抽奖结束');
+      Dialog({
+        title: '中奖提示',
+        content: '您已完成抽奖，是否继续？',
+        onCancel: () => {},
+        onOk: () => {
+          setTimeout(() => {
+            lottoRollDom.value.init();
+          }, 300);
+        }
+      });
     }
    
     return {
@@ -74,21 +81,8 @@ export default createDemo({
 }
 .show-demo {
   background: #ffffff;
-  padding: 0 20px;
 }
 h2 {
   padding: 0 20px;
-}
-.btnBtn {
-  margin: 20px 0;
-  text-align: center;
-  .nut-button {
-    margin-right: 20px;
-  }
-}
-.disabledClick {
-  pointer-events: none !important;
-  cursor: not-allowed !important;
-  opacity: 0.6 !important;
 }
 </style>

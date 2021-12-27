@@ -1,32 +1,33 @@
-# LottoRoll 老虎机
+# Dollmachine 抓娃娃
 
 ### 介绍
 
-用于老虎机抽奖，可配置图片、开始结束回调等。
+模拟娃娃机抽奖，可配置图片、开始结束回调等。
 
 ### 安装
 ``` javascript
 import { createApp } from 'vue';
 // vue
-import { LottoRoll } from '@nutui/nutui-bingo';
+import { Dollmachine } from '@nutui/nutui-bingo';
 // taro
 import { LottoRoll } from '@nutui/nutui-bingo-taro';
 
 const app = createApp();
-app.use(LottoRoll);
+app.use(Dollmachine);
 ```
 
 ## 代码示例
 ## 基本用法
 
 ```html
-<nut-bingo-lotto-roll
+<nut-bingo-doll-machine
   ref="lottoRollDom"
   :prize-list="prizeList"
   :prize-index="prizeIndex"
   @start-turns="startTurns"
   @end-turns="endTurns"
 >
+</nut-bingo-doll-machine>
 ```
 
 ```javascript
@@ -40,25 +41,20 @@ export default {
         text: "大鸡腿"
       },
       {
+        imagePath: "https://img12.360buyimg.com/imagetools/jfs/t1/221361/4/7410/16458/61c9261eE45802396/27b64caa9e7c9bac.png",
+        text: "JOY"
+      },
+      { 
         imagePath: "https://img11.360buyimg.com/imagetools/jfs/t1/128607/26/6643/6790/5f06cd27E9b5e15f7/7509bc7ce2da66b8.png",
         text: "VIP"
       },
       {
-        imagePath: "https://img11.360buyimg.com/imagetools/jfs/t1/105385/19/15140/111093/5e6f1506E48bd0dfb/829a98a8cdb4c27f.png",
-        text: "Apple watch"
-      },
-      {
-        imagePath: "https://img14.360buyimg.com/imagetools/jfs/t1/90507/38/15165/448364/5e6f15b4E5df0c718/4bd4c3d375eec312.png",
-        text: "坚果礼盒"
-      },
-      {
-        imagePath: "https://img14.360buyimg.com/imagetools/jfs/t1/104165/34/15186/96522/5e6f1435E46bc0cb0/d4e878a15bfd9362.png",
-        text: "手机"
+        imagePath: "https://img12.360buyimg.com/imagetools/jfs/t1/221361/4/7410/16458/61c9261eE45802396/27b64caa9e7c9bac.png",
+        text: "JOY"
       },
     ]);
 
     // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
-    const index = Math.floor(Math.random() * prizeList.length);
     const prizeIndex = ref(3); 
     const startTurns = () => {
       console.log('开始抽奖');
@@ -66,6 +62,16 @@ export default {
 
     const endTurns = () => {
       console.log('抽奖结束');
+      Dialog({
+        title: '中奖提示',
+        content: '您已完成抽奖，是否继续？',
+        onCancel: () => {},
+        onOk: () => {
+          setTimeout(() => {
+            lottoRollDom.value.init();
+          }, 300);
+        }
+      });
     }
    
     return {
@@ -84,10 +90,10 @@ export default {
 
 | 字段 | 说明 | 类型 | 默认值
 |----- | ----- | ----- | ----- 
-| prize-list | 奖品列表 | Array | -
-| turns-number | 转动的圈数 | Number | 0
-| turns-time | 从开始转动到结束所用时间 | Number | 0(单位是毫秒)
-| prize-index | 中奖奖品在列表的索引位置 | Number | -1（-1随机停，大于1为设置的图片索引位置）
+| prize-list | 奖品列表 | Array | 目前需要至少4个奖品
+| speed | 奖品滚动的速度 | Number | 20
+| init | 初始化游戏 | Function | -
+| prize-index | 中奖奖品在列表的索引位置 | Number | -1（-1未中奖）
 
 ### Events
 

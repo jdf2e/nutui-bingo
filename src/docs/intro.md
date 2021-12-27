@@ -6,11 +6,11 @@ NutUI 营销生态，主要助力常见的营销活动案例和场景。
     <img src="https://img14.360buyimg.com/imagetools/jfs/t1/167902/2/8762/791358/603742d7E9b4275e3/e09d8f9a8bf4c0ef.png" width="150" alt="NutUI">
 </div>
 
-<iframe src="https://ghbtns.com/github-btn.html?user=jdf2e&repo=nutui&type=star&count=true" frameborder="0" scrolling="0" width="60px" height="20px"></iframe>
+<iframe src="https://ghbtns.com/github-btn.html?user=jdf2e&repo=nutui-bingo&type=star&count=true" frameborder="0" scrolling="0" width="60px" height="20px"></iframe>
 
-<iframe src="https://ghbtns.com/github-btn.html?user=jdf2e&repo=nutui&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="70px" height="20px"></iframe>
+<iframe src="https://ghbtns.com/github-btn.html?user=jdf2e&repo=nutui-bingo&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="70px" height="20px"></iframe>
 
-<iframe src="https://ghbtns.com/github-btn.html?user=jdf2e&repo=nutui&type=fork&count=true" frameborder="0" scrolling="0" width="60px" height="20px"></iframe>
+<iframe src="https://ghbtns.com/github-btn.html?user=jdf2e&repo=nutui-bingo&type=fork&count=true" frameborder="0" scrolling="0" width="60px" height="20px"></iframe>
 
 ## 特性
 
@@ -19,9 +19,6 @@ NutUI 营销生态，主要助力常见的营销活动案例和场景。
 * 支持按需引用
 * 详尽的文档和示例
 * 支持 TypeScript
-* 支持服务端渲染（测试阶段）
-* 支持定制主题
-* 单元测试覆盖（3.0 开发中）
 
 ## 示例 H5 & 小程序
 
@@ -44,7 +41,7 @@ NutUI 营销生态，主要助力常见的营销活动案例和场景。
 
 最新稳定版：![npm](https://img.shields.io/npm/v/@nutui/nutui.svg)
 
-> 你还可以订阅： https://github.com/jdf2e/nutui/releases.atom 来获得稳定版发布的通知。
+> 你还可以订阅： https://github.com/jdf2e/nutui-bingo/releases.atom 来获得稳定版发布的通知。
 
 
 

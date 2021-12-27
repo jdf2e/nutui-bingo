@@ -1,3 +1,107 @@
 .nut-bingo-doll-machine {
-  
+  .machineBox {
+    width: 100%;
+    height: 100%;
+    background: url("https://img12.360buyimg.com/imagetools/jfs/t1/145351/6/24350/800170/61c95470E416c27bb/a3f62a18af70684e.png") no-repeat center;
+    background-size: cover;
+  }
+  .machineTop {
+    width: 100%;
+    height: 20px;
+    position: relative;
+  }
+  .rope {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    width: 10px;
+    height: 20px;
+    background: #ffaa33;
+    margin-left: -5px;
+  }
+  .clawBox {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    width: 110px;
+    height: 85px;
+    margin-left: -55px;
+    &.yes {
+      .fail {
+        display: none;
+      }
+      .succ {
+        display: block;
+      }
+    }
+  }
+  .fail {
+    width: 100px;
+    height: 85px;
+    display: block;
+    margin: 0 auto;
+  }
+  .succ {
+    width: 110px;
+    height: 105px;
+    display: none;
+    margin: 0 auto;
+    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/218082/28/7092/15914/61b088afEf9c253f7/8392e2b14bd8f43a.png");
+    background-size: cover;
+    // overflow: hidden;
+    img {
+      position: relative;
+      display: block;
+      top: 30px;
+      width: 80px;
+      height: 90px;
+      margin: 0 auto;
+    }
+  }
+  .game_operate {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -60px;
+  }
+  .game_star {
+    background: url("https://img10.360buyimg.com/imagetools/jfs/t1/175397/30/22747/31977/61b088afEaaa58f92/7974fbc5abe5bbd6.png") no-repeat center;
+    background-size: contain;
+    width: 120px;
+    height: 120px;
+  }
+  .game_end {
+    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/161670/19/26860/20356/61b088afEe1bfe8c2/fa58caef092d439c.png") no-repeat center;
+    background-size: contain;
+    width: 120px;
+    height: 120px;
+  }
+  .activeArea {
+    width: 100%;
+    height: 90px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+  }
+  #giftBox {
+    width: 100%;
+    height: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    img {
+      display: inline-block;
+      width: 80px;
+      height: 90px;
+      margin-right: 20px;
+    }
+    #gift1, #gift2 {
+      display: inline;
+    }
+  }
 }

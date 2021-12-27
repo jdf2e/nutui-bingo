@@ -30,7 +30,7 @@
     {
       "name": "component",
       "cName": "组件",
-      "path": "#/button"
+      "path": "#/luckdraw"
     },
     {
       "name": "joinus",
@@ -52,27 +52,12 @@
         "show": true
       },
       {
-        "name": "starttaro",
-        "cName": "小程序开发",
-        "show": true
-      },
-      {
-        "name": "theme",
-        "cName": "主题定制",
-        "show": true
-      },
-      {
         "name": "international",
         "cName": "国际化",
         "show": false
       },
       {
-        "name": "resource",
-        "cName": "资源",
-        "show": true
-      },
-      {
-        "name": "https://github.com/jdf2e/nutui/releases",
+        "name": "https://github.com/jdf2e/nutui-bingo/releases",
         "cName": "更新日志",
         "show": true,
         "isLink": true

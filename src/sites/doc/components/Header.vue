@@ -51,13 +51,13 @@
             <a
               class="user-link"
               target="_blank"
-              href="https://github.com/jdf2e/nutui"
+              href="https://github.com/jdf2e/nutui-bingo"
             ></a>
-            <a
+            <!-- <a
               class="user-link gitee"
               target="_blank"
               href="https://gitee.com/jd-platform-opensource/nutui"
-            ></a>
+            ></a> -->
           </li>
         </ul>
       </div>
