@@ -1,17 +1,17 @@
 <template>
-  <view :class="classes">
-    <view class="shake-box" :style="styles">
-      <view class="shake-box-img" :class="[loading ? 'animation': 'rockit']">
+  <div :class="classes">
+    <div class="shake-box" :style="styles">
+      <div class="shake-box-img" :class="[loading ? 'animation': 'rockit']">
         <img class="img-top" :src="luckImgTop" />
         <img class="img-bottom" :src="luckImgBottom" />
-      </view>
-    </view>
+      </div>
+    </div>
     <slot name="shake-num"></slot>
-    <view v-if="clickPoint" class="pointer" :class="[loading ? '' : 'clickShake']" :style="pointerStyle" @click="clickShake">
+    <div v-if="clickPoint" class="pointer" :class="[loading ? '' : 'clickShake']" :style="pointerStyle" @click="clickShake">
       <img :src="clickPoint" />
-    </view>
+    </div>
     <slot></slot>
-  </view>
+  </div>
 </template>
 <script lang="ts">
 import { ref, computed, onMounted, onUnmounted, reactive } from 'vue';
