@@ -32,7 +32,8 @@
         <div class="image-demo"></div>
       </div>
     </div>
-    <div class="title">赋能案例</div>
+    <div class="title">组件库样例</div>
+    <!-- <div class="title">赋能案例</div> -->
     <div class="doc-content-cases-content__list">
       <swiper
         :autoplay="swiper_options.autoplay"
@@ -51,11 +52,11 @@
           v-for="(item, index) in casesImages"
           :key="index"
         >
-          <img :src="item" />
+          <img :src="item.img" />
           <div class="desc">
-            <span class="desc-tit">这是标题这是标题</span>
+            <span class="desc-tit">{{item.title}}</span>
             <span class="desc-txt">
-              这是介绍十五字这是介绍十五字这
+              {{item.desc}}
             </span>
           </div>
         </swiper-slide>
@@ -99,9 +100,31 @@ export default defineComponent({
       // theme: 'white',
       articleList: new Array(),
       casesImages: [
-        "https://img12.360buyimg.com/imagetools/jfs/t1/210494/19/11309/379197/61a831d6E93ba570b/672691a354557a38.png",
-        "https://img13.360buyimg.com/imagetools/jfs/t1/201218/3/17645/473011/61a831d6Ef32fc89f/40bbc63f26fdb3f2.png",
-        "https://img13.360buyimg.com/imagetools/jfs/t1/201218/3/17645/473011/61a831d6Ef32fc89f/40bbc63f26fdb3f2.png",
+        {
+          img: "https://img14.360buyimg.com/imagetools/jfs/t1/202547/29/20143/263706/61cc1eaaEb4636005/a46c8d158437d052.jpg",
+          title: "幸运大转盘",
+          desc: "大转盘滚动抽奖，可配置奖品、样式等"
+        },
+        {
+          img: "https://img13.360buyimg.com/imagetools/jfs/t1/202404/35/20107/279950/61cc1eaaE574c3eb8/39cf24a482d01e97.jpg",
+          title: "跑马灯",
+          desc: "跑马灯转动抽奖，可配置奖品、样式等"
+        },
+        {
+          img: "https://img11.360buyimg.com/imagetools/jfs/t1/202949/13/20432/93032/61cc1eaaE27e30ed5/b1f9de2f68bed73e.jpg",
+          title: "红包雨",
+          desc: "可配置红包雨数量，事件回调等"
+        },
+        {
+          img: "https://img11.360buyimg.com/imagetools/jfs/t1/223840/32/1825/143367/61cc1eabE5fa7e5b4/09da1e2b7c384459.jpg",
+          title: "刮刮卡",
+          desc: "多种场景模式，支持比例、背景等配置"
+        },
+        {
+          img: "https://img11.360buyimg.com/imagetools/jfs/t1/172470/9/24728/128195/61cc1eaaE492cee7e/0ea9532c0cccd8f7.jpg",
+          title: "幸运大礼盒",
+          desc: "开箱子场景，支持图片、事件回调等"
+        },
       ],
       currentCaseItem: {},
       currentCaseIndex: 0,
