@@ -1,46 +1,46 @@
 <template>
-  <div class="nut-bingo-doll-machine">
-    <div class="machineBox" ref="machineBox">
-      <div class="machineTop">
+  <view class="nut-bingo-doll-machine">
+    <view class="machineBox" ref="machineBox">
+      <view class="machineTop">
         <!-- 绳子 -->
-        <div class="rope" ref="rope"></div>
+        <view class="rope" ref="rope"></view>
         <!--爪子-->
-        <div ref="clawBox" :class="['clawBox', catchFlag ? 'yes' : '']">
+        <view ref="clawBox" :class="['clawBox', catchFlag ? 'yes' : '']">
           <img src="https://img14.360buyimg.com/imagetools/jfs/t1/146467/34/22553/4178/61b088afE198f676e/21952e7018d1d141.png" class="fail" />
-          <div class="succ">
+          <view class="succ">
             <img :src="winImage" />
-          </div>
-        </div>
-      </div>
-      <div class="activeArea" ref="activeArea">
+          </view>
+        </view>
+      </view>
+      <view class="activeArea" ref="activeArea">
         <!--奖品-->
-        <div id="giftBox" ref="giftBox">
-          <div id="gift1" ref="gift1">
+        <view id="giftBox" ref="giftBox">
+          <view id="gift1" ref="gift1">
             <img
               v-for="(item, index) of prizeList"
               :key="'machine' + index"
               :ref="setGiftimg"
               :src="item.imagePath"
             />
-          </div>
-          <div id="gift1" ref="gift2">
+          </view>
+          <view id="gift1" ref="gift2">
             <img
               v-for="(item, index) of prizeList"
               :key="'machine' + index"
               :ref="setGiftimg"
               :src="item.imagePath"
             />
-          </div>
-        </div>
-      </div>
-      <div class="game_operate">
+          </view>
+        </view>
+      </view>
+      <view class="game_operate">
         <!--点击前-->
-        <div class="game_btn game_star" @click="start" v-if="lock"></div>
+        <view class="game_btn game_star" @click="start" v-if="lock"></view>
         <!--点击后-->
-        <div class="game_btn game_end" v-if="!lock"></div>
-      </div>
-    </div>
-  </div>
+        <view class="game_btn game_end" v-if="!lock"></view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script lang="ts">

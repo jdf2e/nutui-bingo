@@ -181,6 +181,18 @@
       "show": true,
       "desc": "娃娃机",
       "author": "Ymm0008"
+    },
+    {
+      "version": "1.0.0",
+      "name": "Guessgift",
+      "taro": true,
+      "tarodoc": false,
+      "sort": 1,
+      "cName": "你藏我猜",
+      "type": "component",
+      "show": true,
+      "desc": "你藏我猜",
+      "author": "Ymm0008"
     }
   ]
 }

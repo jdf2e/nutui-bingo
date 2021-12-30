@@ -1,0 +1,32 @@
+.nut-bingo-guess-gift {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  .bowl-item {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+    background: url("https://img14.360buyimg.com/imagetools/jfs/t1/213395/37/9376/5774/61cc34b8Ec3d2eddd/1ddf6d42663e1285.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transition: all ease-out 0.5s;
+  }
+  .gold-bean {
+    position: absolute;
+    z-index: 1;
+    bottom: 20px;
+    width: 30px;
+    height: 30px;
+    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/219815/14/9349/4725/61cc34b8E059ebbd2/55e8002ae82a01ea.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}
+.disabledClick {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+}
