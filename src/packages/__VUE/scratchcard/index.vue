@@ -2,11 +2,11 @@
   <div
     :class="classes"
     :style="{ height: height + 'px', width: width + 'px' }"
-    ref="luckycardDom"
-    id="luckycardDom"
+    ref="scratchcard"
+    id="scratchcard"
   >
     <div
-      class="lucky-content"
+      class="scratchcard-content"
       v-html="result"
       :style="{ backgroundColor: backgroundColor, fontSize: fontSize + 'px' }"
     ></div>
@@ -15,7 +15,7 @@
 <script lang="ts">
 import { ref, computed, nextTick, onMounted, reactive ,watch} from 'vue';
 import { createComponent } from '../../utils/create';
-const { componentName, create } = createComponent('luckscratch');
+const { componentName, create } = createComponent('scratch-card');
 import LuckyCard from './luckycard.js';
 export default create({
   props: {
@@ -56,7 +56,7 @@ export default create({
   emits: ['click', 'open'],
 
   setup(props, { emit }) {
-    const luckycardDom = ref<HTMLElement | null>(null);
+    const scratchcard = ref<HTMLElement | null>(null);
     const classes = computed(() => {
       const prefixCls = componentName;
       return {
@@ -66,16 +66,16 @@ export default create({
     const result=ref(props.content)
     const state:any = reactive({
       luckcard: null,
-    
     });
     const clearCover = () => {
       state.luckcard.clearCover();
     };
     onMounted(() => {
+      console.log(scratchcard.value);
       nextTick(() => {
         state.luckcard = LuckyCard(
           {
-            scratchDiv: luckycardDom.value,
+            scratchDiv: scratchcard.value,
             coverColor: props.coverColor,
             coverImg: props.coverImg,
             ratio: Number(props.ratio),
@@ -92,7 +92,6 @@ export default create({
    watch(
       () => props.content,
       (val) => {
-        console.log("bian")
         result.value=val;
       }
     );
@@ -100,7 +99,7 @@ export default create({
       ...state,
       result,
       classes,
-      luckycardDom
+      scratchcard
     };
   }
 });

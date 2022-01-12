@@ -9,8 +9,6 @@
 import { createApp } from 'vue';
 // vue
 import { GuessGift } from '@nutui/nutui-bingo';
-// taro
-import { GuessGift } from '@nutui/nutui-bingo-taro';
 
 const app = createApp();
 app.use(GuessGift);
@@ -20,13 +18,13 @@ app.use(GuessGift);
 ## 基本用法
 
 ```html
-<nut-bingo-guess-gift
+<nutbig-guess-gift
   ref="guessgiftDom"
   :prize-index="prizeIndex"
   @start-turns="startTurns"
   @end-turns="endTurns"
 >
-</nut-bingo-guess-gift>
+</nutbig-guess-gift>
 ```
 
 ```javascript

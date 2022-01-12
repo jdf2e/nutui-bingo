@@ -2,14 +2,14 @@
   <div class="demo">
     <h2>基础用法</h2>
     <div class="show-demo">
-      <nut-bingo-guess-gift
+      <nutbig-guess-gift
         ref="guessgiftDom"
         :prize-index="prizeIndex"
         :turn-number="turnNum"
         @start-turns="startTurns"
         @end-turns="endTurns"
       >
-      </nut-bingo-guess-gift>
+      </nutbig-guess-gift>
       <nut-button type="primary" @click="gameStart">开始</nut-button>
     </div>
   </div>

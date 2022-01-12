@@ -2,14 +2,14 @@
   <div class="demo">
     <h2>基础用法</h2>
     <div class="show-demo">
-      <nut-bingo-lotto-roll
+      <nutbig-lotto-roll
         ref="lottoRollDom"
         :prize-list="prizeList"
         :prize-index="prizeIndex"
         @start-turns="startTurns"
         @end-turns="endTurns"
       >
-      </nut-bingo-lotto-roll>
+      </nutbig-lotto-roll>
       <!-- <div class="btnBtn">
         <nut-button type="danger" @click="startRole" :disabled="startFlag">抽奖</nut-button>
         <nut-button type="danger" @click="startRole2" :disabled="startFlag">不中奖</nut-button>
@@ -78,17 +78,13 @@ export default createDemo({
 }
 .show-demo {
   background: #ffffff;
-  padding: 0 20px;
+  padding: 20px;
 }
 h2 {
   padding: 0 20px;
 }
-.btnBtn {
-  margin: 20px 0;
-  text-align: center;
-  .nut-button {
-    margin-right: 20px;
-  }
+.nut-button {
+  margin-top: 20px;
 }
 .disabledClick {
   pointer-events: none !important;

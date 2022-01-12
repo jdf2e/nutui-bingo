@@ -1,7 +1,7 @@
 <template>
   <div class="demo">
     <h2>基础用法</h2>
-    <nut-bingo-luckmarquee
+    <nutbig-marquee
       :prize-list="prizeList"
       :prize-index="prizeIndex"
       :speed="100"
@@ -10,14 +10,14 @@
       @start-turns="startTurns"
       @end-turns="endTurns"
     >
-    </nut-bingo-luckmarquee>
+    </nutbig-marquee>
   </div>
 </template>
 
 <script lang="ts">
 import { ref, reactive } from 'vue';
 import { createComponent } from '../../utils/create';
-const { createDemo } = createComponent('luckmarquee');
+const { createDemo } = createComponent('marquee');
 export default createDemo({
   setup() {
     // 转盘上要展示的奖品数据

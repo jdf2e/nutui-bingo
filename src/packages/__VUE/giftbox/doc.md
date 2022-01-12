@@ -1,4 +1,4 @@
-# LuckGiftbox 神秘大礼盒
+# Giftbox 神秘大礼盒
 
 ### 介绍
 
@@ -8,24 +8,22 @@
 ``` javascript
 import { createApp } from 'vue';
 // vue
-import { Luckgiftbox } from '@nutui/nutui-bingo';
-// taro
-import { Luckgiftbox } from '@nutui/nutui-bingo-taro';
+import { Giftbox } from '@nutui/nutui-bingo';
 
 const app = createApp();
-app.use(Luckgiftbox);
+app.use(Giftbox);
 ```
 
 ## 代码示例
 ## 基本用法
 
 ```html
-<nut-bingo-Luckgiftbox
+<nutbig-giftbox
   ref="refChild"
   @start-turns="startTurns"
   @end-turns="endTurns"
 >
-</nut-bingo-Luckgiftbox>
+</nutbig-giftbox>
 <nut-button type="primary" @click="initBox">再来一次</nut-button>
 ```
 

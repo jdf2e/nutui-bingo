@@ -1,4 +1,4 @@
-# LuckDraw 转盘抽奖
+# Marquee 跑马灯
 
 ### 介绍
 
@@ -8,12 +8,10 @@
 ``` javascript
 import { createApp } from 'vue';
 // vue
-import { Luckmarquee } from '@nutui/nutui-bingo';
-// taro
-import { Luckmarquee } from '@nutui/nutui-bingo-taro';
+import { Marquee } from '@nutui/nutui-bingo';
 
 const app = createApp();
-app.use(Luckmarquee);
+app.use(Marquee);
 ```
 
 ## 代码示例
@@ -21,7 +19,7 @@ app.use(Luckmarquee);
 ## 基本用法
 
 ```html
-<nut-bingo-luckmarquee
+<nutbig-marquee
   :prize-list="prizeList"
   :prize-index="prizeIndex"
   :speed="100"
@@ -29,7 +27,7 @@ app.use(Luckmarquee);
   @start-turns="startTurns"
   @end-turns="endTurns"
 >
-</nut-bingo-luckmarquee>
+</nutbig-marquee>
 ```
 
 ```javascript

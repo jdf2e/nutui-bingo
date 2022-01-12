@@ -1,5 +1,5 @@
 <template>
-  <view :class="classes" ref="luckMarqueeDom">
+  <view :class="classes" ref="marqueeDom">
     <view class="bgContent"></view>
     <view class="marqueeBg" :style="bgContentStyle"></view>
     <view :class="['start', {'disabledDraw': lock}]" @click="startDraw" :style="cursorStyle"></view>
@@ -16,7 +16,7 @@
 <script lang="ts">
 import { ref, toRefs, watch, computed, onMounted, watchEffect, reactive } from 'vue';
 import { createComponent } from '../../utils/create';
-const { componentName, create } = createComponent('luckmarquee');
+const { componentName, create } = createComponent('marquee');
 
 export default create({
   props: {
@@ -75,7 +75,7 @@ export default create({
       }
     );
 
-    const luckMarqueeDom:any = ref(null);
+    const marqueeDom:any = ref(null);
     // 上锁
     const lock = ref(false);
     // 转动到的商品的index
@@ -141,7 +141,7 @@ export default create({
 
     return {
       classes,
-      luckMarqueeDom,
+      marqueeDom,
       prizeList,
       index,
       lock,
