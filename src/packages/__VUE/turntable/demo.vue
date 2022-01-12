@@ -1,43 +1,28 @@
-# LuckDraw 转盘抽奖
+<template>
+  <div class="demo">
+    <h2>基础用法</h2>
+    <nutbig-turntable
+      class="turntable"
+      :width="luckWidth"
+      :height="luckheight"
+      :prize-list="prizeList"
+      :turns-number="turnsNumber"
+      :turns-time="turnsTime"
+      :prize-index="prizeIndex"
+      :style-opt="styleOpt"
+      :pointer-style="pointerStyle"
+      @start-turns="startTurns"
+      @end-turns="endTurns"
+    >
+    </nutbig-turntable>
+  </div>
+</template>
 
-### 介绍
-
-用于大转盘滚动抽奖场景，可配置奖品、图片、转盘样式等。
-
-### 安装
-``` javascript
-import { createApp } from 'vue';
-// vue
-import { Luckdraw } from '@nutui/nutui-bingo';
-// taro
-import { Luckdraw } from '@nutui/nutui-bingo-taro';
-
-const app = createApp();
-app.use(Luckdraw);
-```
-
-## 代码示例
-## 基本用法
-
-```html
-<nut-bingo-luckdraw
-  class="drawTable"
-  :luck-width="luckWidth"
-  :luck-height="luckheight"
-  :prize-list="prizeList"
-  :turns-number="turnsNumber"
-  :turns-time="turnsTime"
-  :prize-index="prizeIndex"
-  :style-opt="styleOpt"
-  :pointer-style="pointerStyle"
-  @start-turns="startTurns"
-  @end-turns="endTurns"
->
-</nut-bingo-luckdraw>
-```
-
-```javascript
-export default {
+<script lang="ts">
+import { ref, toRefs, watch, computed, onMounted, watchEffect, reactive } from 'vue';
+import { createComponent } from '../../utils/create';
+const { createDemo } = createComponent('turntable');
+export default createDemo({
   setup() {
     // 转盘大小
     const luckWidth = ref('300px');
@@ -131,29 +116,9 @@ export default {
       endTurns
     };
   }
-}
-```
+});
+</script>
 
+<style lang="scss" scoped>
 
-### Props
-
-| 字段 | 说明 | 类型 | 默认值
-|----- | ----- | ----- | ----- 
-| luck-width | 转盘的宽度 | String | 300px
-| luck-height | 转盘的高度 | String | 300px
-| prize-list | 奖品列表 | Array | -
-| turns-number | 转动的圈数 | Number | 5
-| turns-time | 从开始转动到结束所用时间 | Number | 5(单位是秒)
-| prize-index | 中奖奖品在列表的索引位置 | Number | -1
-| style-opt | 转盘中的样式，包括每个扇区的背景颜色(在每条数据中页可单独设置prizeColor)，扇区的边框颜色 | Object | {prizeBgColors: [],borderColor: ''}
-| pointer-style | 转盘中指针的样式，包括背景图片、大小等 | Object | {width: '80px',height: '80px'}
-
-
-
-### Events
-
-| 字段 | 说明 | 回调参数
-|----- | ----- | -----
-| start-turns | 转盘开始转动的回调函数，此时将接口中的中奖索引，赋值到 prize-index| - 
-| end-turns | 转盘中停止转动后的回调函数 | - 
-
+</style>

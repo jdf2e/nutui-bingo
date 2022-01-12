@@ -10,7 +10,7 @@ import { createApp } from 'vue';
 // vue
 import { Dollmachine } from '@nutui/nutui-bingo';
 // taro
-import { LottoRoll } from '@nutui/nutui-bingo-taro';
+// import { LottoRoll } from '@nutui/nutui-bingo-taro';
 
 const app = createApp();
 app.use(Dollmachine);

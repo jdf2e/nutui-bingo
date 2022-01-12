@@ -20,7 +20,7 @@
               {{ item.cName }}
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <div
               @focus="handleFocus"
               @focusout="handleFocusOut"
@@ -46,7 +46,7 @@
                 </div>
               </transition>
             </div>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a
               class="user-link"

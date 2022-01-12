@@ -2,14 +2,14 @@
   <div class="demo">
     <h2>基础用法</h2>
     <div class="show-demo">
-      <nut-bingo-doll-machine
+      <nutbig-doll-machine
         ref="lottoRollDom"
         :prize-list="prizeList"
         :prize-index="prizeIndex"
         @start-turns="startTurns"
         @end-turns="endTurns"
       >
-      </nut-bingo-doll-machine>
+      </nutbig-doll-machine>
     </div>
   </div>
 </template>

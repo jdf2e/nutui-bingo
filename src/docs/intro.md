@@ -1,6 +1,6 @@
 # NutUI-bingo
 
-NutUI 营销生态，主要助力常见的营销活动案例和场景。
+基于 NutUI 的抽奖组件库，助力营销活动和小游戏场景。
 
 <div style="margin:30px 0;">
     <img src="https://img14.360buyimg.com/imagetools/jfs/t1/167902/2/8762/791358/603742d7E9b4275e3/e09d8f9a8bf4c0ef.png" width="150" alt="NutUI">
@@ -14,16 +14,16 @@ NutUI 营销生态，主要助力常见的营销活动案例和场景。
 
 ## 特性
 
-* 70+ 高质量组件（3.0 持续开发中）
+* 10+ 抽奖组件
 * 基于京东APP 10.0 视觉规范
-* 支持按需引用
 * 详尽的文档和示例
 * 支持 TypeScript
+* 灵活的自定义设置
 
-## 示例 H5 & 小程序
+## 示例 H5
 
 <img src="https://img12.360buyimg.com/imagetools/jfs/t1/162421/39/13392/9425/6052ea60E592310a9/264bdff23ef5fe95.png" width="200" alt="NutUI" />
-<img src="https://storage.360buyimg.com/jdc-article/gh_f2231eb941be_258.jpg" width="200" alt="NutUI" />
+<!-- <img src="https://storage.360buyimg.com/jdc-article/gh_f2231eb941be_258.jpg" width="200" alt="NutUI" /> -->
 
 ## 支持环境
 

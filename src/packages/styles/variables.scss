@@ -277,5 +277,6 @@ $fixednav-btn-bg: linear-gradient(
   rgba(250, 63, 25, 1) 100%
 ) !default;
 
+@import './common/common';
 @import './mixins/index';
 @import './animation/index';

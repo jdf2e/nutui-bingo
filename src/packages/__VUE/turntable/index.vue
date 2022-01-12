@@ -1,6 +1,6 @@
 <template>
-  <view :class="classes" ref="luckdrawDom" :style="{ width: luckWidth, height: luckHeight }">
-    <view class="lucktable" :style="{ transform: rotateAngle, transition: rotateTransition }">
+  <view :class="classes" ref="turntableDom" :style="{ width: width, height: height }">
+    <view class="turntable" :style="{ transform: rotateAngle, transition: rotateTransition }">
       <canvas id="canvas" ref="canvasDom">
         浏览器版本过低
       </canvas>
@@ -19,15 +19,17 @@
 <script lang="ts">
 import { ref, toRefs, watch, computed, onMounted, watchEffect, reactive } from 'vue';
 import { createComponent } from '../../utils/create';
-const { componentName, create } = createComponent('luckdraw');
+const { componentName, create } = createComponent('turntable');
 
 export default create({
   props: {
-    luckWidth: {
-      required: true
+    width: {
+      required: true,
+      default: '300px'
     },
-    luckHeight: {
-      required: true
+    height: {
+      required: true,
+      default: '300px'
     },
     prizeList: {
       required: true
@@ -113,7 +115,7 @@ export default create({
     const rotateAngle = ref<string|number>(0);
     const rotateTransition = ref("");
 
-    const luckdrawDom:any = ref(null);
+    const turntableDom:any = ref(null);
     const canvasDom:any = ref(null);
     
     // 根据index计算每一格要旋转的角度的样式
@@ -131,7 +133,7 @@ export default create({
       
       // 开始绘画
       const canvas = canvasDom.value;
-      const luckdraw = luckdrawDom.value;
+      const luckdraw = turntableDom.value;
       const ctx = canvas.getContext('2d');
       
       const canvasW = (canvas.width = luckdraw.clientWidth); // 画板的高度
@@ -210,7 +212,7 @@ export default create({
 
     return {
       classes,
-      luckdrawDom,
+      turntableDom,
       canvasDom,
       getRotateAngle,
       rotateAngle,

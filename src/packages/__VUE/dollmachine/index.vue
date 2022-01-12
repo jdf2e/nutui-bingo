@@ -1,5 +1,5 @@
 <template>
-  <view class="nut-bingo-doll-machine">
+  <view class="nutbig-doll-machine">
     <view class="machineBox" ref="machineBox">
       <view class="machineTop">
         <!-- 绳子 -->

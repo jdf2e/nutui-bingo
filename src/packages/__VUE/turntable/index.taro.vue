@@ -1,6 +1,6 @@
 <template>
-  <view :class="classes" ref="luckdrawDom" :style="{ width: luckWidth, height: luckHeight }">
-    <view class="lucktable" :style="{ transform: rotateAngle, transition: rotateTransition }">
+  <view :class="classes" ref="turntableDom" :style="{ width: width, height: height }">
+    <view class="turntable" :style="{ transform: rotateAngle, transition: rotateTransition }">
       <canvas id="canvasWx" :class="envApp == 'WEAPP' ? '':'mlcanvas'" canvas-id="canvasWx" ref="canvasDom" type="33" :style="envApp == 'WEAPP' ? '' : getRotateAngle(0)">
       </canvas>
       <!-- <canvas id="canvasWx" canvas-id="canvasWx" ref="canvasDom" type="2d" :style="getRotateAngle(0)">
@@ -28,11 +28,13 @@ const { componentName, create } = createComponent('luckdraw');
 
 export default create({
   props: {
-    luckWidth: {
-      required: true
+    width: {
+      required: true,
+      default: '300px'
     },
-    luckHeight: {
-      required: true
+    height: {
+      required: true,
+      default: '300px'
     },
     prizeList: {
       required: true
@@ -80,7 +82,7 @@ export default create({
   },
   emits: ["click", "start-turns", "end-turns"],
   setup(props, { emit }) {
-    let { luckWidth, luckHeight, prizeList, turnsNumber, styleOpt, turnsTime, pointerStyle } = reactive(props);
+    let { width, height, prizeList, turnsNumber, styleOpt, turnsTime, pointerStyle } = reactive(props);
 
     const classes = computed(() => {
       const prefixCls = componentName;
@@ -142,7 +144,7 @@ export default create({
     const rotateAngle = ref<string|number>(0);
     const rotateTransition = ref("");
 
-    const luckdrawDom:any = ref(null);
+    const turntableDom:any = ref(null);
     const canvasDom:any = ref(null);
     const rorateDeg = ref(360 / prizeList.length);
 
@@ -161,13 +163,13 @@ export default create({
       const { prizeBgColors, borderColor } = data;
       // 开始绘画
       const canvas = canvasDom.value;
-      const luckdraw = luckdrawDom.value;
+      const luckdraw = turntableDom.value;
       // const ctx = canvas.getContext('2d');
       const ctx:any = Taro.createCanvasContext('canvasWx');
       // const canvasW = (canvas.width = luckdraw.clientWidth); // 画板的高度
       // const canvasH = (canvas.height = luckdraw.clientHeight); // 画板的宽度
-      const canvasW = luckWidth.replace(/px/g, ""); // 画板的高度
-      const canvasH = luckHeight.replace(/px/g, ""); // 画板的宽度
+      const canvasW = width.replace(/px/g, ""); // 画板的高度
+      const canvasH = height.replace(/px/g, ""); // 画板的宽度
       if(envApp.value == "WEAPP") {
         // translate方法重新映射画布上的 (0,0) 位置
         ctx.translate(0, canvasH);
@@ -252,7 +254,7 @@ export default create({
     return {
       classes,
       envApp,
-      luckdrawDom,
+      turntableDom,
       canvasDom,
       rorateDeg,
       getRotateAngle,
