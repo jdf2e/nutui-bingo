@@ -2,7 +2,7 @@
   <div class="demo">
     <h2>基础用法</h2>
     <div class="demo1" style="background: url('//img11.360buyimg.com/imagetools/jfs/t1/114254/40/21041/607452/618e30bbE6ab3ee0c/9b7a249aee21ba46.jpg') no-repeat top center/100% 100%">
-      <nut-bingo-luckshake
+      <nutbig-luckshake
         ref="luckshakePrize"
         :luck-width="luckWidth"
         :luck-height="luckheight"
@@ -13,7 +13,7 @@
         <!-- <template #shake-num>
           <view class="shake-num">抽奖可用次数{{ shakeNum }}</view>
         </template> -->
-      </nut-bingo-luckshake>
+      </nutbig-luckshake>
     </div>
   </div>
 </template>
