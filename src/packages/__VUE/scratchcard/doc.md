@@ -12,7 +12,6 @@ import { Scratchcard } from '@nutui/nutui';
 
 const app = createApp();
 app.use(Scratchcard);
-
 ```   
     
  ## 基本用法

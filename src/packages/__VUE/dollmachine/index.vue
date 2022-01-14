@@ -23,7 +23,7 @@
               :src="item.imagePath"
             />
           </view>
-          <view id="gift1" ref="gift2">
+          <view id="gift2" ref="gift2">
             <img
               v-for="(item, index) of prizeList"
               :key="'machine' + index"
@@ -70,6 +70,14 @@ export default create({
   },
   emits: ["click", "start-turns", "end-turns"],
   setup(props, { emit }) {
+    const prize = ref(props.prizeIndex);
+    watch(
+      () => props.prizeIndex,
+      (val, prevVal) => {
+        prize.value = val;
+      }
+    );
+    
     const machineBox: any = ref(null);
     const clawBox: any = ref(null);
     const activeArea: any= ref(null);
@@ -108,6 +116,8 @@ export default create({
       let box_width = giftBox.value.scrollLeft;
       // let giftW1 = gift1.value.offsetWidth;
       let giftW2 = gift2.value.offsetWidth;
+      // 保证奖品列表的宽度 大于 当前视图的宽度
+      // 待解决问题：动态计算宽度，宽度不足情况下自动添加元素
       if (giftW2 - box_width <= 0) {
         circle.value = 0;
         giftBox.value.scrollLeft = circle.value;
@@ -129,10 +139,10 @@ export default create({
       rope.value.animate({ height: maxLong.value - 60 + "px" }, 2000);
       clawBox.value.animate({ top: maxLong.value - 20 + "px" }, 2000);
       setTimeout(() => {
-        rope.value.style.height = maxLong.value - 60+ "px";
-        clawBox.value.style.top = maxLong.value - 20  + "px";
+        rope.value.style.height = maxLong.value - 60 + "px";
+        clawBox.value.style.top = maxLong.value - 20 + "px";
         giftCalculation();
-      }, 1900);
+      }, 1850);
     }
 
     //抓住了
@@ -149,9 +159,15 @@ export default create({
       giftimg.value.push(ele);
     };
     const giftCalculation = () => {
-      giftimg.value.forEach((item: any) => {
+      if (prize.value == -1) {
+        gameover();
+        return false;
+      }
+      giftimg.value.forEach((item: any, index) => {
         let long = item.offsetLeft + 100;
-        if (long - 20 <= claw.value && claw.value <= long + 20) {
+        console.log(long, claw.value);
+
+        if (long - 20 <= claw.value && claw.value <= long + 20 && index == prize.value) {
           let img = item.src;
           setTimeout(() => {
             catchGift(img);

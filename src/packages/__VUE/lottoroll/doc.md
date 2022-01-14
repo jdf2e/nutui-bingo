@@ -85,7 +85,7 @@ export default {
 | prize-list | 奖品列表 | Array | -
 | turns-number | 转动的圈数 | Number | 0
 | turns-time | 从开始转动到结束所用时间 | Number | 0(单位是毫秒)
-| prize-index | 中奖奖品在列表的索引位置 | Number | -1（-1随机停，大于1为设置的图片索引位置）
+| prize-index | 中奖奖品在列表的索引位置 | Number | -1（-1随机停，大于1为设置的图片索引位置，请保证中间参数初始值为-1）
 
 ### Events
 

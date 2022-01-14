@@ -40,7 +40,7 @@ export default createDemo({
       {
         imagePath: "https://img12.360buyimg.com/imagetools/jfs/t1/221361/4/7410/16458/61c9261eE45802396/27b64caa9e7c9bac.png",
         text: "JOY"
-      },
+      }
     ]);
 
     // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
@@ -51,16 +51,18 @@ export default createDemo({
 
     const endTurns = () => {
       console.log('抽奖结束');
-      Dialog({
-        title: '中奖提示',
-        content: '您已完成抽奖，是否继续？',
-        onCancel: () => {},
-        onOk: () => {
-          setTimeout(() => {
-            lottoRollDom.value.init();
-          }, 300);
-        }
-      });
+      // setTimeout(() => {
+      //   Dialog({
+      //     title: '中奖提示',
+      //     content: '您已完成抽奖，是否继续？',
+      //     onCancel: () => {},
+      //     onOk: () => {
+            setTimeout(() => {
+              lottoRollDom.value.init();
+            }, 300);
+      //     }
+      //   });
+      // }, 2500);
     }
    
     return {

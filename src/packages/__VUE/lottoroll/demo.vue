@@ -10,10 +10,10 @@
         @end-turns="endTurns"
       >
       </nutbig-lotto-roll>
-      <!-- <div class="btnBtn">
-        <nut-button type="danger" @click="startRole" :disabled="startFlag">抽奖</nut-button>
-        <nut-button type="danger" @click="startRole2" :disabled="startFlag">不中奖</nut-button>
-      </div> -->
+      <div class="btnBtn">
+        <nut-button type="danger" @click="startRole" :disabled="startFlag">中奖（测试）</nut-button>
+        <nut-button type="danger" @click="startRole2" :disabled="startFlag">不中奖（测试）</nut-button>
+      </div>
     </div>
   </div>
 </template>
@@ -51,7 +51,7 @@ export default createDemo({
     ]);
 
     // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
-    const prizeIndex = ref(3); 
+    const prizeIndex = ref(-1); 
     const startTurns = () => {
       console.log('开始抽奖');
     }
@@ -59,11 +59,22 @@ export default createDemo({
     const endTurns = () => {
       console.log('抽奖结束');
     }
+  
+    const startRole = () => {
+      prizeIndex.value = Math.floor(Math.random() * 5);
+      lottoRollDom.value.start();
+    }
+    const startRole2 = () => {
+      prizeIndex.value = -1;
+      lottoRollDom.value.start();
+    }
    
     return {
       lottoRollDom,
       prizeList,
       prizeIndex,
+      startRole,
+      startRole2,
       startTurns,
       endTurns
     };

@@ -16,7 +16,8 @@
       </div>
     </div>
   </div>
-  <nut-button type="danger" @click="start">抽奖</nut-button>
+  <!-- 待设计补充，做成开关装置 -->
+  <!-- <nut-button type="danger" @click="start" style="margin-top: 20px;">抽奖</nut-button> -->
 </template>
 
 <script>
