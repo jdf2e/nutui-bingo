@@ -91,7 +91,7 @@
     },
     {
       "version": "1.0.0",
-      "name": "Squarenine",
+      "name": "SquareNine",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
@@ -149,7 +149,7 @@
       "author": "Drjingfubo"
     },
     {
-      "name": "Giftrain",
+      "name": "GiftRain",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
@@ -181,6 +181,17 @@
       "show": true,
       "desc": "娃娃机",
       "author": "Ymm0008"
+    },
+    {
+      "name": "ShakeDice",
+      "taro": true,
+      "tarodoc": false,
+      "sort": 1,
+      "cName": "摇骰子",
+      "type": "component",
+      "show": true,
+      "desc": "摇骰子",
+      "author": "Drjingfubo"
     },
     {
       "version": "1.0.0",

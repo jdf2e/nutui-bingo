@@ -1,4 +1,4 @@
-# Luckrain 组件
+# GiftRain 组件
 
 ### 介绍
 
@@ -8,10 +8,10 @@
 
 ```javascript
 import { createApp } from "vue";
-import { Luckrain } from "@nutui/nutui";
+import { GiftRain } from "@nutui/nutui-bingo";
 
 const app = createApp();
-app.use(Luckrain);
+app.use(GiftRain);
 ```
 
 ## 代码演示
@@ -19,7 +19,7 @@ app.use(Luckrain);
 ### 基础用法
 
 ```html
-<nut-bingo-luckrain
+<nutbig-giftrain
   width="100%"
   height="580px"
   @gameOver="gameOver"
@@ -30,7 +30,7 @@ app.use(Luckrain);
   <template #customize="{ onStart }" v-if="!isStart">
     <div class="start" @click="onStart">开始</div>
   </template>
-</nut-bingo-luckrain>
+</nutbig-giftrain>
 ```
 
 ```javascript

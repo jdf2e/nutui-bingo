@@ -1,14 +1,14 @@
 <template>
   <div class="demo">
     <h2>基础用法</h2>
-    <nut-bingo-luckeggs :num="9" @click="hit"></nut-bingo-luckeggs>
+    <nutbig-hiteggs :num="9" @click="hit"></nutbig-hiteggs>
   </div>
 </template>
 
 <script lang="ts">
 import { reactive } from "vue";
 import { createComponent } from "../../utils/create";
-const { createDemo } = createComponent("luckeggs");
+const { createDemo } = createComponent("hiteggs");
 export default createDemo({
   props: {},
   setup() {

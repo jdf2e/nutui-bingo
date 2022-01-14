@@ -27,7 +27,7 @@
 <script lang="ts">
 import { computed, reactive, ref, toRefs } from "vue";
 import { createComponent } from "../../utils/create";
-const { componentName, create } = createComponent("luckeggs");
+const { componentName, create } = createComponent("hiteggs");
 interface propsType {
   num: number;
   intactImg: string;
