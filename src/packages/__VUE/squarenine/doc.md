@@ -1,4 +1,4 @@
-# Temp Lucknine 九宫格翻牌抽奖
+# SquareNine 九宫格翻牌抽奖
 
 ### 介绍
 
@@ -8,27 +8,25 @@
 
 ``` javascript
 import { createApp } from 'vue';
-import { Lucknine } from '@nutui/nutui';
+import { SquareNine } from '@nutui/nutui-bingo';
 
 const app = createApp();
-app.use(Lucknine);
+app.use(SquareNine);
 
 ```
 
 ## 代码演示
 
-### 基础用法1
-
-`Icon` 的 `name` 属性支持传入图标名称或图片链接。
+### 基础用法
 
 ```html
-<nut-bingo-lucknine
+<nutbig-squarenine
       :prize-list="dataArr"
       :prize-id="prizeId"
       :cardImg="cardImg"
       @click="click"
     >
-</nut-bingo-lucknine>
+</nutbig-squarenine>
 ```
 
 ```javascript
@@ -99,10 +97,9 @@ app.use(Lucknine);
 
 ### 自定义开始游戏按钮
 
-`Icon` 的 `name` 属性支持传入图标名称或图片链接。
 
 ```html
- <nut-bingo-lucknine
+ <nutbig-squarenine
       :data="dataArr"
       :prize-id="prizeId"
       :cardImg="cardImg"
@@ -111,7 +108,7 @@ app.use(Lucknine);
      <template #startBtn>
        <div>自定义</div>
      </template>
-    </nut-bingo-lucknine>
+    </nutbig-squarenine>
 ```
 
 

@@ -1,17 +1,17 @@
 <template>
   <div class="demo">
-    <nut-bingo-luckrain width="100%" height="580px" @gameOver="gameOver" @start="start" @click="click">
+    <nutbig-giftrain width="100%" height="580px" @gameOver="gameOver" @start="start" @click="click">
       <template #customize="{ onStart }" v-if="!isStart">
         <div class="start" @click="onStart">开始</div>
       </template>
-    </nut-bingo-luckrain>
+    </nutbig-giftrain>
   </div>
 </template>
 
 <script lang="ts">
 import { ref } from "vue";
 import { createComponent } from "../../utils/create";
-const { createDemo } = createComponent("luckrain");
+const { createDemo } = createComponent("giftrain");
 export default createDemo({
   props: {},
   setup() {
@@ -35,8 +35,8 @@ export default createDemo({
 .demo{
   padding: 35px 17px 0 17px !important;
 }
-::v-deep(.nut-bingo-luckrain) {
-  .nut-bingo-luckrain-content {
+::v-deep(.nutbig-giftrain) {
+  .nutbig-giftrain-content {
     background: url("//img13.360buyimg.com/imagetools/jfs/t1/156139/35/24533/600373/61974f3eEf612507c/88df16bece0b202f.png")
       no-repeat;
     background-size: 100% 100%;

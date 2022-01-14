@@ -1,6 +1,6 @@
 <template>
   <div class="demo">
-    <nut-bingo-luckdice ref="dice"></nut-bingo-luckdice>
+    <nutbig-shakedice ref="dice"></nutbig-shakedice>
     <div @click="jump" class="demoBtn">摇动</div>
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script lang="ts">
 import { ref } from "vue";
 import { createComponent } from "../../utils/create";
-const { createDemo } = createComponent("luckdice");
+const { createDemo } = createComponent("shakedice");
 export default createDemo({
   props: {},
   setup() {
@@ -29,7 +29,7 @@ export default createDemo({
   text-align: center;
   background: url("//img12.360buyimg.com/imagetools/jfs/t1/95587/33/21814/218186/61e0015aE05e5fa32/e367632953cc3633.png")
     no-repeat bottom !important;
-  ::v-deep(.nut-bingo-luckdice) {
+  ::v-deep(.nutbig-shakedice) {
     margin: 70px auto;
   }
   .demoBtn {

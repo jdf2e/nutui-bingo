@@ -1,4 +1,4 @@
-# Luckrain 组件
+# ShakeDice 组件
 
 ### 介绍
 
@@ -8,10 +8,10 @@
 
 ```javascript
 import { createApp } from "vue";
-import { shakeDice } from "@nutui/nutui";
+import { ShakeDice } from "@nutui/nutui-bingo";
 
 const app = createApp();
-app.use(shakeDice);
+app.use(ShakeDice);
 ```
 
 ## 代码演示
@@ -19,7 +19,7 @@ app.use(shakeDice);
 ### 基础用法
 
 ```html
- <nut-bingo-luckdice ref="dice"></nut-bingo-luckdice>
+ <nutbig-shakedice  ref="dice"></nutbig-shakedice >
 <div @click="jump" class="demoBtn">摇动</div>
 ```
 

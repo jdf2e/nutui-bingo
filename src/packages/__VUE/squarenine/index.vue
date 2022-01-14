@@ -1,5 +1,5 @@
 <template>
-  <div class="nut-ninegrid">
+  <div :class="classes">
     <div
       v-for="(item, index) in gridList"
       class="nine-ninegrid__item"
@@ -30,9 +30,9 @@
   </div>
 </template>
 <script lang="ts">
-import { toRefs, watch, onMounted, reactive, ref } from "vue";
+import { toRefs, watch, onMounted, reactive, ref, computed } from "vue";
 import { createComponent } from "../../utils/create";
-const { componentName, create } = createComponent("lucknine");
+const { componentName, create } = createComponent("squarenine");
 
 export default create({
   props: {
@@ -64,6 +64,12 @@ export default create({
       arrPos: [] as any, // 每个方块对应下标记录
       isDraw: true, // 是否是抽奖状态
       isStartDraw: false, // 是否可以翻开卡牌
+    });
+     const classes = computed(() => {
+      const prefixCls = componentName;
+      return {
+        [prefixCls]: true,
+      };
     });
     const prizeId = ref(props.prizeId);
     watch(
@@ -230,6 +236,7 @@ export default create({
 
     return {
       ...toRefs(state),
+      classes,
       resResponse,
       isHaveSlots,
       resetData,

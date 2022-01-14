@@ -12,7 +12,7 @@
 <script lang="ts">
 import { onMounted, toRefs, computed, ref, Ref, reactive, watch } from "vue";
 import { createComponent } from "../../utils/create";
-const { componentName, create } = createComponent("luckdice");
+const { componentName, create } = createComponent("shakedice");
 interface props {
   time: string; // 旋转时间
   speed: number; // 旋转速度 几秒一圈

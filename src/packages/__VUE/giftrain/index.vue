@@ -1,13 +1,13 @@
 <template>
   <div :class="classes">
     <div
-      class="nut-bingo-luckrain-content"
+      class="nutbig-giftrain-content"
       ref="rainContent"
       :style="{ width: width, height: height }"
     >
       <img
         :class="[
-          'nut-bingo-luckrain-content-rainimg',
+          'nutbig-giftrain-content-rainimg',
           item.hasSelected ? '' : 'noselected',
         ]"
         :style="
@@ -28,7 +28,7 @@
 <script lang="ts">
 import { onMounted, toRefs, computed, ref, Ref, reactive, watch } from "vue";
 import { createComponent } from "../../utils/create";
-const { componentName, create } = createComponent("luckrain");
+const { componentName, create } = createComponent("giftrain");
 interface props {
   width: string; // 容器宽度
   height:string // 容器高度

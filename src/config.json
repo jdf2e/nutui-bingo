@@ -91,7 +91,7 @@
     },
     {
       "version": "1.0.0",
-      "name": "Squarenine",
+      "name": "SquareNine",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
@@ -149,7 +149,7 @@
       "author": "Drjingfubo"
     },
     {
-      "name": "Giftrain",
+      "name": "GiftRain",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
@@ -183,7 +183,7 @@
       "author": "Ymm0008"
     },
     {
-      "name": "LuckDice",
+      "name": "ShakeDice",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
