@@ -9,8 +9,6 @@
 import { createApp } from 'vue';
 // vue
 import { Dollmachine } from '@nutui/nutui-bingo';
-// taro
-import { LottoRoll } from '@nutui/nutui-bingo-taro';
 
 const app = createApp();
 app.use(Dollmachine);
@@ -20,14 +18,14 @@ app.use(Dollmachine);
 ## 基本用法
 
 ```html
-<nut-bingo-doll-machine
+<nutbig-doll-machine
   ref="lottoRollDom"
   :prize-list="prizeList"
   :prize-index="prizeIndex"
   @start-turns="startTurns"
   @end-turns="endTurns"
 >
-</nut-bingo-doll-machine>
+</nutbig-doll-machine>
 ```
 
 ```javascript

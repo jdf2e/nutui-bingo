@@ -1,39 +1,24 @@
-# LuckDraw 转盘抽奖
+<template>
+  <div class="demo">
+    <h2>基础用法</h2>
+    <nutbig-marquee
+      :prize-list="prizeList"
+      :prize-index="prizeIndex"
+      :speed="100"
+      :circle="40"
+      :style-opt="styleOpt"
+      @start-turns="startTurns"
+      @end-turns="endTurns"
+    >
+    </nutbig-marquee>
+  </div>
+</template>
 
-### 介绍
-
-用于跑马灯抽奖场景，可配置奖品、图片等。
-
-### 安装
-``` javascript
-import { createApp } from 'vue';
-// vue
-import { Luckmarquee } from '@nutui/nutui-bingo';
-// taro
-import { Luckmarquee } from '@nutui/nutui-bingo-taro';
-
-const app = createApp();
-app.use(Luckmarquee);
-```
-
-## 代码示例
-
-## 基本用法
-
-```html
-<nut-bingo-luckmarquee
-  :prize-list="prizeList"
-  :prize-index="prizeIndex"
-  :speed="100"
-  :circle="40"
-  @start-turns="startTurns"
-  @end-turns="endTurns"
->
-</nut-bingo-luckmarquee>
-```
-
-```javascript
-export default {
+<script lang="ts">
+import { ref, reactive } from 'vue';
+import { createComponent } from '../../utils/create';
+const { createDemo } = createComponent('marquee');
+export default createDemo({
   setup() {
     // 转盘上要展示的奖品数据
     const prizeList = ref([
@@ -82,6 +67,7 @@ export default {
     ]);
     // 转盘样式的选项
     const styleOpt = reactive({
+      // 转盘中每一块扇形的背景色,根据奖品的index来取每一块的对应颜色
       prizeItem: {},
       startStyle:{},
       contentBg: {
@@ -105,26 +91,9 @@ export default {
       endTurns
     };
   }
-}
-```
+});
+</script>
 
+<style lang="scss" scoped>
 
-### Props
-
-| 字段 | 说明 | 类型 | 默认值
-|----- | ----- | ----- | ----- 
-| prize-list | 奖品列表 | Array | []
-| prize-index | 中奖奖品在列表的索引位置 | Number | -1
-| speed | 转动速度 | Number | 150
-| circle | 转动圈数 | Number | 30
-| style-opt | 跑马灯中的样式：contentBg-整个容器样式，prizeItem-每个奖品样式，startStyle-中间按钮样式 | Object | {contentBg: {},prizeItem: {},startStyle:{}}
-
-
-
-### Events
-
-| 字段 | 说明 | 回调参数
-|----- | ----- | -----
-| start-turns | 开始跑动的回调函数，此时将接口中的中奖索引，赋值到 prize-index| - 
-| end-turns | 停止跑动后的回调函数 | - 
-
+</style>

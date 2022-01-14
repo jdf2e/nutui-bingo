@@ -2,14 +2,15 @@
   <div class="demo">
     <h2>基础用法</h2>
     <div class="show-demo">
-      <nutbig-doll-machine
-        ref="lottoRollDom"
-        :prize-list="prizeList"
+      <nutbig-guess-gift
+        ref="guessgiftDom"
         :prize-index="prizeIndex"
+        :turn-number="turnNum"
         @start-turns="startTurns"
         @end-turns="endTurns"
       >
-      </nutbig-doll-machine>
+      </nutbig-guess-gift>
+      <nut-button type="primary" @click="gameStart">开始</nut-button>
     </div>
   </div>
 </template>
@@ -19,54 +20,39 @@ import { Dialog } from "@nutui/nutui";
 import { ref } from 'vue';
 import { createComponent } from '../../utils/create';
 import { reactive } from '@vue/reactivity';
-const { createDemo } = createComponent('doll-machine');
+const { createDemo } = createComponent('guess-gift');
 export default createDemo({
   props: {},
   setup() {
-    const lottoRollDom:any = ref(null);
-    const prizeList = reactive([
-      {
-        imagePath: "https://img11.360buyimg.com/imagetools/jfs/t1/147182/12/2440/6194/5f06cde6Ead240fe8/31082e30a182a5ce.png",
-        text: "大鸡腿"
-      },
-      {
-        imagePath: "https://img12.360buyimg.com/imagetools/jfs/t1/221361/4/7410/16458/61c9261eE45802396/27b64caa9e7c9bac.png",
-        text: "JOY"
-      },
-      { 
-        imagePath: "https://img11.360buyimg.com/imagetools/jfs/t1/128607/26/6643/6790/5f06cd27E9b5e15f7/7509bc7ce2da66b8.png",
-        text: "VIP"
-      },
-      {
-        imagePath: "https://img12.360buyimg.com/imagetools/jfs/t1/221361/4/7410/16458/61c9261eE45802396/27b64caa9e7c9bac.png",
-        text: "JOY"
-      },
-    ]);
+    const guessgiftDom:any = ref(null);
 
     // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
     const prizeIndex = ref(3); 
+    const gameStart = () => {
+      guessgiftDom.value.start();
+    }
     const startTurns = () => {
       console.log('开始抽奖');
     }
 
     const endTurns = () => {
-      console.log('抽奖结束');
       Dialog({
         title: '中奖提示',
         content: '您已完成抽奖，是否继续？',
         onCancel: () => {},
         onOk: () => {
           setTimeout(() => {
-            lottoRollDom.value.init();
+            guessgiftDom.value.init();
           }, 300);
         }
       });
     }
-   
+    const turnNum = ref(20);
     return {
-      lottoRollDom,
-      prizeList,
+      guessgiftDom,
+      turnNum,
       prizeIndex,
+      gameStart,
       startTurns,
       endTurns
     };
@@ -78,11 +64,19 @@ export default createDemo({
 <style lang="scss" scoped>
 #app .demo {
   padding: 57px 0 0 0;
+  height: 100%;
+  background: #000;
+  h2 {
+    padding: 0 20px;
+    color: white;
+  }
 }
 .show-demo {
-  background: #ffffff;
-}
-h2 {
-  padding: 0 20px;
+  margin-top: 50px;
+  .nut-button {
+    display: block;
+    width: 100px;
+    margin: 30px auto;
+  }
 }
 </style>

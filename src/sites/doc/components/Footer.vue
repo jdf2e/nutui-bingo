@@ -53,7 +53,7 @@
           ><a
             class="sub-link"
             target="_blank"
-            href="https://github.com/jdf2e/nutui"
+            href="https://github.com/jdf2e/nutui-bingo"
             v-hover
             >GitHub</a
           ></div

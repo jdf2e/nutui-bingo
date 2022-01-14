@@ -4,7 +4,7 @@
       <img src="../../assets/images/logo-red.png" alt="" srcset="" />
       <div class="info">
         <h1>NutUI-bingo</h1>
-        <p>NutUI 营销生态，主要助力常见的营销活动案例和场景。</p>
+        <p>基于 NutUI 的抽奖组件库，助力营销活动和小游戏场景。</p>
       </div>
     </div>
     <div class="index-components">
@@ -63,7 +63,7 @@ export default defineComponent({
       h1 {
         height: 48px;
         line-height: 48px;
-        font-size: 34px;
+        font-size: 30px;
         color: rgba(51, 51, 51, 1);
       }
       p {

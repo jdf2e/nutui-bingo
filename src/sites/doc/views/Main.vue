@@ -5,7 +5,7 @@
       <div class="content-left">
         <div class="content-title"> NutUI-bingo </div>
         <div class="content-smile"> </div>
-        <div class="content-subTitle">基于 NutUI 的抽奖组件库，主要助力常见的营销活动案例和场景。</div>
+        <div class="content-subTitle">基于 NutUI 的抽奖组件库，助力营销活动和小游戏场景。</div>
         <div class="content-button">
           <div class="leftButton" @click="toIntro">
             <div class="leftButtonText">开始使用</div>
@@ -389,7 +389,7 @@ export default defineComponent({
           width: 160px;
           height: 160px;
           margin: 0 auto;
-          background: url(https://img12.360buyimg.com/imagetools/jfs/t1/162421/39/13392/9425/6052ea60E592310a9/264bdff23ef5fe95.png)
+          background: url(https://img10.360buyimg.com/imagetools/jfs/t1/221795/28/8998/79025/61dea1f9Ec8c9ce55/a10dc1c0362683a3.png)
             no-repeat;
           background-size: cover;
         }
@@ -413,7 +413,7 @@ export default defineComponent({
   color: rgba(26,26,26,0.73);
 }
 .doc-content-cases-content__list {
-  width: 80%;
+  width: 1400px;
   margin: 20px auto 100px;
 }
 ::v-deep(.swiper-container ){

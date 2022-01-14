@@ -1,26 +1,25 @@
 <template>
   <div class="demo">
-    {{text}}
     <h2>基本用法</h2>
-    <nut-bingo-luckscratch content="1000万"></nut-bingo-luckscratch>
+    <nutbig-scratch-card content="1000万"></nutbig-scratch-card>
     <h2>内容异步</h2>
-    <nut-bingo-luckscratch :content="text"></nut-bingo-luckscratch>
+    <nutbig-scratch-card :content="text"></nutbig-scratch-card>
     <h2>刮开层和背景层都支持自定义颜色，奖品信息支持HTML</h2>
-    <nut-bingo-luckscratch
+    <nutbig-scratch-card
       coverColor="#F9CC9D"
       backgroundColor="#C3D08B"
       content="<em>1000<em><strong>元</strong>"
-    ></nut-bingo-luckscratch>
+    ></nutbig-scratch-card>
     <h2>刮开层支持图片</h2>
-    <nut-bingo-luckscratch content="1000万" :coverImg="coverImage"></nut-bingo-luckscratch>
+    <nutbig-scratch-card content="1000万" :coverImg="coverImage"></nutbig-scratch-card>
     <h2>事件回调</h2>
-    <nut-bingo-luckscratch content="1000万" @open="opencard"></nut-bingo-luckscratch>
+    <nutbig-scratch-card content="1000万" @open="opencard"></nutbig-scratch-card>
     <h2>设置刮开比列</h2>
-    <nut-bingo-luckscratch
+    <nutbig-scratch-card
       content="1000万"
       @open="opencard"
       ratio="0.2"
-    ></nut-bingo-luckscratch>
+    ></nutbig-scratch-card>
     <p></p>
   </div>
 </template>
@@ -28,21 +27,14 @@
 <script lang="ts">
 import { ref,onMounted } from 'vue';
 import { createComponent } from '../../utils/create';
-const { createDemo } = createComponent('luckscratch');
+const { createDemo } = createComponent('scratch-card');
 export default createDemo({
   props: {},
   setup() {
-    const text=ref("初始数据")
-    onMounted(()=>{
-      setTimeout(()=>{
-          text.value="异步数据";
-        
-      },1000)
-    })
     const opencard = () => {
       alert('刮开事件完成');
     };
-    return {text, opencard };
+    return {opencard };
   }
 });
 </script>

@@ -48,7 +48,7 @@ export default defineComponent({
       h1 {
         height: 48px;
         line-height: 48px;
-        font-size: 34px;
+        font-size: 30px;
         color: rgba(51, 51, 51, 1);
       }
       p {

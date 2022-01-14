@@ -1,5 +1,5 @@
 <template>
-  <div class="nut-bingo-lotto-roll">
+  <div class="nutbig-lotto-roll">
     <div class="lotto-roll-wrap" v-for="(s, index) of 3" :key="index">
       <div class="lotto-roll-content">
         <div class="lotto-wrap">

@@ -1,12 +1,12 @@
 <template>
   <div class="demo">
     <h2>基础用法</h2>
-    <nut-bingo-luckgiftbox
+    <nutbig-giftbox
       ref="refChild"
       @start-turns="startTurns"
       @end-turns="endTurns"
     >
-    </nut-bingo-luckgiftbox>
+    </nutbig-giftbox>
     <nut-button type="primary" @click="initBox">再来一次</nut-button>
   </div>
 </template>
@@ -14,7 +14,7 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { createComponent } from '../../utils/create';
-const { createDemo } = createComponent('luckgiftbox');
+const { createDemo } = createComponent('giftbox');
 export default createDemo({
   props: {},
   setup() {

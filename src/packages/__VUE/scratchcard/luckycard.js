@@ -112,6 +112,7 @@ function _endEventHandler(event) {
  */
 LuckyCard.prototype.createCanvas = function () {
   this.cover = document.createElement('canvas');
+  console.log(11);
   this.cover.className = 'nut-cover';
   this.cover.height = this.cHeight;
   this.cover.width = this.cWidth;
@@ -195,7 +196,7 @@ LuckyCard.prototype.init = function (settings, callback) {
   if (!this.scratchDiv) {
     return;
   }
-  this.cardDiv = this.scratchDiv.querySelector('.lucky-content');
+  this.cardDiv = this.scratchDiv.querySelector('.scratchcard-content');
   if (!this.cardDiv) {
     return;
   }

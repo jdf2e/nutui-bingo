@@ -1,4 +1,4 @@
-#  luckycard组件
+#  Scratchcard组件
 
 ### 介绍
     
@@ -8,61 +8,61 @@
  ``` javascript
 import { createApp } from 'vue';
 // vue
-import { Luckcard} from '@nutui/nutui';
+import { Scratchcard } from '@nutui/nutui';
 
 const app = createApp();
-app.use(Luckcard);
+app.use(Scratchcard);
 
 ```   
     
  ## 基本用法
 
 ```html
-<nut-luckycard 
-content="1000万"
-></nut-luckycard>
+<nutbig-scratch-card 
+  content="1000万"
+></nutbig-scratch-card>
 ```
 ## 异步数据
 
 ```html
-<nut-luckycard 
-:content="val"
-></nut-luckycard>
+<nutbig-scratch-card 
+  :content="val"
+></nutbig-scratch-card>
 ```
 ## 支持自定义颜色
 
 ```html
-<nut-luckycard 
-coverColor="#F9CC9D" 
-backgroundColor="#C3D08B" 
-content="<em>1000<em><strong>元</strong>"
-></nut-luckycard>
+<nutbig-scratch-card 
+  coverColor="#F9CC9D" 
+  backgroundColor="#C3D08B" 
+  content="<em>1000<em><strong>元</strong>"
+></nutbig-scratch-card>
 ```
 ## 支持背景是图片
 
 ```html
-<nut-luckycard 
-content="1000万" 
-:coverImg="coverImage"
-></nut-luckycard>
+  <nutbig-scratch-card 
+  content="1000万" 
+  :coverImg="coverImage"
+></nutbig-scratch-card>
 ```
 
 ## 事件回调
 
 ```html
-<nut-luckycard 
-content="1000万"
-@open="opencard"
-></nut-luckycard>
+<nutbig-scratch-card 
+  content="1000万"
+  @open="opencard"
+></nutbig-scratch-card>
 ```
 ## 设置刮开比例
 
 ```html
-<nut-luckycard 
-content="1000万"
-@open="opencard"
-ratio="0.2"
-></nut-luckycard>
+<nutbig-scratch-card 
+  content="1000万"
+  @open="opencard"
+  ratio="0.2"
+></nutbig-scratch-card>
 ```
 
 ## Prop

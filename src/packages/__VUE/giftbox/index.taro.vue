@@ -10,7 +10,7 @@
 <script lang="ts">
 import { computed } from 'vue';
 import { createComponent } from '../../utils/create';
-const { componentName, create } = createComponent('luckgiftbox');
+const { componentName, create } = createComponent('giftbox');
 
 export default create({
   props: {
