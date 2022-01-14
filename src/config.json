@@ -181,6 +181,17 @@
       "show": true,
       "desc": "娃娃机",
       "author": "Ymm0008"
+    },
+    {
+      "name": "LuckDice",
+      "taro": true,
+      "tarodoc": false,
+      "sort": 1,
+      "cName": "摇骰子",
+      "type": "component",
+      "show": true,
+      "desc": "摇骰子",
+      "author": "Drjingfubo"
     }
   ]
 }

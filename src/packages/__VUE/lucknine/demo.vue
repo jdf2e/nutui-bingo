@@ -90,5 +90,9 @@ export default createDemo({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.nut-ninegrid{
+  background-image: url('//img10.360buyimg.com/imagetools/jfs/t1/182262/4/21143/406696/6126fceeEccce5223/61a6b338777fd857.png');
+  background-size: 100% 100%;
+}
 </style>
