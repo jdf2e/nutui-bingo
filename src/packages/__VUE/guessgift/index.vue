@@ -1,13 +1,13 @@
 <template>
   <view :class="classes">
     <view class="bowl-item"
-      v-for="(item, idx) of [1 ,2, 3]"
+      v-for="(item, idx) of bowlList"
       :key="'bowl' + item"
       :ref="setBowlEle"
       @click="raise(idx)"
     >
     </view>
-    <view class="gold-bean"></view>
+    <view ref="goldBeanDom" class="gold-bean" v-show="showBean"></view>
   </view>
 </template>
 <script lang="ts">
@@ -32,31 +32,68 @@ export default create({
     raiseHeight: {
       type: Number,
       default: 50
-    }
+    },
+    prizeIndex: {
+      type: Number,
+      default: -1
+    },
   },
   emits: ['start-turns', 'end-turns'],
 
   setup(props, { emit }) {
+    let bowlList = reactive([1 ,2, 3]);
     const num = ref(0);
-    const lock = ref(true);
+    const lock = ref(false);
+    // 点击的哪一个碗，index索引
+    const bowlRaiseIndex = ref(0);
+    // 碗是否可点击
+    const bowlLock = ref(true);
+    // 豆子的展示与否
+    const showBean = ref(false);
+    // 3只碗
+    let bowlEle: any = reactive([]);
+
+    watch(() => showBean.value, (n, o) => {
+      bowlEle = [];
+    })
 
     const classes = computed(() => {
       const prefixCls = componentName;
       return {
         [prefixCls]: true,
         "guess-gift": true,
-        "disabledClick": lock.value
+        "disabledClick": bowlLock.value
       };
     });
 
     const start = () => {
-      bowlEle[1].style.top = `-${props.raiseHeight}px`;
+      let _index = bowlRaiseIndex.value;
+      if (lock.value) {
+        return false;
+      }else {
+        if (_index > -1) {
+          bowlEle[_index].style.top = 0;
+        }
+      }
+      showBean.value = true;
+      lock.value = true;
+      let idx = _index + 1 > 2 ? 0 : _index + 1;
+      let item = bowlEle[idx];
       setTimeout(() => {
-        bowlEle[1].style.top = 0;
-      }, 800);
-      setTimeout(() => {
-        init();
-      }, 1300);
+        if (_index > -1) {
+          let _item = item.getBoundingClientRect();
+          goldBeanDom.value.style.left = _item['x'] + _item['width']/2 - goldBeanDom.value.offsetWidth/2 + 'px';
+        }
+        setTimeout(() => {
+          item.style.top = `-${props.raiseHeight}px`;
+          setTimeout(() => {
+            item.style.top = 0;
+          }, 800);
+          setTimeout(() => {
+            init();
+          }, 1300);
+        }, 400);
+      }, 100);
     };
 
     // 打乱数组顺序
@@ -71,6 +108,7 @@ export default create({
 
     const timer = ref<any>(null);
     const init = () => {
+      showBean.value = false;
       clearTimeout(timer);//初始化timeout定时器，防止定时器重叠
       timer.value = setTimeout(function(){
         changePosition();//循环调用函数自身，以达到循环的效果
@@ -80,14 +118,19 @@ export default create({
         }else {
           clearTimeout(timer);
           num.value = 0;
-          lock.value = false;
+          setTimeout(() => {
+            lock.value = false;
+            bowlLock.value = false;
+          }, 500);
         }
       }, props.turnsFrequency);
     }
 
+    const goldBeanDom: any = ref(null);
+    let orginBowl_copy: any = reactive([]);
     const changePosition = () => {
       let orginBowl = bowlLocation;
-      let orginBowl_copy = shuffle(bowlLocation);
+      orginBowl_copy = shuffle(bowlLocation);
       // 通过对比原始值和打乱顺序后的值，判断哪些元素应该移动
       bowlEle.forEach((element: any, index: number) => {
         let origin_dom = orginBowl[index]['x'];
@@ -97,7 +140,6 @@ export default create({
     }
 
     // 存放碗的dom元素
-    const bowlEle: any = reactive([]);
     const setBowlEle = (ele: Element) => {
       bowlEle.push(ele);
     };
@@ -111,14 +153,34 @@ export default create({
     })
 
     const raise = (index: number) => {
+      if (lock.value) {
+        return false;
+      }
+      if (props.prizeIndex > -1) {
+        showBean.value = true;
+        let _item = orginBowl_copy[index];
+        setTimeout(() => {
+          goldBeanDom.value.style.left = _item['x'] + _item['width']/2 - goldBeanDom.value.offsetWidth/2 + 'px';
+        }, 100);
+      } else {
+        showBean.value = false;
+      }
+      bowlRaiseIndex.value = index;
       bowlEle[index].style.top = `-${props.raiseHeight}px`;
+      setTimeout(() => {
+        emit("end-turns");
+        bowlLock.value = true;
+      }, 300);
     }
 
     return {
+      bowlList,
       classes,
+      goldBeanDom,
       init,
       setBowlEle,
       raise,
+      showBean,
       start
     };
   }

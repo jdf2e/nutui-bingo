@@ -75,7 +75,7 @@ export default {
 | turns-time | 每个碗移动所用时间 | Number | 0(单位是毫秒)
 | turns-frequency | 动画频率，位置交换更新 | Number | 500(单位是毫秒)
 | raise-height | 碗抬起的高度 | Number | 50
-| prize-index | 中奖奖品在列表的索引位置 | Number | -1（-1随机停，大于1为设置的图片索引位置）
+| prize-index | 中奖奖品在列表的索引位置 | Number | -1（-1不中奖，大于等于0为中奖）
 
 ### Events
 

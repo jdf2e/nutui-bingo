@@ -1,4 +1,4 @@
-# Dollmachine 抓娃娃
+# DollMachine 抓娃娃
 
 ### 介绍
 

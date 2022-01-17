@@ -36,18 +36,9 @@ export default createDemo({
     }
 
     const endTurns = () => {
-      Dialog({
-        title: '中奖提示',
-        content: '您已完成抽奖，是否继续？',
-        onCancel: () => {},
-        onOk: () => {
-          setTimeout(() => {
-            guessgiftDom.value.init();
-          }, 300);
-        }
-      });
+      console.log('抽奖结束');
     }
-    const turnNum = ref(20);
+    const turnNum = ref(5);
     return {
       guessgiftDom,
       turnNum,

@@ -67,7 +67,7 @@
   "nav": [
     {
       "version": "1.0.0",
-      "name": "Turntable",
+      "name": "TurnTable",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
@@ -103,7 +103,7 @@
     },
     {
       "version": "1.0.0",
-      "name": "Scratchcard",
+      "name": "ScratchCard",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
@@ -115,7 +115,7 @@
     },
     {
       "version": "1.0.0",
-      "name": "Giftbox",
+      "name": "GiftBox",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
@@ -160,7 +160,7 @@
       "author": "Drjingfubo"
     },
     {
-      "name": "Luckshake",
+      "name": "LuckShake",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
@@ -172,7 +172,7 @@
     },
     {
       "version": "1.0.0",
-      "name": "Dollmachine",
+      "name": "DollMachine",
       "taro": true,
       "tarodoc": false,
       "sort": 1,
@@ -195,7 +195,7 @@
     },
     {
       "version": "1.0.0",
-      "name": "Guessgift",
+      "name": "GuessGift",
       "taro": true,
       "tarodoc": false,
       "sort": 1,

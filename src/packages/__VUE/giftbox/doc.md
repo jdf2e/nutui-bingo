@@ -1,4 +1,4 @@
-# Giftbox 神秘大礼盒
+# GiftBox 神秘大礼盒
 
 ### 介绍
 
