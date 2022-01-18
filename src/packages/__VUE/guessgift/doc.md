@@ -21,10 +21,12 @@ app.use(GuessGift);
 <nutbig-guess-gift
   ref="guessgiftDom"
   :prize-index="prizeIndex"
+  :turn-number="turnNum"
   @start-turns="startTurns"
   @end-turns="endTurns"
 >
 </nutbig-guess-gift>
+<nut-button type="primary" @click="gameStart">开始</nut-button>
 ```
 
 ```javascript
@@ -43,20 +45,12 @@ export default {
     }
 
     const endTurns = () => {
-      Dialog({
-        title: '中奖提示',
-        content: '您已完成抽奖，是否继续？',
-        onCancel: () => {},
-        onOk: () => {
-          setTimeout(() => {
-            guessgiftDom.value.init();
-          }, 300);
-        }
-      });
+      console.log('抽奖结束');
     }
-   
+    const turnNum = ref(5);
     return {
       guessgiftDom,
+      turnNum,
       prizeIndex,
       gameStart,
       startTurns,
@@ -81,6 +75,6 @@ export default {
 
 | 字段 | 说明 | 回调参数
 |----- | ----- | -----
-| start-turns | 转盘开始转动的回调函数，此时将接口中的中奖索引，赋值到 prize-index| - 
-| end-turns | 转盘中停止转动后的回调函数 | - 
+| start-turns | 碗开始换位 | - 
+| end-turns | 碗停止换位，点击某个碗抽奖 | - 
 

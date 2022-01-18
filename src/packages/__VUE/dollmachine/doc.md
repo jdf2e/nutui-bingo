@@ -60,16 +60,18 @@ export default {
 
     const endTurns = () => {
       console.log('抽奖结束');
-      Dialog({
-        title: '中奖提示',
-        content: '您已完成抽奖，是否继续？',
-        onCancel: () => {},
-        onOk: () => {
-          setTimeout(() => {
-            lottoRollDom.value.init();
-          }, 300);
-        }
-      });
+      setTimeout(() => {
+        Dialog({
+          title: '中奖提示',
+          content: '您已完成抽奖，是否继续？',
+          onCancel: () => {},
+          onOk: () => {
+            setTimeout(() => {
+              lottoRollDom.value.init();
+            }, 300);
+          }
+        });
+      }, 5000);
     }
    
     return {
@@ -97,6 +99,7 @@ export default {
 
 | 字段 | 说明 | 回调参数
 |----- | ----- | -----
-| start-turns | 转盘开始转动的回调函数，此时将接口中的中奖索引，赋值到 prize-index| - 
-| end-turns | 转盘中停止转动后的回调函数 | - 
+| init | 游戏初始化 | dom.value.init()
+| start-turns | 爪子开始下伸，赋值到 prize-index| - 
+| end-turns | 爪子已经抓到/未抓到奖品触发 | - 
 

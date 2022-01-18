@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
-import { Dialog } from "@nutui/nutui";
 import { ref } from 'vue';
 import { createComponent } from '../../utils/create';
 import { reactive } from '@vue/reactivity';
+import { Dialog } from '@nutui/nutui';
 const { createDemo } = createComponent('doll-machine');
 export default createDemo({
   props: {},
@@ -51,18 +51,18 @@ export default createDemo({
 
     const endTurns = () => {
       console.log('抽奖结束');
-      // setTimeout(() => {
-      //   Dialog({
-      //     title: '中奖提示',
-      //     content: '您已完成抽奖，是否继续？',
-      //     onCancel: () => {},
-      //     onOk: () => {
+      setTimeout(() => {
+        Dialog({
+          title: '中奖提示',
+          content: '您已完成抽奖，是否继续？',
+          onCancel: () => {},
+          onOk: () => {
             setTimeout(() => {
               lottoRollDom.value.init();
             }, 300);
-      //     }
-      //   });
-      // }, 2500);
+          }
+        });
+      }, 4500);
     }
    
     return {

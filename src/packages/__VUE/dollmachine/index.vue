@@ -163,19 +163,32 @@ export default create({
         gameover();
         return false;
       }
-      giftimg.value.forEach((item: any, index) => {
+      for (var i = 0; i < giftimg.value.length; i++) {
+        let item = giftimg.value[i];
         let long = item.offsetLeft + 100;
-        console.log(long, claw.value);
-
-        if (long - 20 <= claw.value && claw.value <= long + 20 && index == prize.value) {
-          let img = item.src;
-          setTimeout(() => {
-            catchGift(img);
-          }, 0);
-          return;
+        if (long - 20 <= claw.value && claw.value <= long + 20) {
+          if (prize.value > -1) {
+            let img = props.prizeList[prize.value].imagePath;
+            setTimeout(() => {
+              catchGift(img);
+              gameover();
+            }, 0);
+            return;
+          }
         }
-      });
-      gameover();
+      }
+      // giftimg.value.forEach((item: any, index: number) => {
+      //   let long = item.offsetLeft + 100;
+      //   console.log(item.offsetLeft);
+      //   if (long - 20 <= claw.value && claw.value <= long + 20) {
+      //     let img = item.src;
+      //     setTimeout(() => {
+      //       catchGift(img);
+      //     }, 0);
+      //     return;
+      //   }
+      // });
+      // gameover();
     }
 
     // 游戏结束
