@@ -21,7 +21,6 @@
         :src="item.img"
         alt=""
       />
-      <slot name="customize" :onStart="()=>startRain()"></slot>
     </div>
   </div>
 </template>

@@ -10,7 +10,7 @@
   </div>
 </template>
 <script lang="ts">
-import { onMounted, toRefs, computed, ref, Ref, reactive, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { createComponent } from "../../utils/create";
 const { componentName, create } = createComponent("shakedice");
 interface props {
@@ -30,14 +30,13 @@ export default create({
     },
     id: {
       type: Number,
-      default: 1,
+      default: 3,
     },
   },
   emits: ["end"],
   setup(props: props, { emit }) {
     const dice = ref<number>(6);
-    console.log(props.speed);
-
+    const clickTag = ref<boolean>(false);
     let animationStyle = ref({});
     const isShake = ref(false);
     const classes = computed(() => {
@@ -57,7 +56,8 @@ export default create({
           setTimeout(() => {
             isShake.value = false;
             animationStyle.value = { animation: "none" };
-            let posible: any = [
+            let posible:any = [
+              { value: 1, x: 0, y: 0 },
               { value: 1, x: 0, y: 0 },
               { value: 2, x: 90, y: 0 },
               { value: 3, x: 0, y: -90 },
@@ -68,7 +68,7 @@ export default create({
             let _result = posible[props.id];
             setTimeout(() => {
               let odice: HTMLElement | null = document.querySelector(
-                ".nut-bingo-luckdice"
+                ".nutbig-shakedice"
               );
               if (odice) {
                 odice.style.transform = `rotateX(${_result.x}deg) rotateY(${_result.y}deg)`;
@@ -82,7 +82,13 @@ export default create({
       }
     );
     const shake = () => {
-      isShake.value = !isShake.value;
+      if (clickTag.value) return false;
+      clickTag.value = true;
+      isShake.value = true;
+      setTimeout(() => {
+        clickTag.value = false;
+      }, props.speed);
+      
     };
     return {
       classes,

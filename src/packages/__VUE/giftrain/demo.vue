@@ -1,10 +1,8 @@
 <template>
   <div class="demo">
-    <nutbig-giftrain width="100%" height="580px" @gameOver="gameOver" @start="start" @click="click">
-      <template #customize="{ onStart }" v-if="!isStart">
-        <div class="start" @click="onStart">开始</div>
-      </template>
+    <nutbig-giftrain ref="rain" width="100%" height="580px" @gameOver="gameOver" @start="start" @click="click">
     </nutbig-giftrain>
+     <div v-if="!isStart" class="start" @click="onStart">开始</div>
   </div>
 </template>
 
@@ -15,6 +13,7 @@ const { createDemo } = createComponent("giftrain");
 export default createDemo({
   props: {},
   setup() {
+    const rain = ref();
     const isStart = ref(false)
     const gameOver = () => {
       isStart.value = false
@@ -24,9 +23,11 @@ export default createDemo({
     }
     const click=()=>{
       console.log('点击');
-      
     }
-    return { gameOver ,isStart,start,click};
+    const onStart = ()=>{
+      rain.value.startRain()
+    }
+    return { gameOver ,isStart,start,click,onStart,rain};
   },
 });
 </script>
@@ -42,6 +43,7 @@ export default createDemo({
     background-size: 100% 100%;
     position: relative;
   }
+}
   .start{
     width: 100px;
     height: 30px;
@@ -54,5 +56,4 @@ export default createDemo({
     bottom: 0;
     left: 40%;
   }
-}
 </style>
