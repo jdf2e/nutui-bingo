@@ -25,6 +25,11 @@ app.use(LottoRoll);
   @start-turns="startTurns"
   @end-turns="endTurns"
 >
+</nutbig-lotto-roll>
+<div class="btnBtn">
+  <nut-button type="danger" @click="startRole" :disabled="startFlag">中奖（测试）</nut-button>
+  <nut-button type="danger" @click="startRole2" :disabled="startFlag">不中奖（测试）</nut-button>
+</div>
 ```
 
 ```javascript
@@ -65,13 +70,25 @@ export default {
     const endTurns = () => {
       console.log('抽奖结束');
     }
+
+    
+    const startRole = () => {
+      prizeIndex.value = Math.floor(Math.random() * 5);
+      lottoRollDom.value.start();
+    }
+    const startRole2 = () => {
+      prizeIndex.value = -1;
+      lottoRollDom.value.start();
+    }
    
     return {
       lottoRollDom,
       prizeList,
       prizeIndex,
       startTurns,
-      endTurns
+      endTurns,
+      startRole,
+      startRole2,
     };
   }
 }
@@ -82,7 +99,7 @@ export default {
 
 | 字段 | 说明 | 类型 | 默认值
 |----- | ----- | ----- | ----- 
-| prize-list | 奖品列表 | Array | -
+| prize-list | 奖品列表 | Array | [{imagePath: "xxxx",text: "xxx"}, {}...]
 | turns-number | 转动的圈数 | Number | 0
 | turns-time | 从开始转动到结束所用时间 | Number | 0(单位是毫秒)
 | prize-index | 中奖奖品在列表的索引位置 | Number | -1（-1随机停，大于1为设置的图片索引位置，请保证中间参数初始值为-1）
@@ -91,6 +108,6 @@ export default {
 
 | 字段 | 说明 | 回调参数
 |----- | ----- | -----
+| start | 转盘开始转动方法| - 
 | start-turns | 转盘开始转动的回调函数，此时将接口中的中奖索引，赋值到 prize-index| - 
 | end-turns | 转盘中停止转动后的回调函数 | - 
-

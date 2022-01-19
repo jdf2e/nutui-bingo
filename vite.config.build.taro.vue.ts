@@ -38,8 +38,8 @@ export default defineConfig({
     },
     lib: {
       entry: 'src/packages/nutui.taro.vue.ts',
-      name: 'nutui',
-      fileName: 'nutui',
+      name: 'nutbig',
+      fileName: 'nutbig',
       formats: ['es', 'umd']
     }
   }

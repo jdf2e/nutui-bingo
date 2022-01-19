@@ -70,6 +70,12 @@ export default create({
       if (lock.value) {
         return false;
       }
+      setTimeout(() => {
+        startRoll();
+      }, 300);
+    }
+
+    const startRoll = () => {
       emit("start-turns");
       lock.value = true;
       if (options.value) {
