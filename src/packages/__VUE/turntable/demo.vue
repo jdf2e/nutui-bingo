@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { ref, toRefs, watch, computed, onMounted, watchEffect, reactive } from 'vue';
+import { ref, reactive } from 'vue';
 import { createComponent } from '../../utils/create';
 const { createDemo } = createComponent('turntable');
 export default createDemo({

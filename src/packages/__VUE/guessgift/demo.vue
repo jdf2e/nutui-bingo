@@ -64,6 +64,7 @@ export default createDemo({
 }
 .show-demo {
   margin-top: 50px;
+  padding: 10px;
   .nut-button {
     display: block;
     width: 100px;

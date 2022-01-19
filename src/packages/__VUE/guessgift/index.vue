@@ -1,5 +1,5 @@
 <template>
-  <view :class="classes">
+  <view :class="classes" ref="bowlBox">
     <view class="bowl-item"
       v-for="(item, idx) of bowlList"
       :key="'bowl' + item"
@@ -11,7 +11,7 @@
   </view>
 </template>
 <script lang="ts">
-import { computed, onMounted, reactive, ref, watch, watchEffect } from 'vue';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { createComponent } from '../../utils/create';
 const { componentName, create } = createComponent('guess-gift');
 
@@ -52,6 +52,8 @@ export default create({
     const showBean = ref(false);
     // 3只碗
     let bowlEle: any = reactive([]);
+    // 碗父级盒子
+    let bowlBox: any = ref(null);
 
     watch(() => showBean.value, (n, o) => {
       bowlEle = [];
@@ -81,8 +83,9 @@ export default create({
       let item = bowlEle[idx];
       setTimeout(() => {
         if (_index > -1) {
-          let _item = item.getBoundingClientRect();
-          goldBeanDom.value.style.left = _item['x'] + _item['width']/2 - goldBeanDom.value.offsetWidth/2 + 'px';
+          let _item = item.getBoundingClientRect();  
+          let _itemParentLeft = bowlBox.value.getBoundingClientRect().left || 0;
+          goldBeanDom.value.style.left = _item['left'] + _item['width']/2 - _itemParentLeft - goldBeanDom.value.offsetWidth/2 + 'px';
         }
         setTimeout(() => {
           item.style.top = `-${props.raiseHeight}px`;
@@ -149,7 +152,7 @@ export default create({
     onMounted(() => {
       bowlEle.forEach((element: Element) => {
         bowlLocation.push(element.getBoundingClientRect());
-      });
+      });      
     })
 
     const raise = (index: number) => {
@@ -159,8 +162,9 @@ export default create({
       if (props.prizeIndex > -1) {
         showBean.value = true;
         let _item = orginBowl_copy[index];
+        let _itemParentLeft = bowlBox.value.getBoundingClientRect().left || 0;
         setTimeout(() => {
-          goldBeanDom.value.style.left = _item['x'] + _item['width']/2 - goldBeanDom.value.offsetWidth/2 + 'px';
+          goldBeanDom.value.style.left = _item['x'] + _item['width']/2 - _itemParentLeft - goldBeanDom.value.offsetWidth/2 + 'px';
         }, 100);
       } else {
         showBean.value = false;
@@ -178,6 +182,7 @@ export default create({
       classes,
       goldBeanDom,
       init,
+      bowlBox,
       setBowlEle,
       raise,
       showBean,

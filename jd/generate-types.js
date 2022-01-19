@@ -34,7 +34,7 @@ declare const _default: {
 export default _default;`;
 let fileStr = importStr + installFunction;
 fs.outputFile(
-  path.resolve(__dirname, '../dist/nutui.d.ts'),
+  path.resolve(__dirname, '../dist/nutbig.d.ts'),
   fileStr,
   'utf8',
   error => {
@@ -43,9 +43,9 @@ fs.outputFile(
 );
 fs.outputFile(
   path.resolve(__dirname, '../dist/index.d.ts'),
-  `import * as NutUI from './nutui';
-export default NutUI;
-export * from './nutui';`,
+  `import * as NutBig from './nutbig';
+export default NutBig;
+export * from './nutbig';`,
   'utf8',
   error => {
     // logger.success(`${package_config_path} 文件写入成功`);
