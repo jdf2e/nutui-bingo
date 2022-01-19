@@ -1,0 +1,1 @@
+import{e as a,o as s,g as l}from"./vendor.15df60d4.js";const o={class:"markdown-body"},d=[l("h1",null,"luckycard",-1),l("h3",null,"介绍",-1),l("p",null,"由于 taro 对原生 canvas 的转换未完成。暂时不支持该组件转小程序的应用",-1)],n={setup:l=>(l,n)=>(s(),a("div",o,d))};export{n as default};
