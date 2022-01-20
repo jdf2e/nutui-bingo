@@ -1,6 +1,6 @@
 <template>
   <div class="demo">
-    <nutbig-shakedice ref="dice"></nutbig-shakedice>
+    <nutbig-shakedice ref="dice" :id="id"></nutbig-shakedice>
     <div @click="jump" class="demoBtn">摇动</div>
   </div>
 </template>
@@ -13,12 +13,15 @@ export default createDemo({
   props: {},
   setup() {
     const dice = ref();
+    const id = ref()
     const jump = () => {
+      id.value = 5
       dice.value.shake();
     };
     return {
       jump,
       dice,
+      id
     };
   },
 });

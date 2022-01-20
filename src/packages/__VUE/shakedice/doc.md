@@ -19,19 +19,22 @@ app.use(ShakeDice);
 ### 基础用法
 
 ```html
- <nutbig-shakedice  ref="dice"></nutbig-shakedice >
+ <nutbig-shakedice  ref="dice" :id="id"></nutbig-shakedice >
 <div @click="jump" class="demoBtn">摇动</div>
 ```
 
 ```javascript
-setup() {
+ setup() {
     const dice = ref();
+    const id = ref()
     const jump = () => {
-      dice.value.jump();
+      id.value = 5
+      dice.value.shake();
     };
     return {
       jump,
       dice,
+      id
     };
   },
 ```
