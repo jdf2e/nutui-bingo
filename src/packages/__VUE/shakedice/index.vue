@@ -30,7 +30,7 @@ export default create({
     },
     id: {
       type: Number,
-      default: 3,
+      default: 4,
     },
   },
   emits: ["end"],

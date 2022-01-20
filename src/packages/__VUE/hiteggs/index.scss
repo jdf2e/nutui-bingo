@@ -19,6 +19,7 @@
         .intactImg{
             position: absolute;
             bottom: 0;
+            left: 0;
             animation:move 2s 0s infinite;
             &.hide{
                 opacity: 0;
@@ -26,6 +27,7 @@
         }
         .splitImg{
             position: absolute;
+            left: 0;
             bottom: 0;
           
         }
