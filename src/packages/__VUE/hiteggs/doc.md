@@ -40,7 +40,6 @@ app.use(Hiteggs);
 setup(){
      const hit = ()=>{
       console.log('中奖啦');
-      
     }
     return{
         hit,
