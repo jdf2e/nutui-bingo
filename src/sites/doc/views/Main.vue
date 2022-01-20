@@ -389,7 +389,7 @@ export default defineComponent({
           width: 160px;
           height: 160px;
           margin: 0 auto;
-          background: url(https://img10.360buyimg.com/imagetools/jfs/t1/221795/28/8998/79025/61dea1f9Ec8c9ce55/a10dc1c0362683a3.png)
+          background: url(https://img10.360buyimg.com/imagetools/jfs/t1/144370/21/26680/3050/61e90c2eEcc91650b/5a9c979e0b0624e9.png)
             no-repeat;
           background-size: cover;
         }
