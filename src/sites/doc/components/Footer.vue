@@ -4,7 +4,7 @@
       <div class="doc-footer-list">
         <img
           class="doc-footer-logo"
-          src="../../assets/images/logo-header-red.png"
+          src="../../assets/images/logo.png"
         />
       </div>
       <div class="doc-footer-list">
@@ -75,7 +75,7 @@
             <p class="vx-desc">微信交流群</p>
             <p class="vx-desc">扫码添加好友</p>
             <img class="img-code" src="../../assets/images/vx-code1.png" />
-            <p class="vx-desc">回复<span class="vx-red">NutUI</span>即刻进群</p>
+            <p class="vx-desc">回复<span class="vx-red">Bingo</span>即刻进群</p>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@
       </div>
     </div>
     <p class="doc-footer-desc"
-      >2021 京东零售 - 基础业务体验部.&nbsp;All Rights Reserved.</p
+      >2022 京东零售 - 基础业务体验部.&nbsp;All Rights Reserved.</p
     >
   </div>
 </template>
@@ -198,10 +198,12 @@ export default defineComponent({
     &-list {
       position: relative;
       &:first-child {
-        margin-right: 65px;
+        // margin-right: 65px;
       }
     }
     &-logo {
+      width: 218px;
+      height: 50px;
       margin-top: 8px;
     }
     &-title {

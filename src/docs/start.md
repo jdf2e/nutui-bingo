@@ -5,7 +5,7 @@
 
 > 扫描下方二维码体验，体验 bingo 组件库示例
 
-<img src="https://img10.360buyimg.com/imagetools/jfs/t1/144370/21/26680/3050/61e90c2eEcc91650b/5a9c979e0b0624e9.png" width="200" alt="NutUI-Bingo">
+<img src="https://img11.360buyimg.com/imagetools/jfs/t1/167199/15/24963/2648/61ea6b4dE7bcc7a55/bccecb56cb063dff.png" width="200" alt="NutUI-Bingo">
 
 #### NPM 安装
 

@@ -3,7 +3,7 @@
   <div class="doc-content" :class="themeName()">
     <div class="doc-content-index">
       <div class="content-left">
-        <div class="content-title"> NutUI-bingo </div>
+        <div class="content-title"> NutUI-Bingo </div>
         <div class="content-smile"> </div>
         <div class="content-subTitle">基于 NutUI 的抽奖组件库，助力营销活动和小游戏场景。</div>
         <div class="content-button">
@@ -28,11 +28,11 @@
           ></iframe>
         </div>
       </div>
-      <div class="content-right">
+      <!-- <div class="content-right">
         <div class="image-demo"></div>
-      </div>
+      </div> -->
     </div>
-    <div class="title">组件库样例</div>
+    <div class="title">组件库案例</div>
     <!-- <div class="title">赋能案例</div> -->
     <div class="doc-content-cases-content__list">
       <swiper
@@ -138,8 +138,8 @@ export default defineComponent({
       },
       speed: 500, //切换过渡速度
       loop: true,
-      slidesPerView: 5, //解决最后一张切换到第一张中间的空白
-      centeredSlides: true, //设置slide居中
+      slidesPerView: 4, //解决最后一张切换到第一张中间的空白
+      // centeredSlides: true, //设置slide居中
       spaceBetween: 25,
       coverflowEffect: {
         // rotate: 0, //slide做3d旋转时Y轴的旋转角度。默认50。
@@ -150,10 +150,10 @@ export default defineComponent({
       },
       observer: true,
       observeParents: true,
-      navigation: {
-        nextElRef: ".swiper-button-next",
-        prevElRef: ".swiper-button-prev",
-      },
+      // navigation: {
+      //   nextElRef: ".swiper-button-next",
+      //   prevElRef: ".swiper-button-prev",
+      // },
       pagination: {
         clickable: true,
       },
@@ -305,26 +305,34 @@ export default defineComponent({
 <style lang="scss" scoped>
 .doc-content-index {
   display: flex;
-  // height: 926px;
+  height: 550px;
   // background-color: #070505;
   min-width: 1200px;
-  padding: 2% 15%;
-  justify-content: space-around;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 0 2%;
+  // justify-content: space-around;
   align-items: center;
+  background: url('../../assets/images/picture-demo.png') no-repeat;
+  background-size: 726px 523px;
+  background-position: right 0;
   .content-left {
-    padding: 5%;
+    // padding: 5%;
     // margin: auto 0;
     // flex: 1;
-    min-width: 550px;
+    // min-width: 550px;
+    width: 100%;
+    // height: 100%;
     .content-title {
       // line-height: 36px;
       font-size: 42px;
       color: #1A1A1A;
+      font-weight: 700;
     }
     .content-subTitle {
-      margin-top: 12px;
+      margin-top: 15px;
       font-size: 20px;
-      font-weight: 800;
+      // font-weight: 800;
       color: #5F50FB;
     }
     .content-button {
@@ -345,8 +353,10 @@ export default defineComponent({
         }
         width: 200px;
         height: 50px;
-        background: linear-gradient(135deg, rgba(114,60,255,1) 0%,rgba(111,58,255,1) 63.49938195167575%,rgba(150,110,255,1) 87.35307751528254%,rgba(149,117,241,1) 100%);
+        // background: linear-gradient(135deg, rgba(114,60,255,1) 0%,rgba(111,58,255,1) 63.49938195167575%,rgba(150,110,255,1) 87.35307751528254%,rgba(149,117,241,1) 100%);
         border-radius: 29px;
+        background: url("../../assets/images/btn-bg.png") no-repeat;
+        background-size: 100% 100%;
         cursor: pointer;
       }
       .rightButton {
@@ -389,7 +399,7 @@ export default defineComponent({
           width: 160px;
           height: 160px;
           margin: 0 auto;
-          background: url(https://img10.360buyimg.com/imagetools/jfs/t1/144370/21/26680/3050/61e90c2eEcc91650b/5a9c979e0b0624e9.png)
+          background: url(https://img11.360buyimg.com/imagetools/jfs/t1/167199/15/24963/2648/61ea6b4dE7bcc7a55/bccecb56cb063dff.png)
             no-repeat;
           background-size: cover;
         }
@@ -398,25 +408,31 @@ export default defineComponent({
   }
   .content-right {
     .image-demo {
-      width: 550px;
-      height: 330px;
+      width: 726px;
+      height: 523px;
       background: url('../../assets/images/picture-demo.png') no-repeat;
       background-size: 100% 100%;
     }
   }
 }
 .title {
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 26px;
+  // font-weight: 800;
   margin: 130px 0 50px;
   text-align: center;
   color: rgba(26,26,26,0.73);
 }
 .doc-content-cases-content__list {
-  width: 1400px;
+  width: 1200px;
   margin: 20px auto 100px;
 }
-::v-deep(.swiper-container ){
+::v-deep(.swiper-container){
+  .swiper-pagination {
+    bottom: 0;
+    .swiper-pagination-bullet-active {
+      background: rgba(0,0,0,0.6);
+    }
+  }
   .swiper-button-prev{
     width: 30px;
     height: 30px;
@@ -442,9 +458,9 @@ export default defineComponent({
   transition: all 0.6s ease;
   align-items: center;
   .swiper-slide {
-    width: 273px;
-    height: 441px;
-    padding: 40px 60px 126px;
+    width: 280px;
+    height: 390px;
+    padding: 40px 28px 24px;
     flex-shrink: 0;
     background: rgba(255,255,255,1);
     border-radius: 19px;
@@ -456,12 +472,12 @@ export default defineComponent({
     transition: 300ms;
     transform: scale(0.8);
     > img {
-      width: 100%;
-      height: 100%;
+      width: 220px;
+      height: 240px;
     }
   }
   .swiper-slide-active {
-    transform: scale(1);
+    // transform: scale(1);
   }
   .desc {
     span {
@@ -471,12 +487,15 @@ export default defineComponent({
       display: block;
       width: 100%;
       text-align: center;
-      font-size: 14px;
+      font-size: 18px;
       margin: 20px 0 10px;
       font-weight: 900;
     }
     .desc-txt {
-      font-size: 12px;
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      font-size: 14px;
     }
   }
   &.noShadow {

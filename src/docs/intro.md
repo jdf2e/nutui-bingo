@@ -14,7 +14,7 @@
 
 ## 特性
 
-* 10+ 抽奖组件
+* 12 个抽奖组件
 * 基于京东APP 10.0 视觉规范
 * 详尽的文档和示例
 * 支持 TypeScript
@@ -22,7 +22,7 @@
 
 ## 示例 H5
 
-<img src="https://img12.360buyimg.com/imagetools/jfs/t1/162421/39/13392/9425/6052ea60E592310a9/264bdff23ef5fe95.png" width="200" alt="NutUI" />
+<img src="https://img11.360buyimg.com/imagetools/jfs/t1/167199/15/24963/2648/61ea6b4dE7bcc7a55/bccecb56cb063dff.png" width="200" alt="NutUI-Bingo" />
 <!-- <img src="https://storage.360buyimg.com/jdc-article/gh_f2231eb941be_258.jpg" width="200" alt="NutUI" /> -->
 
 ## 支持环境
@@ -30,7 +30,6 @@
 * Android 5.0+
 * iOS 9.2+
 
-> 如果想要兼容低版本，请使用 NutUI2.x
 
 ## 构建版本
 
