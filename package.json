@@ -1,6 +1,6 @@
 {
   "name": "@test/nutui-bingo",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "nutui生态之一抽奖组件库",
   "main": "dist/nutbig.umd.js",
   "module": "dist/nutbig.es.js",

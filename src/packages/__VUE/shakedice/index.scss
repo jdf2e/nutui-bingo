@@ -79,7 +79,10 @@
         >span{
             margin: 0 10px;
             &:nth-child(3){
+                margin: 0;
                 position: absolute;
+                top: 37%;
+                left: 37%;
             }
         }
     }
