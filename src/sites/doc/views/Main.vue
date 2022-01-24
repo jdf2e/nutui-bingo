@@ -101,29 +101,64 @@ export default defineComponent({
       articleList: new Array(),
       casesImages: [
         {
-          img: "https://img14.360buyimg.com/imagetools/jfs/t1/202547/29/20143/263706/61cc1eaaEb4636005/a46c8d158437d052.jpg",
+          img: "https://img13.360buyimg.com/imagetools/jfs/t1/6407/16/20895/121076/61ee7758Efa48a526/5a6164476a6f67a8.png",
           title: "幸运大转盘",
           desc: "大转盘滚动抽奖，可配置奖品、样式等"
         },
         {
-          img: "https://img13.360buyimg.com/imagetools/jfs/t1/202404/35/20107/279950/61cc1eaaE574c3eb8/39cf24a482d01e97.jpg",
+          img: "https://img11.360buyimg.com/imagetools/jfs/t1/175841/32/26077/118716/61ee77c8E63f68506/3617992ff001f5da.png",
           title: "跑马灯",
           desc: "跑马灯转动抽奖，可配置奖品、样式等"
         },
         {
-          img: "https://img11.360buyimg.com/imagetools/jfs/t1/202949/13/20432/93032/61cc1eaaE27e30ed5/b1f9de2f68bed73e.jpg",
-          title: "红包雨",
-          desc: "可配置红包雨数量，事件回调等"
+          img: "https://img14.360buyimg.com/imagetools/jfs/t1/208183/30/16424/24043/61ee7b25E5daf8f0c/54b6e0b0370c27dd.png",
+          title: "九宫格",
+          desc: "九宫格抽奖，可配置奖品、图片等"
         },
         {
-          img: "https://img11.360buyimg.com/imagetools/jfs/t1/223840/32/1825/143367/61cc1eabE5fa7e5b4/09da1e2b7c384459.jpg",
+          img: "https://img13.360buyimg.com/imagetools/jfs/t1/109423/18/21052/53432/61ee7795Ec3a96057/79650b95c77200aa.png",
           title: "刮刮卡",
           desc: "多种场景模式，支持比例、背景等配置"
         },
         {
-          img: "https://img11.360buyimg.com/imagetools/jfs/t1/172470/9/24728/128195/61cc1eaaE492cee7e/0ea9532c0cccd8f7.jpg",
+          img: "https://img13.360buyimg.com/imagetools/jfs/t1/133881/34/22453/133525/61ee77b1Ed1a9aa5e/158026b920f2e368.png",
           title: "幸运大礼盒",
           desc: "开箱子场景，支持图片、事件回调等"
+        },
+        {
+          img: "https://img14.360buyimg.com/imagetools/jfs/t1/90480/31/20134/56354/61ee7ba4Ea361b3f4/51576de0c39ef352.png",
+          title: "摇奖机",
+          desc: "可配置转动圈数、时间、事件回调等"
+        },
+        {
+          img: "https://img12.360buyimg.com/imagetools/jfs/t1/14463/11/20040/131653/61ee7c2aE91adee7d/2d8a8b832dbe8da8.png",
+          title: "砸金蛋",
+          desc: "可配置金蛋数量、图片大小等"
+        },
+        {
+          img: "https://img12.360buyimg.com/imagetools/jfs/t1/117915/35/27960/112048/61ee77ebE233c034a/245773ac197c6903.png",
+          title: "红包雨",
+          desc: "可配置红包雨数量，事件回调等"
+        },
+        {
+          img: "https://img12.360buyimg.com/imagetools/jfs/t1/122265/15/21771/169708/61ee7827E55a62803/f4155486b089fa12.png",
+          title: "摇一摇",
+          desc: "可配置红包，手机震动，回调函数等"
+        },
+        {
+          img: "https://img12.360buyimg.com/imagetools/jfs/t1/126785/39/21940/107005/61ee7c7dE889de475/6dc701e563f68d1d.png",
+          title: "娃娃机",
+          desc: "可配置奖品列表、速度，指定奖品等"
+        },
+        {
+          img: "https://img13.360buyimg.com/imagetools/jfs/t1/6981/39/21101/49425/61ee7cc3E505cf90b/239c85be06a89759.png",
+          title: "摇骰子",
+          desc: "可配置骰子速度，指定中奖数字等"
+        },
+        {
+          img: "https://img10.360buyimg.com/imagetools/jfs/t1/214388/21/11592/35437/61ee7d01E7ea1eff3/8ec26d395947a556.png",
+          title: "你藏我猜",
+          desc: "可配置交换次数、速度、回调函数等"
         },
       ],
       currentCaseItem: {},
