@@ -9,7 +9,7 @@ const resolve = path.resolve;
 export default defineConfig({
   base: '/bingo/',
   server: {
-    port: 2021,
+    port: 2022,
     proxy: {
       '/devServer': {
         target: 'https://nutui.jd.com',

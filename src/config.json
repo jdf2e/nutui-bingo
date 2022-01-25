@@ -178,7 +178,7 @@
       "sort": 1,
       "cName": "娃娃机",
       "type": "component",
-      "show": true,
+      "show": false,
       "desc": "娃娃机",
       "author": "Ymm0008"
     },

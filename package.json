@@ -1,6 +1,6 @@
 {
-  "name": "@test/nutui-bingo",
-  "version": "1.0.5",
+  "name": "@nutui/nutui-bingo",
+  "version": "1.0.0",
   "description": "nutui生态之一抽奖组件库",
   "main": "dist/nutbig.umd.js",
   "module": "dist/nutbig.es.js",
@@ -22,7 +22,7 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public",
-    "registry": "http://registry.m.jd.com/"
+    "registry": "http://registry.m.com/"
   },
   "files": [
     "dist",
