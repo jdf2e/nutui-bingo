@@ -11,7 +11,7 @@
 
 ```bash
 # Vue3
-npm i @bingo/nutui-bingo
+npm i @nutui/nutui-bingo
 ```
 
 
@@ -21,8 +21,8 @@ npm i @bingo/nutui-bingo
 ```javascript
 import { createApp } from "vue";
 import App from "./App.vue";
-import NutBig from "@bingo/nutui-bingo";
-import "@bingo/nutui-bingo/dist/style.css";
+import NutBig from "@nutui/nutui-bingo";
+import "@nutui/nutui-bingo/dist/style.css";
 createApp(App).use(NutBig).mount("#app");
 ```
 
@@ -33,8 +33,8 @@ createApp(App).use(NutBig).mount("#app");
 ```javascript
 import { createApp } from "vue";
 import App from "./App.vue";
-import { Turntable } from "@test/nutui-bingo";
-import "@test/nutui-bingo/dist/style.css";
+import { Turntable } from "@nutui/nutui-bingo";
+import "@nutui/nutui-bingo/dist/style.css";
 createApp(App).use(Turntable).mount("#app");
 ```
 

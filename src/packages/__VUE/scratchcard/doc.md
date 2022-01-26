@@ -8,7 +8,7 @@
  ``` javascript
 import { createApp } from 'vue';
 // vue
-import { Scratchcard } from '@nutui/nutui';
+import { Scratchcard } from '@nutui/nutui-bingo';
 
 const app = createApp();
 app.use(Scratchcard);

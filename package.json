@@ -1,6 +1,6 @@
 {
   "name": "@nutui/nutui-bingo",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.0",
   "description": "nutui生态之一抽奖组件库",
   "main": "dist/nutbig.umd.js",
   "module": "dist/nutbig.es.js",
@@ -22,7 +22,7 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public",
-    "registry": "http://registry.m.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "files": [
     "dist",
@@ -46,7 +46,7 @@
     "serve": "vite preview",
     "upload": "yarn build:site:oss && node ./jd/upload.js",
     "add": "node jd/createComponentMode.js",
-    "publish:beta": "npm publish --tag=beta",
+    "publish:beta": "npm publish",
     "publish": "npm publish",
     "generate:file": "node jd/generate-nutui.js",
     "generate:file:taro:vue": "node jd/generate-nutui-taro-vue.js",

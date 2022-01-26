@@ -8,7 +8,7 @@
 
 ``` javascript
 import { createApp } from 'vue';
-import { Temp } from '@nutui/nutui';
+import { Temp } from '@nutui/nutui-bingo';
 
 const app = createApp();
 app.use(Temp);
