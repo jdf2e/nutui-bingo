@@ -10,8 +10,8 @@
 #### NPM 安装
 
 ```bash
-# Vue3（目前内网可用，外网稍后发布）
-npm i @test/nutui-bingo
+# Vue3
+npm i @bingo/nutui-bingo
 ```
 
 
@@ -21,8 +21,8 @@ npm i @test/nutui-bingo
 ```javascript
 import { createApp } from "vue";
 import App from "./App.vue";
-import NutBig from "@test/nutui-bingo";
-import "@test/nutui-bingo/dist/style.css";
+import NutBig from "@bingo/nutui-bingo";
+import "@bingo/nutui-bingo/dist/style.css";
 createApp(App).use(NutBig).mount("#app");
 ```
 

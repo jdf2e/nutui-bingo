@@ -1,6 +1,6 @@
 {
   "name": "@nutui/nutui-bingo",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "nutui生态之一抽奖组件库",
   "main": "dist/nutbig.umd.js",
   "module": "dist/nutbig.es.js",
@@ -46,8 +46,8 @@
     "serve": "vite preview",
     "upload": "yarn build:site:oss && node ./jd/upload.js",
     "add": "node jd/createComponentMode.js",
-    "publish:next": "npm publish --tag=next",
-    "publish:taro": "npm publish",
+    "publish:beta": "npm publish --tag=beta",
+    "publish": "npm publish",
     "generate:file": "node jd/generate-nutui.js",
     "generate:file:taro:vue": "node jd/generate-nutui-taro-vue.js",
     "generate:types": "node jd/generate-types.js",

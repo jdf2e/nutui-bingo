@@ -145,11 +145,11 @@ export default defineComponent({
           title: "摇一摇",
           desc: "可配置红包，手机震动，回调函数等"
         },
-        // {
-        //   img: "https://img12.360buyimg.com/imagetools/jfs/t1/126785/39/21940/107005/61ee7c7dE889de475/6dc701e563f68d1d.png",
-        //   title: "娃娃机",
-        //   desc: "可配置奖品列表、速度，指定奖品等"
-        // },
+        {
+          img: "https://img12.360buyimg.com/imagetools/jfs/t1/126785/39/21940/107005/61ee7c7dE889de475/6dc701e563f68d1d.png",
+          title: "娃娃机",
+          desc: "可配置奖品列表、速度，指定奖品等"
+        },
         {
           img: "https://img13.360buyimg.com/imagetools/jfs/t1/6981/39/21101/49425/61ee7cc3E505cf90b/239c85be06a89759.png",
           title: "摇骰子",
