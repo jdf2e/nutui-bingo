@@ -24,7 +24,7 @@
     </ul>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { defineComponent, reactive, onMounted, watch } from 'vue';
 import { nav } from '@/config.json';
 import { useRouter } from 'vue-router';

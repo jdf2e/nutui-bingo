@@ -74,7 +74,7 @@
           <div class="vx-box">
             <p class="vx-desc">微信交流群</p>
             <p class="vx-desc">扫码添加好友</p>
-            <img class="img-code" src="../../assets/images/vx-code1.png" />
+            <img class="img-code" src="https://img13.360buyimg.com/imagetools/jfs/t1/180330/6/22974/108157/620629f4Eb5642c04/0ff2f7cd5cc44b0d.png" />
             <p class="vx-desc">回复<span class="vx-red">Bingo</span>即刻进群</p>
           </div>
         </div>

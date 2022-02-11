@@ -3,8 +3,8 @@
   <div class="doc-header" :class="themeName()">
     <div class="header-logo">
       <a class="logo-link" href="#" @click="toHome"></a>
-      <span class="logo-border"></span>
       <span class="version">{{ version }}</span>
+      <span class="logo-border"></span>
     </div>
     <div class="header-nav">
       <Search />
@@ -165,29 +165,35 @@ export default defineComponent({
   &-logo {
     position: relative;
     display: inline-block;
-    width: 260px;
+    // width: 260px;
     height: 64px;
     .logo-link {
+      display: inline-block;
       width: 200px;
       height: 46px;
       vertical-align: middle;
-      position: absolute;
-      top: 50%;
-      margin-top: -23px;
+      // position: absolute;
+      // top: 50%;
+      // margin-top: -23px;
     }
     .logo-border {
+      display: inline-block;
       width: 1px;
       height: 26px;
-      position: absolute;
-      right: -10px;
-      top: 50%;
-      margin-top: -13px;
+      margin: 0 20px;
+      position: relative;
+      // right: -10px;
+      // top: 50%;
+      top: 8px;
+      margin-left: 50px;
     }
     .version {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      margin-top: -30px;
+      display: inline-block;
+      position: relative;
+      // position: absolute;
+      // right: 20px;
+      // top: 50%;
+      margin-left: 20px;
       font-size: 14px;
     }
   }
@@ -196,9 +202,9 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     float: right;
-    width: calc(100% - 260px);
+    width: calc(100% - 400px);
     min-width: 900px;
-    padding: 0 40px;
+    // padding: 0 40px;
     .nav-box {
       margin-right: 140px;
       .nav-list {
