@@ -146,7 +146,7 @@ export default create({
     }
 
     //抓住了
-    const catchFlag = ref(false);
+    const catchFlag = ref<boolean>(false);
     const winImage = ref("");
     const catchGift = (img: string) => {
       catchFlag.value = true;
@@ -166,7 +166,7 @@ export default create({
       for (var i = 0; i < giftimg.value.length; i++) {
         let item = giftimg.value[i];
         let long = item.offsetLeft + 100;
-        if (long - 20 <= claw.value && claw.value <= long + 20) {
+        if (long - 100 <= claw.value && claw.value <= long + 100) {
           if (prize.value > -1) {
             let img = props.prizeList[prize.value].imagePath;
             setTimeout(() => {

@@ -59,24 +59,22 @@
     }
   }
   .game_operate {
-    width: 120px;
-    height: 120px;
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -30px;
   }
   .game_star {
-    background: url("https://img10.360buyimg.com/imagetools/jfs/t1/175397/30/22747/31977/61b088afEaaa58f92/7974fbc5abe5bbd6.png") no-repeat center;
+    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/205479/17/4245/32041/61309346E02bd3b6b/b41be60bedbb1e69.png") no-repeat center;
     background-size: contain;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
   }
   .game_end {
-    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/161670/19/26860/20356/61b088afEe1bfe8c2/fa58caef092d439c.png") no-repeat center;
+    background: url("https://img10.360buyimg.com/imagetools/jfs/t1/193040/14/21217/16320/61309346E6569e270/36e45126a5f1fc9c.png") no-repeat center;
     background-size: contain;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
   }
   .activeArea {
     position: absolute;
