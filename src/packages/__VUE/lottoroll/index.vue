@@ -20,7 +20,7 @@
   <!-- <nut-button type="danger" @click="start" style="margin-top: 20px;">抽奖</nut-button> -->
 </template>
 
-<script>
+<script lang="ts">
 import { reactive, toRefs, ref, onMounted, onUnmounted, nextTick, watch, computed } from 'vue';
 import { createComponent } from '../../utils/create';
 const { create } = createComponent('lotto-roll');
@@ -55,7 +55,7 @@ export default create({
     );
 
     // https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame 
-    const animationFun = window.requestAnimationFrame ||
+    const animationFun: any = window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
       window.msRequestAnimationFrame ||

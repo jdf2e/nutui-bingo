@@ -76,7 +76,7 @@ export default create({
     }
   },
   emits: ["click", "start-turns", "end-turns"],
-  setup(props, { emit }) {
+  setup(props: any, { emit }) {
     let { prizeList, turnsNumber, styleOpt, turnsTime, pointerStyle } = reactive(props);
 
     const classes = computed(() => {

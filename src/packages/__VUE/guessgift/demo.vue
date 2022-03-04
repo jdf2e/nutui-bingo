@@ -17,14 +17,14 @@
 
 <script lang="ts">
 import { Dialog } from "@nutui/nutui";
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 import { createComponent } from '../../utils/create';
 import { reactive } from '@vue/reactivity';
 const { createDemo } = createComponent('guess-gift');
 export default createDemo({
   props: {},
   setup() {
-    const guessgiftDom:any = ref(null);
+    const guessgiftDom: Ref = ref(null);
 
     // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
     const prizeIndex = ref(3); 
