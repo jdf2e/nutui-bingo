@@ -38,6 +38,43 @@ import "@nutui/nutui-bingo/dist/style.css";
 createApp(App).use(Turntable).mount("#app");
 ```
 
+#### CDN 安装使用示例
+
+> 可以通过 CDN 的方式引入， 可以在 **jsdelivr** 和 **unpkg** 等公共 CDN 上获取到 NutUI。
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nutui/nutui-bingo/dist/style.css" />
+    <!-- 引入Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
+    <!-- 引入NutUI-Bingo组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/@nutui/nutui-bingo/dist/nutbig.umd.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        
+    </div>
+    <script>
+      // 在 #app 标签下渲染一个按钮组件
+      const app = Vue.createApp({
+        template: `
+          <nutbig-scratch-card 
+            content="618万"
+          ></nutbig-scratch-card>
+        `,
+      });
+      app.use(nutbig);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
+```
+
 
 ## 注意事项
 
