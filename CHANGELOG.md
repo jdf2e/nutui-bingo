@@ -1,3 +1,13 @@
+## v1.0.1
+
+`2022-02-16`
+
+* :zap: feat(DollMachine): 新增娃娃机组件 @Ymm0008
+* :bug: fix(DollMachine): 爪子下伸无法归位问题修复 @Ymm0008
+* :bug: fix(ShakeDice): 摇动时样式兼容处理 @Drjingfubo
+* :bug: docs(video): 九宫格抽奖文档及demo完善 @Drjingfubo
+* :bug: docs(官网): 官网样式适配及优化 @Ymm0008
+
 ## v1.0.0
 
 `2022-01-20`
