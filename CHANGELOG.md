@@ -1,3 +1,12 @@
+## v1.0.2
+
+`2022-03-25`
+
+* :zap: feat(GiftRain、ShakeDice、GiftBox): 组件适配小程序 @Ymm0008
+* :zap: feat(DollMachine): 娃娃机组件增加入参，包括图片、插槽等 @Ymm0008
+* :bug: fix(SquareNine): 九宫格抽奖开始前屏蔽操作 @Ymm0008
+* :bug: docs(DollMachine): 娃娃机组件文档优化 @Ymm0008
+
 ## v1.0.1
 
 `2022-02-16`
