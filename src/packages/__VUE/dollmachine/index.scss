@@ -26,14 +26,14 @@
     width: 110px;
     height: 85px;
     margin-left: -55px;
-    &.yes {
-      .fail {
-        display: none;
-      }
-      .succ {
-        display: block;
-      }
-    }
+    // &.yes {
+    //   .fail {
+    //     display: none;
+    //   }
+    //   .succ {
+    //     display: block;
+    //   }
+    // }
   }
   .fail {
     width: 100px;
@@ -42,14 +42,19 @@
     margin: 0 auto;
   }
   .succ {
+    position: relative;
     width: 110px;
     height: 105px;
-    display: none;
     margin: 0 auto;
-    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/218082/28/7092/15914/61b088afEf9c253f7/8392e2b14bd8f43a.png");
-    background-size: cover;
+    // background: url("https://img13.360buyimg.com/imagetools/jfs/t1/218082/28/7092/15914/61b088afEf9c253f7/8392e2b14bd8f43a.png");
+    // background-size: cover;
     // overflow: hidden;
-    img {
+    .succBg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .prizeBg {
       position: relative;
       display: block;
       top: 30px;

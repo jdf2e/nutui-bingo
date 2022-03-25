@@ -13,14 +13,14 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/luckdraw/index",
-          "pathName": "pages/luckdraw/index",
+          "name": "pages/giftrain/index",
+          "pathName": "pages/giftrain/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/luckshake/index",
-          "pathName": "pages/luckshake/index",
+          "name": "pages/scratchcard/index",
+          "pathName": "pages/scratchcard/index",
           "query": "",
           "scene": null
         }

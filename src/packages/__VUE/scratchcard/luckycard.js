@@ -175,7 +175,7 @@ LuckyCard.prototype.clearCover = function () {
  */
 LuckyCard.prototype.init = function (settings, callback) {
   if (!_isCanvasSupported()) {
-    alert('对不起，当前浏览器不支持Canvas，无法使用本控件！');
+    console.log('对不起，当前浏览器不支持Canvas，无法使用本控件！');
     return;
   }
   var _this = this;

@@ -1,13 +1,13 @@
 <template>
   <div :class="classes">
     <div
-      class="nut-bingo-luckrain-content"
+      class="nutbig-giftrain-content"
       ref="rainContent"
       :style="{ width: width, height: height }"
     >
       <img
         :class="[
-          'nut-bingo-luckrain-content-rainimg',
+          'nutbig-giftrain-content-rainimg',
           item.hasSelected ? '' : 'noselected',
         ]"
         :style="
@@ -28,7 +28,7 @@
 <script lang="ts">
 import { onMounted, toRefs, computed, ref, Ref, reactive, watch } from "vue";
 import { createComponent } from "../../utils/create";
-const { componentName, create } = createComponent("luckrain");
+const { componentName, create } = createComponent("giftrain");
 interface props {
   width: string; // 容器宽度
   height:string // 容器高度
@@ -114,7 +114,7 @@ export default create({
       if (isOver.value) return;
       let redPacketWarp: any = rainContent.value;
       let height = redPacketWarp.clientHeight;
-      let x = redPacketWarp.clientWidth - props.rainWidth;
+      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth : 340) - props.rainWidth;
       rainList.value &&
         rainList.value.map((item: any) => {
           if (item.y > height + 80) {
@@ -128,7 +128,8 @@ export default create({
     };
     const addRainList = () => {
       let redPacketWarp: any = rainContent.value;
-      let x = redPacketWarp.clientWidth - props.rainWidth;
+      // let x = redPacketWarp.clientWidth - props.rainWidth;
+      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth : 340) - props.rainWidth;
       let timeout = setInterval(() => {
         let state = reactive({
           width: props.rainWidth, // 红包宽度

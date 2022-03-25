@@ -5,11 +5,24 @@
         <!-- 绳子 -->
         <view class="rope" ref="rope"></view>
         <!--爪子-->
-        <view ref="clawBox" :class="['clawBox', catchFlag ? 'yes' : '']">
-          <img src="https://img14.360buyimg.com/imagetools/jfs/t1/146467/34/22553/4178/61b088afE198f676e/21952e7018d1d141.png" class="fail" />
-          <view class="succ">
-            <img :src="winImage" />
+        <view ref="clawBox" :class="['clawBox']">
+          <view class="succ" v-if="catchFlag">
+            <img :src="winImage" class="prizeBg" />
+            <view v-if="$slots.activeClaw" class="clawRender">
+                <slot name="activeClaw"></slot>
+            </view>
+            <img v-else :src="activeClaw" class="succBg" />
           </view>
+          <template v-else>
+            <view v-if="$slots.defaultClaw" class="clawRender">
+                <slot name="defaultClaw"></slot>
+            </view>
+            <img v-else :src="defaultClaw" class="fail" />
+          </template>
+            <!-- <view class="succ" v-if="catchFlag">
+              <img :src="winImage" />
+            </view>
+            <img v-else :src="defaultClaw" class="fail" /> -->
         </view>
       </view>
       <view class="activeArea" ref="activeArea">
@@ -51,6 +64,14 @@ const { create } = createComponent('doll-machine');
 
 export default create({
   props: {
+    defaultClaw: {
+      type: String,
+      default: 'https://img14.360buyimg.com/imagetools/jfs/t1/146467/34/22553/4178/61b088afE198f676e/21952e7018d1d141.png'
+    },
+    activeClaw: {
+      type: String,
+      default: 'https://img13.360buyimg.com/imagetools/jfs/t1/218082/28/7092/15914/61b088afEf9c253f7/8392e2b14bd8f43a.png'
+    },
     speed: {
       type: Number,
       default: 20

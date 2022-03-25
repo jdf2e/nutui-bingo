@@ -93,7 +93,14 @@ export default {
 | prize-list | 奖品列表 | Array | 目前需要至少4个奖品
 | speed | 奖品滚动的速度 | Number | 20
 | init | 初始化游戏 | Function | -
+| default-claw | 初始化爪子的样式，也可插槽形式 | string | -
+| active-claw | 爪子抓到奖品的样式，也可插槽形式 | string | -
 | prize-index | 中奖奖品在列表的索引位置 | Number | -1（-1未中奖）
+
+```ts
+default-claw 插槽形式: <template v-slot:defaultClaw></template> 
+active-claw 插槽形式: <template v-slot:defaultClaw></template> 
+```
 
 ### Events
 
