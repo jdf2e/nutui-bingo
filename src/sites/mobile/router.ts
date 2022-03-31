@@ -1,13 +1,13 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import Index from './components/Index.vue';
-import IndexTaro from './components/IndexTaro.vue';
-import { nav } from '../../config.json';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import Index from "./components/Index.vue";
+import IndexTaro from "./components/IndexTaro.vue";
+import { nav } from "../../config.json";
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: '/',
-    component: Index
-  }
+    path: "/",
+    name: "/",
+    component: Index,
+  },
 ];
 
 /** webpack */
@@ -33,47 +33,45 @@ const findComponentName = (name: string) => {
   //     }
   //   }
   // }
-  let idx = nav.findIndex(
-    (i) => i.name.toLowerCase() === name
-  );
+  let idx = nav.findIndex((i) => i.name.toLowerCase() === name);
   if (idx !== -1) {
     return nav[idx].name;
   }
 };
 
 /** vite */
-const modulesPage = import.meta.glob('/src/packages/__VUE/**/demo.vue');
+const modulesPage = import.meta.glob("/src/packages/__VUE/**/demo.vue");
 
 for (const path in modulesPage) {
   let name = (/packages\/__VUE\/(.*)\/demo.vue/.exec(path) as any[])[1];
   routes.push({
-    path: '/' + name,
+    path: "/" + name,
     component: modulesPage[path],
     name,
     meta: {
-      ComponentName: findComponentName(name)
-    }
+      ComponentName: findComponentName(name),
+    },
   });
 
   routes.push({
-    path: '/' + name + '-taro',
+    path: "/" + name + "-taro",
     component: IndexTaro,
-    name: name + '-taro',
+    name: name + "-taro",
     meta: {
-      ComponentName: findComponentName(name)
-    }
+      ComponentName: findComponentName(name),
+    },
   });
 }
 
 routes.push({
-  name: 'NotFound',
-  path: '/:path(.*)+',
-  redirect: () => '/'
+  name: "NotFound",
+  path: "/:path(.*)+",
+  redirect: () => "/",
 });
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 });
 
 export default router;

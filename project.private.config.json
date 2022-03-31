@@ -13,10 +13,11 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/giftrain/index",
-          "pathName": "pages/giftrain/index",
+          "name": "pages/squarenine/index",
+          "pathName": "pages/squarenine/index",
           "query": "",
-          "scene": null
+          "scene": null,
+          "launchMode": "default"
         },
         {
           "name": "pages/scratchcard/index",
@@ -34,8 +35,8 @@
           "name": "",
           "pathName": "pages/index/index",
           "query": "",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

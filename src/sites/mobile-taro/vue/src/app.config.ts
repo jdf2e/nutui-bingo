@@ -3,6 +3,7 @@ export default {
     'pages/index/index',
     'pages/turntable/index',
     'pages/marquee/index',
+    'pages/squarenine/index',
     'pages/luckshake/index',
     'pages/giftbox/index',
     'pages/lottoroll/index',

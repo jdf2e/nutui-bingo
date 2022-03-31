@@ -1,62 +1,67 @@
 <template>
-  <!-- { shake: shakeIndexs.includes(index + 1) } -->
-  <div class="nut-ninegrid">
+  <div :class="classes">
     <div
       v-for="(item, index) in gridList"
-      class="nine-ninegrid_item"
-      :style="itemStyle[index]"
+      class="nine-ninegrid__item"
       :class="[{ active: activeState || (index != 4 && index == currIndex) }]"
       :key="index"
+      :style="calPosition(index)"
     >
+      <template v-if="index == 4 && isHaveSlots('startBtn')">
+        <slot name="startBtn"></slot>
+      </template>
       <div
-        v-if="index == 4"
-        class="center"
+        v-if="index == 4 && !isHaveSlots('startBtn')"
+        class="nine-ninegrid__item__center"
         @click="isDraw ? startDraw() : returnDraw()"
       >
-        <img
-          :class="{ rotate: loadingDataState }"
-          src="//img13.360buyimg.com/imagetools/jfs/t1/190805/24/20092/1136/6126fce9E6c61cf21/acd44eec9fc694bd.png"
-          alt="refresh.png"
-        />
         <span>{{ drawTitle }}</span>
         <p>{{ drawDesc }}</p>
       </div>
-      <template v-else>
+      <template v-if="index != 4">
         <div class="front" @click="isStartDraw ? startFlop(index) : ''">
-          <img
-            src="//img11.360buyimg.com/imagetools/jfs/t1/73511/35/17197/9388/613852cdE75dc6822/ddb31e0f3cfdcb81.png"
-          />
+          <img :src="cardImg" />
         </div>
         <div class="back">
-          <p>{{ item.back.name }}</p>
-          <img :src="item.back.pictureUrl" />
+          <p>{{ item.name || "" }}</p>
+          <img v-if="item.pictureUrl" :src="item.pictureUrl" />
         </div>
       </template>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { toRefs, watch, onMounted, reactive } from "vue";
+import { toRefs, watch, onMounted, reactive, ref, computed } from "vue";
 import { createComponent } from "../../utils/create";
-const { componentName, create } = createComponent("lucknine");
-import Taro, { eventCenter, getCurrentInstance } from '@tarojs/taro';
+const { componentName, create } = createComponent("squarenine");
+import Taro, {
+  eventCenter,
+  getCurrentInstance as getCurrentInstanceTaro,
+} from "@tarojs/taro";
 
 export default create({
   props: {
-    data: {
+    prizeList: {
       type: [Object, Array],
       default: () => {
         return [];
       },
     },
+    prizeId: {
+      type: Number,
+      default: 5,
+    },
+    cardImg: {
+      type: String,
+      default: "",
+    },
   },
-  setup(props, { emit }) {
+  emits: ["click", "start", "return"],
+  setup(props, { emit, slots }) {
     const state = reactive({
-      gridList: [], // 数据list
+      gridList: [] as any, // 数据list
+      oldGridList: [] as any, // 初始数据list
       activeState: true, // 是否可以翻转
-      shakeIndexs: [] as any, // 动画抖一抖的下标
-      loadingDataState: false, // 换一换的小图标是否旋转  并且等它旋转完才可以再次点击
-      countDown: 10, // 倒计时时间
       currIndex: 10,
       drawTitle: "开始抽奖",
       drawDesc: "请翻牌",
@@ -64,49 +69,78 @@ export default create({
       arrPos: [] as any, // 每个方块对应下标记录
       isDraw: true, // 是否是抽奖状态
       isStartDraw: false, // 是否可以翻开卡牌
-      query: Taro.createSelectorQuery(),
-      itemStyle:[] as any,
     });
+    const classes = computed(() => {
+      const prefixCls = componentName;
+      return {
+        [prefixCls]: true,
+      };
+    });
+    const prizeId = ref(props.prizeId);
     watch(
-      () => props.data,
+      () => props.prizeList,
       (value) => {
         resResponse(value);
       }
     );
-    const resResponse = (sudoku_goodsG: []) => {
-      let front = [0, 1, 2, 3, 4, 5, 6, 7];
-      let back = sudoku_goodsG;
-      let filterData: any = [];
-      front.forEach((element: any, index: number) => {
-        filterData.push({
-          front: element,
-          back: back[index],
+    watch(
+      () => props.prizeId,
+      (value) => {
+        prizeId.value = value;
+      }
+    );
+    const isHaveSlots = (name: string) => {
+      return slots[name];
+    };
+    const resResponse = (sudoku_goodsG: any) => {
+      if (!(JSON.stringify(sudoku_goodsG[4]) == "{}")) {
+        sudoku_goodsG.splice(4, 0, {});
+      }
+      state.gridList = sudoku_goodsG;
+    };
+    /**
+     * 更换数据为接口返回
+     */
+    const prizeData = () => {
+      setTimeout(() => {
+        [...state.oldGridList] = state.gridList;
+        let data = state.gridList.find((item: { id: number }) => {
+          return item.id == prizeId.value;
         });
+        for (let i = 0; i < state.gridList.length; i++) {
+          if (i == 4) {
+            state.gridList[i] = {};
+          } else {
+            state.gridList[i] = data;
+          }
+        }
       });
-      filterData.splice(4, 0, {});
-      state.gridList = filterData;
     };
-    const beginTimeIntervar = () => {
-      const timeIntervar = setInterval(() => {
-        state.countDown--;
-        if (state.countDown == 0) {
-          refresh();
+    /**
+     * 调换数据
+     */
+    const changeData = (index: number) => {
+      //进行数据调换
+      var defaultIndex = null; //未知默认的数组所在文本的值
+      for (var i in state.oldGridList) {
+        if (state.oldGridList[i]["id"] == state.gridList[index]["id"]) {
+          defaultIndex = i;
         }
-        if (state.countDown == 7) {
-          state.shakeIndexs = [2, 4, 6, 8];
-        } else if (state.countDown == 3) {
-          state.shakeIndexs = [1, 3, 7, 9];
-        }
-      }, 1000);
+      }
+      state.oldGridList[index] = state.oldGridList.splice(
+        defaultIndex,
+        1,
+        state.oldGridList[index]
+      )[0];
+      [...state.gridList] = state.oldGridList;
     };
-    const refresh = () => {
-      if (state.loadingDataState) return;
-      state.countDown = 10;
-      state.shakeIndexs = [];
-    };
+    // 点击翻牌
     const startFlop = (index: number) => {
       state.currIndex = index;
+      emit("click");
+      prizeData();
       setTimeout(() => {
+        changeData(index);
         state.activeState = true;
         state.isDraw = true;
         state.drawTitle = "开始抽奖";
@@ -118,6 +152,10 @@ export default create({
      */
     const startDraw = () => {
       if (state.isBeginClick) return;
+      emit("start");
+      if (state.oldGridList.length > 0) {
+        [...state.gridList] = state.oldGridList;
+      }
       state.isBeginClick = true;
       state.isStartDraw = false;
       state.currIndex = 10;
@@ -138,34 +176,66 @@ export default create({
         state.isBeginClick = false;
       }, 3900);
     };
+
+    /**
+     * 打乱顺序
+     */
+    const reverse = () => {
+      var randomsort = function () {
+        return Math.random() > 0.5 ? -1 : 1;
+      };
+      state.gridList.splice(4, 1);
+      state.gridList.sort(randomsort);
+      state.gridList.splice(4, 0, {});
+      resetData();
+    };
     /**
      * 洗牌
      */
+    const css3Translate = ref<any>({});
     const shuffle = (pos: number) => {
       state.arrPos = [];
+      reverse();
+
       state.gridList.map((item: any, index: number) => {
         const x = pos * (1 - item.twoArry.x);
         const y = pos * (1 - item.twoArry.y);
         state.arrPos.push({ x, y });
       });
-      // console.log(state.gridList);
-     state.gridList.forEach((item: any, index: number) => {
-        //  state.itemStyle=[]
-        setTimeout(() => {
-          if(pos!=0){
-            const transform:any= "translate(" + state.arrPos[index].x + "px," + state.arrPos[index].y + "px)"
-            state.itemStyle.push({transform})
-          }else{
-            const transform:any= "translate(0px,0px)"
-            state.itemStyle[index] = transform
-          }
-        }, 150 * index);
+      const query = Taro.createSelectorQuery();
+      query.selectAll(".nine-ninegrid__item").boundingClientRect();
+      query.exec((res) => {
+        const itemPos = res[0];
+        itemPos.forEach((item: any, index: number) => {
+          setTimeout(() => {
+            css3Translate.value[index] = {
+              x: state.arrPos[index].x + "px",
+              y: state.arrPos[index].y + "px",
+            };
+          }, 150 * index);
+        });
       });
+      // const itemPos = document.querySelectorAll(".nine-ninegrid__item") as any;
+      // itemPos.forEach((item: any, index: number) => {
+      //   setTimeout(() => {
+      //     item.style.transform =
+      //       "translate(" +
+      //       state.arrPos[index].x +
+      //       "px," +
+      //       state.arrPos[index].y +
+      //       "px)";
+      //   }, 150 * index);
+      // });
     };
+    const calPosition = computed(() => (index: number) => {
+      const sty: any = css3Translate.value[index];
+      return sty ? { transform: `translate(${sty.x}, ${sty.y})` } : "";
+    });
     /**
      * 返回游戏
      */
     const returnDraw = () => {
+      emit("return");
       state.drawTitle = "开始抽奖";
       state.drawDesc = "请翻牌";
       state.activeState = true;
@@ -176,7 +246,6 @@ export default create({
      * 方便处理数据
      */
     const resetData = () => {
-      const total = 9; // 总数
       const lineTotal: number = 3; // 单行数
       state.gridList.map((item: any, index: number) => {
         let x = index % lineTotal;
@@ -185,27 +254,27 @@ export default create({
       });
     };
     onMounted(() => {
-      resResponse(props.data);
-      beginTimeIntervar();
-      resetData();
+      eventCenter.once((getCurrentInstanceTaro() as any).router.onReady, () => {
+        resResponse(props.prizeList);
+      });
     });
 
     return {
       ...toRefs(state),
+      classes,
       resResponse,
-      beginTimeIntervar,
-      refresh,
+      isHaveSlots,
       resetData,
+      prizeId,
       startFlop,
       startDraw,
       returnDraw,
+      calPosition
     };
   },
 });
 </script>
 
-
 <style lang="scss">
 @import "index.scss";
 </style>
-

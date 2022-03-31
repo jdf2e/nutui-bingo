@@ -78,16 +78,13 @@ export default create({
 
     onMounted(() => {
       eventCenter.once((getCurrentInstanceTaro() as any).router.onReady, () => {
-        aa()
+        const query = Taro.createSelectorQuery();
+        query.selectAll('.lotto-roll-wrap').boundingClientRect();
+        query.exec((res) => {
+          console.log(res);
+        });
       });
     })
-    const aa = () => {
-      const query = Taro.createSelectorQuery();
-      query.selectAll('.lotto-roll-wrap').boundingClientRect();
-      query.exec((res) => {
-        console.log(res);
-      });
-    }
     const startRoll = () => {
       emit("start-turns");
       lock.value = true;
