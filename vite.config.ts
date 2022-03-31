@@ -42,9 +42,6 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/]
     }),
     Markdown(),
-    legacy({
-      targets: ['defaults', 'not IE 11']
-    })
   ],
   build: {
     target: 'es2015',

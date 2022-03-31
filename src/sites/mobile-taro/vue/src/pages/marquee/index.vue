@@ -1,7 +1,7 @@
 <template>
   <div class="demo">
     <h2>基础用法</h2>
-    <nut-bingo-luckmarquee
+    <nutbig-marquee
       :prize-list="prizeList"
       :prize-index="prizeIndex"
       :speed="100"
@@ -10,11 +10,12 @@
       @start-turns="startTurns"
       @end-turns="endTurns"
     >
-    </nut-bingo-luckmarquee>
+    </nutbig-marquee>
   </div>
 </template>
 
 <script lang="ts">
+import Taro from '@tarojs/taro';
 import { ref, reactive } from 'vue';
 export default {
   setup() {
@@ -79,7 +80,11 @@ export default {
       prizeIndex.value = index;
     }
     const endTurns = () => {
-      console.log("中奖了");
+      Taro.showToast({
+        title: '中奖了',
+        icon: 'success',
+        duration: 2000
+      })
     }
     return {
       prizeList,

@@ -1,11 +1,10 @@
 <template>
   <div class="demo">
     <h2>基础用法</h2>
-    <nut-bingo-luckdraw
-      class="drawTable"
-      ref="luckDrawPrize"
-      :luck-width="luckWidth"
-      :luck-height="luckheight"
+    <nutbig-turntable
+      class="turntable"
+      :width="luckWidth"
+      :height="luckheight"
       :prize-list="prizeList"
       :turns-number="turnsNumber"
       :turns-time="turnsTime"
@@ -15,12 +14,13 @@
       @start-turns="startTurns"
       @end-turns="endTurns"
     >
-    </nut-bingo-luckdraw>
+    </nutbig-turntable>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, toRefs, watch, computed, onMounted, watchEffect, reactive } from 'vue';
+import Taro from '@tarojs/taro';
+import { ref, reactive } from 'vue';
 export default {
   setup() {
     // 转盘大小
@@ -89,6 +89,8 @@ export default {
     });
     // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
     const prizeIndex = ref(-1);
+    // 用来锁定转盘，避免同时多次点击转动
+    const lock = ref(false);
     // 剩余抽奖次数
     const num = ref(5);
     const startTurns = () => {
@@ -96,7 +98,11 @@ export default {
       prizeIndex.value = index;
     }
     const endTurns = () => {
-      console.log("中奖了")
+      Taro.showToast({
+        title: '中奖了',
+        icon: 'success',
+        duration: 2000
+      })
     }
     return {
       luckWidth,
@@ -107,6 +113,7 @@ export default {
       turnsTime,
       styleOpt,
       prizeIndex,
+      lock,
       num,
       startTurns,
       endTurns
@@ -115,6 +122,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>

@@ -19,6 +19,7 @@
 </template>
 
 <script lang="ts">
+import { Toast } from "@nutui/nutui";
 import { ref, reactive } from 'vue';
 import { createComponent } from '../../utils/create';
 const { createDemo } = createComponent('turntable');
@@ -99,7 +100,7 @@ export default createDemo({
       prizeIndex.value = index;
     }
     const endTurns = () => {
-      alert("中奖了")
+      (Toast as any).text(`中奖了`);
     }
     return {
       luckWidth,

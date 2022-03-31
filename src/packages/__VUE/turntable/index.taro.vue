@@ -19,12 +19,11 @@
 </template>
 
 <script lang="ts">
-
 import Taro from "@tarojs/taro";
 // import { View, Canvas, Image, CoverView } from "@tarojs/components";
 import { ref, toRefs, watch, computed, onMounted, nextTick, reactive } from 'vue';
 import { createComponent } from '../../utils/create';
-const { componentName, create } = createComponent('luckdraw');
+const { componentName, create } = createComponent('turntable');
 
 export default create({
   props: {

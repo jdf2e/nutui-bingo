@@ -43,7 +43,7 @@ export default defineConfig({
       }
     },
     lib: {
-      entry: 'src/packages/nutui.vue.ts',
+      entry: 'src/packages/nutbig.vue.ts',
       name: 'nutbig',
       fileName: 'nutbig',
       formats: ['es', 'umd']

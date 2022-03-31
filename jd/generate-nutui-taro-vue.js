@@ -33,7 +33,7 @@ ${installFunction}
 export { ${packages.join(',')}  };
 export default { install, version:'${package.version}'};`;
 fs.outputFile(
-  path.resolve(__dirname, '../src/packages/nutui.taro.vue.ts'),
+  path.resolve(__dirname, '../src/packages/nutbig.taro.vue.ts'),
   fileStr,
   'utf8',
   (error) => {

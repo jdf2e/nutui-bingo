@@ -23,6 +23,19 @@
           "pathName": "pages/scratchcard/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/turntable/index",
+          "pathName": "pages/turntable/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
         }
       ]
     }

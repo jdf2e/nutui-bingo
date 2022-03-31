@@ -37,7 +37,7 @@ ${installFunction}
 export { install, ${packages.join(',')}  };
 export default { install, version:'${package.version}'};`;
 fs.outputFile(
-  path.resolve(__dirname, '../src/packages/nutui.vue.ts'),
+  path.resolve(__dirname, '../src/packages/nutbig.vue.ts'),
   fileStr,
   'utf8',
   error => {

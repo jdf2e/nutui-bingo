@@ -1,8 +1,8 @@
 export default {
   pages: [
     'pages/index/index',
-    'pages/luckdraw/index',
-    'pages/luckmarquee/index',
+    'pages/turntable/index',
+    'pages/marquee/index',
     'pages/luckshake/index',
     'pages/giftbox/index',
     'pages/lottoroll/index',

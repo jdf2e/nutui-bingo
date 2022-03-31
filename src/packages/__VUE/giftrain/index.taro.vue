@@ -114,7 +114,7 @@ export default create({
       if (isOver.value) return;
       let redPacketWarp: any = rainContent.value;
       let height = redPacketWarp.clientHeight;
-      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth : 340) - props.rainWidth;
+      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth : 200) - props.rainWidth;
       rainList.value &&
         rainList.value.map((item: any) => {
           if (item.y > height + 80) {
@@ -129,7 +129,7 @@ export default create({
     const addRainList = () => {
       let redPacketWarp: any = rainContent.value;
       // let x = redPacketWarp.clientWidth - props.rainWidth;
-      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth : 340) - props.rainWidth;
+      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth : 200) - props.rainWidth;
       let timeout = setInterval(() => {
         let state = reactive({
           width: props.rainWidth, // 红包宽度
