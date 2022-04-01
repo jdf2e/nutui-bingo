@@ -16,8 +16,8 @@
           "name": "pages/squarenine/index",
           "pathName": "pages/squarenine/index",
           "query": "",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         },
         {
           "name": "pages/scratchcard/index",
@@ -26,10 +26,11 @@
           "scene": null
         },
         {
-          "name": "pages/turntable/index",
-          "pathName": "pages/turntable/index",
+          "name": "pages/giftbox/index",
+          "pathName": "pages/giftbox/index",
           "query": "",
-          "scene": null
+          "scene": null,
+          "launchMode": "default"
         },
         {
           "name": "",
