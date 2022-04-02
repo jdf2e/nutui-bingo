@@ -51,7 +51,7 @@ export default create({
       default: "",
     },
   },
-  emits: ["click", "start","return"],
+  emits: ["click", "start", "return"],
   setup(props, { emit, slots }) {
     const state = reactive({
       gridList: [] as any, // 数据list

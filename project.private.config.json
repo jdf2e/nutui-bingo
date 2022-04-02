@@ -13,11 +13,11 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/squarenine/index",
-          "pathName": "pages/squarenine/index",
+          "name": "pages/lottoroll/index",
+          "pathName": "pages/lottoroll/index",
           "query": "",
-          "launchMode": "default",
-          "scene": null
+          "scene": null,
+          "launchMode": "default"
         },
         {
           "name": "pages/scratchcard/index",
@@ -29,8 +29,8 @@
           "name": "pages/giftbox/index",
           "pathName": "pages/giftbox/index",
           "query": "",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         },
         {
           "name": "",
