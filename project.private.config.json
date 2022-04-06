@@ -13,8 +13,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/lottoroll/index",
-          "pathName": "pages/lottoroll/index",
+          "name": "pages/guessgift/index",
+          "pathName": "pages/guessgift/index",
           "query": "",
           "scene": null,
           "launchMode": "default"

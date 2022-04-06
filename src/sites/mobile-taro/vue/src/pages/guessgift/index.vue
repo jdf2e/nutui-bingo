@@ -10,30 +10,34 @@
         @end-turns="endTurns"
       >
       </nutbig-guess-gift>
-      <button type="primary" @click="gameStart">开始</button>
+      <nut-button type="primary" @click="gameStart">开始</nut-button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Ref, ref } from 'vue';
+import { Button } from "@nutui/nutui";
+import { Ref, ref } from "vue";
 export default {
   props: {},
+  comments: {
+    NutButton: Button,
+  },
   setup() {
     const guessgiftDom: Ref = ref(null);
 
     // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
-    const prizeIndex = ref(3); 
+    const prizeIndex = ref(3);
     const gameStart = () => {
       guessgiftDom.value.start();
-    }
+    };
     const startTurns = () => {
-      console.log('开始抽奖');
-    }
+      console.log("开始抽奖");
+    };
 
     const endTurns = () => {
-      console.log('抽奖结束');
-    }
+      console.log("抽奖结束");
+    };
     const turnNum = ref(5);
     return {
       guessgiftDom,
@@ -41,17 +45,16 @@ export default {
       prizeIndex,
       gameStart,
       startTurns,
-      endTurns
+      endTurns,
     };
-  }
+  },
 };
 </script>
 
-<style></style>
-<style lang="scss" scoped>
-#app .demo {
-  padding: 57px 0 0 0;
-  height: 100%;
+<style lang="scss">
+page view.h5-div.demo {
+  // padding: 57px 0 0 0;
+  // height: 100%;
   background: #000;
   h2 {
     padding: 0 20px;
@@ -64,7 +67,7 @@ export default {
   .nut-button {
     display: block;
     width: 100px;
-    margin: 30px auto;
+    margin: 30px auto 0;
   }
 }
 </style>

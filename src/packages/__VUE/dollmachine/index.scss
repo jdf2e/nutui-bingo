@@ -2,7 +2,8 @@
   .machineBox {
     position: relative;
     height: 100%;
-    background: url("https://img12.360buyimg.com/imagetools/jfs/t1/145351/6/24350/800170/61c95470E416c27bb/a3f62a18af70684e.png") no-repeat center;
+    background: url("https://img12.360buyimg.com/imagetools/jfs/t1/145351/6/24350/800170/61c95470E416c27bb/a3f62a18af70684e.png")
+      no-repeat center;
     background-size: cover;
   }
   .machineTop {
@@ -70,13 +71,15 @@
     margin-left: -30px;
   }
   .game_star {
-    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/205479/17/4245/32041/61309346E02bd3b6b/b41be60bedbb1e69.png") no-repeat center;
+    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/205479/17/4245/32041/61309346E02bd3b6b/b41be60bedbb1e69.png")
+      no-repeat center;
     background-size: contain;
     width: 80px;
     height: 80px;
   }
   .game_end {
-    background: url("https://img10.360buyimg.com/imagetools/jfs/t1/193040/14/21217/16320/61309346E6569e270/36e45126a5f1fc9c.png") no-repeat center;
+    background: url("https://img10.360buyimg.com/imagetools/jfs/t1/193040/14/21217/16320/61309346E6569e270/36e45126a5f1fc9c.png")
+      no-repeat center;
     background-size: contain;
     width: 80px;
     height: 80px;
@@ -103,7 +106,8 @@
       height: 90px;
       margin-right: 30px;
     }
-    #gift1, #gift2 {
+    #gift1,
+    #gift2 {
       display: inline;
     }
   }

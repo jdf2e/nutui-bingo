@@ -1,92 +1,104 @@
 <template>
-  <view class="nutbig-doll-machine">
-    <view class="machineBox" ref="machineBox">
-      <view class="machineTop">
+  <div class="nutbig-doll-machine">
+    <div class="machineBox" ref="machineBox">
+      <div class="machineTop">
         <!-- 绳子 -->
-        <view class="rope" ref="rope"></view>
+        <div class="rope" ref="rope"></div>
         <!--爪子-->
-        <view ref="clawBox" :class="['clawBox']">
-          <view class="succ" v-if="catchFlag">
+        <div ref="clawBox" :class="['clawBox']">
+          <div class="succ" v-if="catchFlag">
             <img :src="winImage" class="prizeBg" />
-            <view v-if="$slots.activeClaw" class="clawRender">
-                <slot name="activeClaw"></slot>
-            </view>
+            <div v-if="$slots.activeClaw" class="clawRender">
+              <slot name="activeClaw"></slot>
+            </div>
             <img v-else :src="activeClaw" class="succBg" />
-          </view>
+          </div>
           <template v-else>
-            <view v-if="$slots.defaultClaw" class="clawRender">
-                <slot name="defaultClaw"></slot>
-            </view>
+            <div v-if="$slots.defaultClaw" class="clawRender">
+              <slot name="defaultClaw"></slot>
+            </div>
             <img v-else :src="defaultClaw" class="fail" />
           </template>
-            <!-- <view class="succ" v-if="catchFlag">
+          <!-- <div class="succ" v-if="catchFlag">
               <img :src="winImage" />
-            </view>
+            </div>
             <img v-else :src="defaultClaw" class="fail" /> -->
-        </view>
-      </view>
-      <view class="activeArea" ref="activeArea">
+        </div>
+      </div>
+      <div class="activeArea" ref="activeArea">
         <!--奖品-->
-        <view id="giftBox" ref="giftBox">
-          <view id="gift1" ref="gift1">
+        <div id="giftBox" ref="giftBox">
+          <div id="gift1" ref="gift1">
             <img
               v-for="(item, index) of prizeList"
               :key="'machine' + index"
               :ref="setGiftimg"
               :src="item.imagePath"
             />
-          </view>
-          <view id="gift2" ref="gift2">
+          </div>
+          <div id="gift2" ref="gift2">
             <img
               v-for="(item, index) of prizeList"
               :key="'machine' + index"
               :ref="setGiftimg"
               :src="item.imagePath"
             />
-          </view>
-        </view>
-      </view>
-      <view class="game_operate">
+          </div>
+        </div>
+      </div>
+      <div class="game_operate">
         <!--点击前-->
-        <view class="game_btn game_star" @click="start" v-if="lock"></view>
+        <div class="game_btn game_star" @click="start" v-if="lock"></div>
         <!--点击后-->
-        <view class="game_btn game_end" v-if="!lock"></view>
-      </view>
-    </view>
-  </view>
+        <div class="game_btn game_end" v-if="!lock"></div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { Toast } from "@nutui/nutui";
-import { reactive, toRefs, ref, onMounted, onUnmounted, nextTick, watch, computed, getCurrentInstance } from 'vue';
-import { createComponent } from '../../utils/create';
-const { create } = createComponent('doll-machine');
+import {
+  reactive,
+  toRefs,
+  ref,
+  onMounted,
+  onUnmounted,
+  nextTick,
+  watch,
+  computed,
+  getCurrentInstance,
+} from "vue";
+import { createComponent } from "../../utils/create";
+const { create } = createComponent("doll-machine");
 
 export default create({
   props: {
     defaultClaw: {
       type: String,
-      default: 'https://img14.360buyimg.com/imagetools/jfs/t1/146467/34/22553/4178/61b088afE198f676e/21952e7018d1d141.png'
+      default:
+        "https://img14.360buyimg.com/imagetools/jfs/t1/146467/34/22553/4178/61b088afE198f676e/21952e7018d1d141.png",
     },
     activeClaw: {
       type: String,
-      default: 'https://img13.360buyimg.com/imagetools/jfs/t1/218082/28/7092/15914/61b088afEf9c253f7/8392e2b14bd8f43a.png'
+      default:
+        "https://img13.360buyimg.com/imagetools/jfs/t1/218082/28/7092/15914/61b088afEf9c253f7/8392e2b14bd8f43a.png",
     },
     speed: {
       type: Number,
-      default: 20
+      default: 20,
     },
     prizeList: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     turnsTime: {
       type: Number,
-      default: 0
+      default: 0,
     },
     prizeIndex: {
       type: Number,
-      default: -1
+      default: -1,
     },
   },
   emits: ["click", "start-turns", "end-turns"],
@@ -98,10 +110,10 @@ export default create({
         prize.value = val;
       }
     );
-    
+
     const machineBox: any = ref(null);
     const clawBox: any = ref(null);
-    const activeArea: any= ref(null);
+    const activeArea: any = ref(null);
     var lock = ref(true); //是否已经点击
     // 爪子的位置
     let claw = ref(0);
@@ -112,6 +124,8 @@ export default create({
     let speed = props.speed;
     const timer: any = ref(null);
     onMounted(() => {
+      console.log(props.prizeList);
+
       claw.value = clawBox.value.offsetLeft + 55;
       // 获取整个可视区域的高度
       let screenHeight = document.documentElement.clientHeight;
@@ -120,7 +134,7 @@ export default create({
       // activeArea.value.style.height = maxLong.value + "px";
       if (props.prizeList.length < 4) {
         (Toast as any).text(`本版本目前只支持最少4个奖品`);
-      }else {
+      } else {
         timer.value = setInterval(marqueeRun, speed);
       }
     });
@@ -145,7 +159,7 @@ export default create({
       } else {
         giftBox.value.scrollLeft = circle.value;
       }
-    }
+    };
 
     // 绳子
     const rope: any = ref(null);
@@ -164,7 +178,7 @@ export default create({
         clawBox.value.style.top = maxLong.value - 20 + "px";
         giftCalculation();
       }, 1850);
-    }
+    };
 
     //抓住了
     const catchFlag = ref<boolean>(false);
@@ -172,7 +186,7 @@ export default create({
     const catchGift = (img: string) => {
       catchFlag.value = true;
       winImage.value = img;
-    }
+    };
 
     // 所有的奖品
     const giftimg: any = ref([]);
@@ -210,7 +224,7 @@ export default create({
       //   }
       // });
       // gameover();
-    }
+    };
 
     // 游戏结束
     const gameover = () => {
@@ -233,8 +247,8 @@ export default create({
       catchFlag.value = false;
       lock.value = true;
       timer.value = setInterval(marqueeRun, speed);
-    }
-    
+    };
+
     return {
       machineBox,
       clawBox,
@@ -248,13 +262,11 @@ export default create({
       lock,
       start,
       setGiftimg,
-      init
-    }
-  }
-
+      init,
+    };
+  },
 });
 </script>
 <style lang="scss" scoped>
-@import './index.scss'
+@import "./index.scss";
 </style>
-

@@ -1,6 +1,6 @@
 .nutbig-guess-gift {
   position: relative;
-  display: flex!important;
+  display: flex !important;
   justify-content: center;
   align-items: center;
   .bowl-item {
@@ -26,6 +26,12 @@
     background: url("https://img13.360buyimg.com/imagetools/jfs/t1/219815/14/9349/4725/61cc34b8E059ebbd2/55e8002ae82a01ea.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+  }
+  ._opacity0 {
+    opacity: 0;
+  }
+  ._opacity1 {
+    opacity: 1;
   }
 }
 .disabledClick {
