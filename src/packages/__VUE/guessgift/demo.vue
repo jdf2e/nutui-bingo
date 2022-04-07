@@ -16,28 +16,26 @@
 </template>
 
 <script lang="ts">
-import { Dialog } from "@nutui/nutui";
-import { Ref, ref } from 'vue';
-import { createComponent } from '../../utils/create';
-import { reactive } from '@vue/reactivity';
-const { createDemo } = createComponent('guess-gift');
+import { Ref, ref } from "vue";
+import { createComponent } from "../../utils/create";
+const { createDemo } = createComponent("guess-gift");
 export default createDemo({
   props: {},
   setup() {
     const guessgiftDom: Ref = ref(null);
 
     // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
-    const prizeIndex = ref(3); 
+    const prizeIndex = ref(3);
     const gameStart = () => {
       guessgiftDom.value.start();
-    }
+    };
     const startTurns = () => {
-      console.log('开始抽奖');
-    }
+      console.log("开始抽奖");
+    };
 
     const endTurns = () => {
-      console.log('抽奖结束');
-    }
+      console.log("抽奖结束");
+    };
     const turnNum = ref(5);
     return {
       guessgiftDom,
@@ -45,9 +43,9 @@ export default createDemo({
       prizeIndex,
       gameStart,
       startTurns,
-      endTurns
+      endTurns,
     };
-  }
+  },
 });
 </script>
 

@@ -27,7 +27,7 @@ export default {
     const guessgiftDom: Ref = ref(null);
 
     // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
-    const prizeIndex = ref(3);
+    const prizeIndex = ref(2);
     const gameStart = () => {
       guessgiftDom.value.start();
     };

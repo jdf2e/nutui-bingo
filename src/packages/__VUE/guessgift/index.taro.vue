@@ -83,12 +83,14 @@ export default create({
     });
 
     // 打乱数组顺序
+    const shuffleNewary = ref([]);
     const shuffle = (ary: Array<any>) => {
       const array = JSON.parse(JSON.stringify(ary));
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
+      shuffleNewary.value = array;
       return array;
     };
 
@@ -166,16 +168,17 @@ export default create({
       showBean.value = true;
       lock.value = true;
       const idx = _index + 1 > 2 ? 0 : _index + 1;
+
       bowlRaiseIndex.value = idx;
       // const item = bowlEle[idx];
       const _item = bowlElement[idx];
-
+      const m: any = shuffleNewary.value[idx] || _item;
       setTimeout(() => {
         if (_index > -1) {
           const _itemParentLeft = guessGiftEle.value.left || 0;
           const _left =
-            _item["left"] +
-            _item["width"] / 2 -
+            m["left"] +
+            m["width"] / 2 -
             _itemParentLeft -
             goldBeanEle.value.width / 2 +
             "px";
@@ -203,15 +206,15 @@ export default create({
         showBean.value = true;
         const _item = orginBowlCopy[index];
         const _itemParentLeft = guessGiftEle.value.left || 0;
-        setTimeout(() => {
-          const _left =
-            _item["left"] +
-            _item["width"] / 2 -
-            _itemParentLeft -
-            goldBeanDom.value.offsetWidth / 2 +
-            "px";
-          goldBeanDomLeft.value = _left;
-        }, 100);
+        // setTimeout(() => {
+        const _left =
+          _item["left"] +
+          _item["width"] / 2 -
+          _itemParentLeft -
+          goldBeanEle.value.width / 2 +
+          "px";
+        goldBeanDomLeft.value = _left;
+        // }, 100);
       } else {
         showBean.value = false;
       }
