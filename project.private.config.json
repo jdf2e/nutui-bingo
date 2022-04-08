@@ -16,8 +16,8 @@
           "name": "pages/guessgift/index",
           "pathName": "pages/guessgift/index",
           "query": "",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         },
         {
           "name": "pages/scratchcard/index",
@@ -26,11 +26,11 @@
           "scene": null
         },
         {
-          "name": "pages/giftbox/index",
-          "pathName": "pages/giftbox/index",
+          "name": "pages/dollmachine/index",
+          "pathName": "pages/dollmachine/index",
           "query": "",
-          "launchMode": "default",
-          "scene": null
+          "scene": null,
+          "launchMode": "default"
         },
         {
           "name": "",

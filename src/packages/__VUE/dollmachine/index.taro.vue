@@ -6,7 +6,10 @@
         <view class="rope" ref="rope"></view>
         <!--爪子-->
         <view ref="clawBox" :class="['clawBox', catchFlag ? 'yes' : '']">
-          <img src="https://img14.360buyimg.com/imagetools/jfs/t1/146467/34/22553/4178/61b088afE198f676e/21952e7018d1d141.png" class="fail" />
+          <img
+            src="https://img14.360buyimg.com/imagetools/jfs/t1/146467/34/22553/4178/61b088afE198f676e/21952e7018d1d141.png"
+            class="fail"
+          />
           <view class="succ">
             <img :src="winImage" />
           </view>
@@ -45,57 +48,42 @@
 
 <script lang="ts">
 import { Toast } from "@nutui/nutui";
-import { reactive, toRefs, ref, onMounted, onUnmounted, nextTick, watch, computed, getCurrentInstance } from 'vue';
-import { createComponent } from '../../utils/create';
-const { create } = createComponent('doll-machine');
+import Taro from "@tarojs/taro";
+import {
+  reactive,
+  toRefs,
+  ref,
+  onMounted,
+  onUnmounted,
+  nextTick,
+  watch,
+  computed,
+  getCurrentInstance,
+} from "vue";
+import { createComponent } from "../../utils/create";
+const { create } = createComponent("doll-machine");
 
 export default create({
   props: {
     speed: {
       type: Number,
-      default: 20
+      default: 20,
     },
     prizeList: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     turnsTime: {
       type: Number,
-      default: 0
+      default: 0,
     },
     prizeIndex: {
       type: Number,
-      default: -1
+      default: -1,
     },
   },
   emits: ["click", "start-turns", "end-turns"],
   setup(props, { emit }) {
-    const machineBox: any = ref(null);
-    const clawBox: any = ref(null);
-    const activeArea: any= ref(null);
-    var lock = ref(true); //是否已经点击
-    // 爪子的位置
-    let claw = ref(0);
-    // 爪子可以伸到的最大长度，需要减掉下方娃娃的高度,即活动区域的高度
-    const maxLong = ref(0);
-
-    // 定时器
-    let speed = props.speed;
-    const timer: any = ref(null);
-    onMounted(() => {
-      claw.value = clawBox.value.offsetLeft + 55;
-      // 获取整个可视区域的高度
-      let screenHeight = document.documentElement.clientHeight;
-      machineBox.value.style.height = screenHeight - 120 + "px";
-      maxLong.value = screenHeight - 300;
-      // activeArea.value.style.height = maxLong.value + "px";
-      if (props.prizeList.length < 4) {
-        (Toast as any).text(`本版本目前只支持最少4个奖品`);
-      }else {
-        timer.value = setInterval(marqueeRun, speed);
-      }
-    });
-
     const circle = ref(0);
     const giftBox: any = ref(null);
     const gift1: any = ref(null);
@@ -114,7 +102,34 @@ export default create({
       } else {
         giftBox.value.scrollLeft = circle.value;
       }
-    }
+    };
+
+    const machineBox: any = ref(null);
+    const clawBox: any = ref(null);
+    const activeArea: any = ref(null);
+    var lock = ref(true); //是否已经点击
+    // 爪子的位置
+    let claw = ref(0);
+    // 爪子可以伸到的最大长度，需要减掉下方娃娃的高度,即活动区域的高度
+    const maxLong = ref(0);
+
+    // 定时器
+    let speed = props.speed;
+    const timer: any = ref(null);
+    onMounted(() => {
+      claw.value = clawBox.value.offsetLeft + 55;
+      // 获取整个可视区域的高度
+      const info = Taro.getSystemInfoSync();
+      let screenHeight = info.windowHeight;
+      machineBox.value.style.height = screenHeight - 120 + "px";
+      maxLong.value = screenHeight - 300;
+      // activeArea.value.style.height = maxLong.value + "px";
+      if (props.prizeList.length < 4) {
+        (Toast as any).text(`本版本目前只支持最少4个奖品`);
+      } else {
+        timer.value = setInterval(marqueeRun, speed);
+      }
+    });
 
     // 绳子
     const rope: any = ref(null);
@@ -129,11 +144,11 @@ export default create({
       rope.value.animate({ height: maxLong.value - 60 + "px" }, 2000);
       clawBox.value.animate({ top: maxLong.value - 20 + "px" }, 2000);
       setTimeout(() => {
-        rope.value.style.height = maxLong.value - 60+ "px";
-        clawBox.value.style.top = maxLong.value - 20  + "px";
+        rope.value.style.height = maxLong.value - 60 + "px";
+        clawBox.value.style.top = maxLong.value - 20 + "px";
         giftCalculation();
       }, 1900);
-    }
+    };
 
     //抓住了
     const catchFlag = ref(false);
@@ -141,7 +156,7 @@ export default create({
     const catchGift = (img: string) => {
       catchFlag.value = true;
       winImage.value = img;
-    }
+    };
 
     // 所有的奖品
     const giftimg: any = ref([]);
@@ -160,7 +175,7 @@ export default create({
         }
       });
       gameover();
-    }
+    };
 
     // 游戏结束
     const gameover = () => {
@@ -183,8 +198,8 @@ export default create({
       catchFlag.value = false;
       lock.value = true;
       timer.value = setInterval(marqueeRun, speed);
-    }
-    
+    };
+
     return {
       machineBox,
       clawBox,
@@ -198,13 +213,11 @@ export default create({
       lock,
       start,
       setGiftimg,
-      init
-    }
-  }
-
+      init,
+    };
+  },
 });
 </script>
-<style lang="scss" scoped>
-@import './index.scss'
+<style lang="scss">
+@import "./index.scss";
 </style>
-
