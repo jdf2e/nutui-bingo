@@ -114,21 +114,19 @@ export default create({
     const machineBox: any = ref(null);
     const clawBox: any = ref(null);
     const activeArea: any = ref(null);
-    var lock = ref(true); //是否已经点击
+    const lock = ref(true); //是否已经点击
     // 爪子的位置
-    let claw = ref(0);
+    const claw = ref(0);
     // 爪子可以伸到的最大长度，需要减掉下方娃娃的高度,即活动区域的高度
     const maxLong = ref(0);
 
     // 定时器
-    let speed = props.speed;
+    const speed = props.speed;
     const timer: any = ref(null);
     onMounted(() => {
-      console.log(props.prizeList);
-
       claw.value = clawBox.value.offsetLeft + 55;
       // 获取整个可视区域的高度
-      let screenHeight = document.documentElement.clientHeight;
+      const screenHeight = document.documentElement.clientHeight;
       machineBox.value.style.height = screenHeight - 120 + "px";
       maxLong.value = screenHeight - 300;
       // activeArea.value.style.height = maxLong.value + "px";
@@ -144,16 +142,16 @@ export default create({
     const gift1: any = ref(null);
     const gift2: any = ref(null);
     const marqueeRun = () => {
-      if (!(giftBox && giftBox.value)) {
+      if (!(giftBox.value && giftBox.value)) {
         return;
       }
       circle.value++;
-      let box_width = giftBox.value.scrollLeft;
+      const boxWidth = giftBox.value.scrollLeft;
       // let giftW1 = gift1.value.offsetWidth;
-      let giftW2 = gift2.value.offsetWidth;
+      const giftW2 = gift2.value.offsetWidth;
       // 保证奖品列表的宽度 大于 当前视图的宽度
       // 待解决问题：动态计算宽度，宽度不足情况下自动添加元素
-      if (giftW2 - box_width <= 0) {
+      if (giftW2 - boxWidth <= 0) {
         circle.value = 0;
         giftBox.value.scrollLeft = circle.value;
       } else {
@@ -198,12 +196,12 @@ export default create({
         gameover();
         return false;
       }
-      for (var i = 0; i < giftimg.value.length; i++) {
-        let item = giftimg.value[i];
-        let long = item.offsetLeft + 100;
+      for (let i = 0; i < giftimg.value.length; i++) {
+        const item = giftimg.value[i];
+        const long = item.offsetLeft + 100;
         if (long - 100 <= claw.value && claw.value <= long + 100) {
           if (prize.value > -1) {
-            let img = props.prizeList[prize.value].imagePath;
+            const img = props.prizeList[prize.value].imagePath;
             setTimeout(() => {
               catchGift(img);
               gameover();
@@ -234,7 +232,7 @@ export default create({
       setTimeout(() => {
         rope.value.style.height = "20px";
         clawBox.value.style.top = "70px";
-        if (timer) {
+        if (timer.value) {
           clearInterval(timer.value);
           timer.value = null;
         }
