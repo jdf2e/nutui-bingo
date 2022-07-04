@@ -13,21 +13,21 @@ export default createDemo({
   props: {},
   setup() {
     const dice = ref();
-    const id = ref()
+    const id = ref();
     const jump = () => {
-      id.value = 5
+      id.value = 5;
       dice.value.shake();
     };
     return {
       jump,
       dice,
-      id
+      id,
     };
   },
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .demo {
   text-align: center;
   background: url("//img12.360buyimg.com/imagetools/jfs/t1/95587/33/21814/218186/61e0015aE05e5fa32/e367632953cc3633.png")
@@ -36,7 +36,7 @@ export default createDemo({
     margin: 70px auto;
   }
   .demoBtn {
-    margin:200px auto 0;
+    margin: 200px auto 0;
     width: 100px;
     display: flex;
     align-items: center;
@@ -45,7 +45,7 @@ export default createDemo({
     background: linear-gradient(
       135deg,
       rgba(240, 22, 14, 1) 0%,
-      rgba(240, 37, 15, .8) 69.83950099728881%,
+      rgba(240, 37, 15, 0.8) 69.83950099728881%,
       rgba(240, 78, 14, 1) 100%
     );
     border-radius: 20px;

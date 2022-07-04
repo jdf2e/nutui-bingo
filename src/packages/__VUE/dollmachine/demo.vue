@@ -3,9 +3,8 @@
     <h2>基础用法</h2>
     <div class="show-demo">
       <nutbig-doll-machine
-        ref="lottoRollDom"
-        :prize-list="prizeList"
-        :prize-index="prizeIndex"
+        :prizeList="prizeList"
+        :prizeIndex="1"
         @start-turns="startTurns"
         @end-turns="endTurns"
       >
@@ -55,18 +54,6 @@ export default createDemo({
 
     const endTurns = () => {
       console.log("抽奖结束");
-      setTimeout(() => {
-        Dialog({
-          title: "中奖提示",
-          content: "您已完成抽奖，是否继续？",
-          onCancel: () => {},
-          onOk: () => {
-            setTimeout(() => {
-              lottoRollDom.value.init();
-            }, 300);
-          },
-        });
-      }, 400);
     };
 
     return {

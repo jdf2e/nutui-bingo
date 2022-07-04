@@ -1,56 +1,62 @@
 <template>
   <div class="nutbig-doll-machine">
-    <div class="machineBox" ref="machineBox">
-      <div class="machineTop">
-        <!-- 绳子 -->
-        <div class="rope" ref="rope"></div>
-        <!--爪子-->
-        <div ref="clawBox" :class="['clawBox']">
-          <div class="succ" v-if="catchFlag">
-            <img :src="winImage" class="prizeBg" />
-            <div v-if="$slots.activeClaw" class="clawRender">
-              <slot name="activeClaw"></slot>
-            </div>
-            <img v-else :src="activeClaw" class="succBg" />
-          </div>
-          <template v-else>
-            <div v-if="$slots.defaultClaw" class="clawRender">
-              <slot name="defaultClaw"></slot>
-            </div>
-            <img v-else :src="defaultClaw" class="fail" />
-          </template>
-          <!-- <div class="succ" v-if="catchFlag">
-              <img :src="winImage" />
-            </div>
-            <img v-else :src="defaultClaw" class="fail" /> -->
+    <div class="machine-box" ref="machineBoxDom">
+      <div class="machine-tools" ref="machineToolsDom" :style="toolsStyle">
+        <div class="machine-rope" id="machine-rope" ref="machineRopeDom"></div>
+        <div class="machine-claw" ref="machineClawDom" :style="clawStyle">
+          <img
+            v-if="giftPrize"
+            :src="giftPrize"
+            alt="加载失败"
+            class="gift-prize"
+          />
         </div>
       </div>
-      <div class="activeArea" ref="activeArea">
-        <!--奖品-->
-        <div id="giftBox" ref="giftBox">
-          <div id="gift1" ref="gift1">
-            <img
-              v-for="(item, index) of prizeList"
-              :key="'machine' + index"
-              :ref="setGiftimg"
-              :src="item.imagePath"
-            />
+      <div class="machine-gift-box">
+        <div class="box-glass">
+          <img
+            v-for="(item, index) of prizeList"
+            :src="item.imagePath"
+            :key="index"
+            class="gift-img"
+            :ref="setGiftEle"
+          />
+        </div>
+        <div class="machine-operate" ref="machineOperateDom">
+          <div
+            :class="['machine-direction', machineLock ? 'disabledClick' : '']"
+          >
+            <!-- <span
+              class="direction-block direction-block-top"
+              @click="moveTools('top')"
+            ></span> -->
+            <span
+              class="direction-block direction-block-left"
+              @click="moveTools('left')"
+            ></span>
+            <span
+              class="direction-block direction-block-right"
+              @click="moveTools('right')"
+            ></span>
+            <!-- <span
+              class="direction-block direction-block-bottom"
+              @click="moveTools('bottom')"
+            ></span> -->
           </div>
-          <div id="gift2" ref="gift2">
-            <img
-              v-for="(item, index) of prizeList"
-              :key="'machine' + index"
-              :ref="setGiftimg"
-              :src="item.imagePath"
-            />
+          <div
+            :class="[
+              'machine-btn',
+              machineLock ? 'machine-disabled disabledClick' : 'machine-start',
+            ]"
+            @click="startGame"
+          ></div>
+          <div
+            :class="['machine-reset-btn', initLock ? 'disabledClick' : '']"
+            @click="init"
+          >
+            重置
           </div>
         </div>
-      </div>
-      <div class="game_operate">
-        <!--点击前-->
-        <div class="game_btn game_star" @click="start" v-if="lock"></div>
-        <!--点击后-->
-        <div class="game_btn game_end" v-if="!lock"></div>
       </div>
     </div>
   </div>
@@ -92,174 +98,169 @@ export default create({
       type: Array,
       default: () => [],
     },
-    turnsTime: {
-      type: Number,
-      default: 0,
-    },
     prizeIndex: {
       type: Number,
       default: -1,
     },
   },
   emits: ["click", "start-turns", "end-turns"],
-  setup(props, { emit }) {
-    const prize = ref(props.prizeIndex);
-    watch(
-      () => props.prizeIndex,
-      (val, prevVal) => {
-        prize.value = val;
-      }
-    );
-
-    const machineBox: any = ref(null);
-    const clawBox: any = ref(null);
-    const activeArea: any = ref(null);
-    const lock = ref(true); //是否已经点击
-    // 爪子的位置
-    const claw = ref(0);
-    // 爪子可以伸到的最大长度，需要减掉下方娃娃的高度,即活动区域的高度
-    const maxLong = ref(0);
-
-    // 定时器
-    const speed = props.speed;
-    const timer: any = ref(null);
-    onMounted(() => {
-      claw.value = clawBox.value.offsetLeft + 55;
-      // 获取整个可视区域的高度
-      const screenHeight = document.documentElement.clientHeight;
-      machineBox.value.style.height = screenHeight - 120 + "px";
-      maxLong.value = screenHeight - 300;
-      // activeArea.value.style.height = maxLong.value + "px";
-      if (props.prizeList.length < 4) {
-        (Toast as any).text(`本版本目前只支持最少4个奖品`);
-      } else {
-        timer.value = setInterval(marqueeRun, speed);
-      }
+  setup(props: any, { emit }) {
+    const giftPrize = ref();
+    const machineBoxDom = ref();
+    const machineToolsDom = ref();
+    const toolsStyle = reactive({
+      left: "50%",
+      marginLeft: "0",
     });
 
-    const circle = ref(0);
-    const giftBox: any = ref(null);
-    const gift1: any = ref(null);
-    const gift2: any = ref(null);
-    const marqueeRun = () => {
-      if (!(giftBox.value && giftBox.value)) {
-        return;
-      }
-      circle.value++;
-      const boxWidth = giftBox.value.scrollLeft;
-      // let giftW1 = gift1.value.offsetWidth;
-      const giftW2 = gift2.value.offsetWidth;
-      // 保证奖品列表的宽度 大于 当前视图的宽度
-      // 待解决问题：动态计算宽度，宽度不足情况下自动添加元素
-      if (giftW2 - boxWidth <= 0) {
-        circle.value = 0;
-        giftBox.value.scrollLeft = circle.value;
-      } else {
-        giftBox.value.scrollLeft = circle.value;
-      }
+    const leftCenter = () => {
+      toolsStyle.left = "50%";
+      const toolDomW = machineToolsDom.value.offsetWidth;
+      toolsStyle.marginLeft = "-" + toolDomW / 2 + "px";
     };
-
-    // 绳子
-    const rope: any = ref(null);
-    const start = () => {
-      // if (timer) {
-      //   clearInterval(timer.value);
-      //   timer.value = null;
-      // }
-      emit("start-turns");
-      lock.value = false;
-      // timer.value = setInterval(marqueeRun, speed);
-      rope.value.animate({ height: maxLong.value - 60 + "px" }, 2000);
-      clawBox.value.animate({ top: maxLong.value - 20 + "px" }, 2000);
-      setTimeout(() => {
-        rope.value.style.height = maxLong.value - 60 + "px";
-        clawBox.value.style.top = maxLong.value - 20 + "px";
-        giftCalculation();
-      }, 1850);
-    };
-
-    //抓住了
-    const catchFlag = ref<boolean>(false);
-    const winImage = ref("");
-    const catchGift = (img: string) => {
-      catchFlag.value = true;
-      winImage.value = img;
-    };
-
-    // 所有的奖品
-    const giftimg: any = ref([]);
-    const setGiftimg = (ele: Element) => {
-      giftimg.value.push(ele);
-    };
-    const giftCalculation = () => {
-      if (prize.value == -1) {
-        gameover();
+    const leftRightMove = (flag: string) => {
+      const toolDomLeft = machineToolsDom.value.offsetLeft;
+      const boxDomW = machineBoxDom.value.offsetWidth;
+      const toolDomW = machineToolsDom.value.offsetWidth;
+      const max = boxDomW - toolDomW;
+      if (
+        (flag == "left" && toolDomLeft == 0) ||
+        (flag == "right" && toolDomLeft == max)
+      ) {
         return false;
       }
-      for (let i = 0; i < giftimg.value.length; i++) {
-        const item = giftimg.value[i];
-        const long = item.offsetLeft + 100;
-        if (long - 100 <= claw.value && claw.value <= long + 100) {
-          if (prize.value > -1) {
-            const img = props.prizeList[prize.value].imagePath;
-            setTimeout(() => {
-              catchGift(img);
-              gameover();
-            }, 0);
-            return;
-          }
-        }
+
+      const distance = flag == "left" ? -30 : 30;
+      const left: number = toolDomLeft + distance;
+
+      if (flag == "left") {
+        toolsStyle.left = (left < 0 ? 0 : left) + "px";
+      } else {
+        toolsStyle.left = (left > max ? max : left) + "px";
       }
-      // giftimg.value.forEach((item: any, index: number) => {
-      //   let long = item.offsetLeft + 100;
-      //   console.log(item.offsetLeft);
-      //   if (long - 20 <= claw.value && claw.value <= long + 20) {
-      //     let img = item.src;
-      //     setTimeout(() => {
-      //       catchGift(img);
-      //     }, 0);
-      //     return;
-      //   }
-      // });
-      // gameover();
     };
 
-    // 游戏结束
-    const gameover = () => {
-      rope.value.animate({ height: "20px" }, 2000);
-      clawBox.value.animate({ top: "70px" }, 2000);
-      emit("end-turns");
-      setTimeout(() => {
-        rope.value.style.height = "20px";
-        clawBox.value.style.top = "70px";
-        if (timer.value) {
-          clearInterval(timer.value);
-          timer.value = null;
+    // const topBottomMove = (flag: string) => {
+    //   if (flag == "top") {
+    //   } else {
+    //   }
+    // };
+
+    const moveTools = (flag: string) => {
+      // toolsStyle.transform = "none";
+      toolsStyle.marginLeft = "0";
+      if (flag == "left" || flag == "right") {
+        leftRightMove(flag);
+      } else {
+        // topBottomMove(flag);
+      }
+    };
+
+    const clawStyle = ref({
+      "background-image": `url(${props.defaultClaw})`,
+      "background-size": "100% 100%",
+      "background-position": "center",
+      "background-repeat": "no-repeat",
+    });
+
+    const machineRopeDom = ref();
+    const machineClawDom = ref();
+    const machineOperateDom = ref();
+    const machineLock = ref(false);
+    const initLock = ref(false);
+
+    const startGame = () => {
+      emit("start-turns");
+      giftPrize.value = "";
+      machineLock.value = true;
+      initLock.value = true;
+      clawStyle.value["background-image"] = `url(${props.activeClaw})`;
+      const heightBox = machineBoxDom.value.offsetHeight;
+      const heightTools = machineToolsDom.value.offsetHeight;
+      const heightOpe = machineOperateDom.value.offsetHeight;
+      machineRopeDom.value.style.height = `${
+        heightBox - heightOpe - heightTools - 20
+      }px`;
+    };
+    const initGame = () => {
+      machineRopeDom.value.style.height = "20px";
+    };
+    const removeListen = () => {
+      const rope: HTMLElement = document.getElementById(
+        "machine-rope"
+      ) as HTMLElement;
+      rope.removeEventListener("webkitTransitionEnd", function () {});
+    };
+    const ropeHeightEnd = () => {
+      const machineRope: HTMLElement = document.getElementById(
+        "machine-rope"
+      ) as HTMLElement;
+      machineRope.addEventListener("webkitTransitionEnd", function (e) {
+        initLock.value = false;
+        if (machineRopeDom.value.offsetHeight == 20) {
+          machineLock.value = false;
+          emit("end-turns");
         }
-        // catchFlag.value = false;
-        // lock.value = true;
-      }, 2000);
+        removeListen();
+        clawStyle.value["background-image"] = `url(${props.defaultClaw})`;
+        giftPrize.value = props.prizeList[props.prizeIndex]["imagePath"];
+        setTimeout(() => {
+          initGame();
+        }, 200);
+      });
     };
-
+    const giftEle: any = reactive([]);
+    const setGiftEle = (ele: Element) => {
+      giftEle.push(ele);
+    };
+    const giftPosition = () => {
+      giftEle.forEach((element: any, index: number) => {
+        const left = Math.floor(Math.random() * 325);
+        const top = Math.floor(Math.random() * (150 - 70) + 70);
+        const angle = Math.floor(Math.random() * 90);
+        //   left: left + "px",
+        //   top: top + "px",
+        //   transform: "rotate(" + angle + "deg)",
+        //   "-moz-transform": "rotate(" + angle + "deg)",
+        //   "-webkit-transform": "rotate(" + angle + "deg)",
+        //   "-o-transform": "rotate(" + angle + "deg)",
+        element.style.left = left + "px";
+        element.style.top = top + "px";
+        element.style.transform = "rotate(" + angle + "deg)";
+      });
+    };
     const init = () => {
-      catchFlag.value = false;
-      lock.value = true;
-      timer.value = setInterval(marqueeRun, speed);
+      giftPrize.value = "";
+      leftCenter();
+      initGame();
     };
 
+    onMounted(() => {
+      leftCenter();
+      ropeHeightEnd();
+      giftPosition();
+    });
+
+    watch(
+      () => initLock.value,
+      (newval, oldval) => {
+        // ropeHeightEnd();
+      }
+    );
     return {
-      machineBox,
-      clawBox,
-      activeArea,
-      giftBox,
-      gift1,
-      gift2,
-      rope,
-      catchFlag,
-      winImage,
-      lock,
-      start,
-      setGiftimg,
+      clawStyle,
+      setGiftEle,
+      giftPrize,
+      machineBoxDom,
+      machineOperateDom,
+      machineToolsDom,
+      machineRopeDom,
+      machineClawDom,
+      toolsStyle,
+      moveTools,
+      machineLock,
+      initLock,
+      startGame,
       init,
     };
   },
