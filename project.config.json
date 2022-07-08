@@ -1,11 +1,8 @@
 {
   "description": "项目配置文件",
-  "packOptions": {
-    "ignore": []
-  },
   "setting": {
     "urlCheck": true,
-    "es6": true,
+    "es6": false,
     "enhance": true,
     "postcss": true,
     "preloadBackgroundData": false,
@@ -23,14 +20,12 @@
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useIsolateContext": false,
+    "useIsolateContext": true,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
@@ -42,19 +37,7 @@
     "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.19.3",
-  "appid": "wxf2b976b67dab3882",
-  "projectname": "%E8%90%A5%E9%94%80%E7%BB%84%E4%BB%B6%E5%BA%93",
   "miniprogramRoot": "src/sites/mobile-taro/vue/dist/",
-  "debugOptions": {
-    "hidedInDevtools": []
-  },
-  "scripts": {},
-  "staticServerOptions": {
-    "baseURL": "",
-    "servePath": ""
-  },
-  "isGameTourist": false,
   "condition": {
     "search": {
       "list": []
@@ -74,5 +57,15 @@
     "miniprogram": {
       "list": []
     }
+  },
+  "srcMiniprogramRoot": "src/sites/mobile-taro/vue/dist/",
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "libVersion": "2.25.0",
+  "packOptions": {
+    "ignore": [],
+    "include": []
   }
 }

@@ -3,9 +3,8 @@
     <h2>基础用法</h2>
     <div class="show-demo">
       <nutbig-doll-machine
-        ref="lottoRollDom"
         :prize-list="prizeList"
-        :prize-index="prizeIndex"
+        :prize-index="1"
         @start-turns="startTurns"
         @end-turns="endTurns"
       >
@@ -19,7 +18,6 @@ import { reactive, ref } from "vue";
 export default {
   props: {},
   setup() {
-    const lottoRollDom: any = ref(null);
     const prizeList = reactive([
       {
         imagePath:
@@ -51,15 +49,9 @@ export default {
 
     const endTurns = () => {
       console.log("抽奖结束");
-      setTimeout(() => {
-        setTimeout(() => {
-          lottoRollDom.value.init();
-        }, 300);
-      }, 4500);
     };
 
     return {
-      lottoRollDom,
       prizeList,
       prizeIndex,
       startTurns,
@@ -70,8 +62,9 @@ export default {
 </script>
 
 <style lang="scss">
+page .demo,
 #app .demo {
-  padding: 57px 0 0 0;
+  padding: 0;
 }
 .show-demo {
   background: #ffffff;
