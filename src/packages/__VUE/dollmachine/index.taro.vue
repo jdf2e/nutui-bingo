@@ -155,7 +155,7 @@ export default create({
           } else {
             toolsStyle.left = (left > max ? max : left) + "px";
           }
-        }, 100);
+        }, 200);
       });
     };
 
