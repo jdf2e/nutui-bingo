@@ -28,6 +28,7 @@
 <script lang="ts">
 import { onMounted, toRefs, computed, ref, Ref, reactive, watch } from "vue";
 import { createComponent } from "../../utils/create";
+import Taro, { eventCenter, getCurrentInstance } from '@tarojs/taro';
 const { componentName, create } = createComponent("giftrain");
 interface props {
   width: string; // 容器宽度
@@ -85,7 +86,17 @@ export default create({
     const rainScore: Ref<number> = ref(0); // 标记游戏是否结束
     const arr :any=reactive([])
     let timeout_gameTime = ref();
-    let requestAnimationFrame = ref();
+    let requestAnimationFrameValue = ref();
+
+    const requestAnimationFrame = function (callback: Function) {
+      var id = setTimeout(function () {
+        callback();
+      }, 16.7);
+      return id;
+    };
+    const cancelAnimationFrame = function (id: any) {
+      clearTimeout(id);
+    };
 
     const startRain = () => {
       init();
@@ -102,7 +113,7 @@ export default create({
       rainList.value = [];
       isOver.value = false;
       clearTimeout(timeout_gameTime.value);
-      window.cancelAnimationFrame(requestAnimationFrame.value);
+      cancelAnimationFrame(requestAnimationFrameValue.value);
       timeout_gameTime.value = null;
     };
     const rainOver = () => {
@@ -113,8 +124,12 @@ export default create({
     const render = () => {
       if (isOver.value) return;
       let redPacketWarp: any = rainContent.value;
-      let height = redPacketWarp.clientHeight;
-      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth : 200) - props.rainWidth;
+      let height = parseInt(redPacketWarp.clientHeight||props.height);
+      console.log(props.width);
+      
+      // console.log(redPacketWarp.clientWidth ? redPacketWarp.clientWidth :parseInt(props.width));
+      
+      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth :parseInt(props.width)) - props.rainWidth;
       rainList.value &&
         rainList.value.map((item: any) => {
           if (item.y > height + 80) {
@@ -124,12 +139,12 @@ export default create({
           }
           item.y += item.speed;
         });
-      requestAnimationFrame.value = window.requestAnimationFrame(render);
+      requestAnimationFrameValue.value = requestAnimationFrame(render);
     };
     const addRainList = () => {
       let redPacketWarp: any = rainContent.value;
       // let x = redPacketWarp.clientWidth - props.rainWidth;
-      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth : 200) - props.rainWidth;
+      let x = (redPacketWarp.clientWidth ? redPacketWarp.clientWidth :parseInt(props.width)) - props.rainWidth;
       let timeout = setInterval(() => {
         let state = reactive({
           width: props.rainWidth, // 红包宽度
@@ -189,6 +204,10 @@ export default create({
     //     background:"url('https://img14.360buyimg.com/imagetools/jfs/t1/207041/30/10130/26915/619748b2E7baf3a7e/87e638df2fcf9f85.png')",
     //   }
     // })
+
+     onMounted(() => {
+      eventCenter.once((getCurrentInstance() as any).router.onReady, () => {});
+    });
 
     const classes = computed(() => {
       const prefixCls = componentName;

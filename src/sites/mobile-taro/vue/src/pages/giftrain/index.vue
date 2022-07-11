@@ -1,6 +1,6 @@
 <template>
   <div class="demo">
-    <nutbig-giftrain ref="rain" width="100%" height="580px" @gameOver="gameOver" @start="start" @click="click">
+    <nutbig-giftrain ref="rain" width="375px" height="580px" @gameOver="gameOver" @start="start" @click="click">
     </nutbig-giftrain>
      <div v-if="!isStart" class="start" @click="onStart">开始</div>
   </div>
