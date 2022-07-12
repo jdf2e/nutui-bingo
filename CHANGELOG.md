@@ -1,3 +1,10 @@
+## v1.0.5
+
+`2022-07-12`
+
+- :zap: feat(DollMachine): 娃娃机组件功能重写及适配小程序 @Ymm0008
+- :zap: feat(GiftRain): 红包雨组件适配小程序 @Drjingfubo
+
 ## v1.0.4
 
 `2022-04-08`
