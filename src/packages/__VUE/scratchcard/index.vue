@@ -13,47 +13,47 @@
   </div>
 </template>
 <script lang="ts">
-import { ref, computed, nextTick, onMounted, reactive ,watch} from 'vue';
-import { createComponent } from '../../utils/create';
-const { componentName, create } = createComponent('scratch-card');
-import LuckyCard from './luckycard.js';
+import { ref, computed, nextTick, onMounted, reactive, watch } from "vue";
+import { createComponent } from "../../utils/create";
+const { componentName, create } = createComponent("scratch-card");
+import LuckyCard from "./luckycard.js";
 export default create({
   props: {
     content: {
       type: String,
-      default: ''
+      default: "",
     },
     height: {
       type: [String, Number],
-      default: 50
+      default: 50,
     },
     width: {
       type: [String, Number],
-      default: 300
+      default: 300,
     },
     coverColor: {
       type: String,
-      default: '#C5C5C5'
+      default: "#C5C5C5",
     },
     coverImg: {
       type: String,
-      default: ''
+      default: "",
     },
     fontSize: {
       type: [String, Number],
-      default: 20
+      default: 20,
     },
     backgroundColor: {
       type: String,
-      default: '#FFFFFF'
+      default: "#FFFFFF",
     },
     ratio: {
       type: [String, Number],
-      default: 0.5
-    }
+      default: 0.5,
+    },
   },
   components: {},
-  emits: ['click', 'open'],
+  emits: ["click", "open"],
 
   setup(props, { emit }) {
     const scratchcard = ref<HTMLElement | null>(null);
@@ -63,15 +63,14 @@ export default create({
         [prefixCls]: true,
       };
     });
-    const result=ref(props.content)
-    const state:any = reactive({
+    const result = ref(props.content);
+    const state: any = reactive({
       luckcard: null,
     });
     const clearCover = () => {
       state.luckcard.clearCover();
     };
     onMounted(() => {
-      console.log(scratchcard.value);
       nextTick(() => {
         state.luckcard = LuckyCard(
           {
@@ -79,32 +78,34 @@ export default create({
             coverColor: props.coverColor,
             coverImg: props.coverImg,
             ratio: Number(props.ratio),
-            callback: function () {
-              //console.log(this);
-              clearCover();
-              emit('open', this);
-            }
+            // callback: function () {
+            //   clearCover();
+            //   emit("open", this);
+            // },
           },
-          () => {}
+          () => {
+            clearCover();
+            emit("open", this);
+          }
         ) as any;
       });
     });
-   watch(
+    watch(
       () => props.content,
       (val) => {
-        result.value=val;
+        result.value = val;
       }
     );
     return {
       ...state,
       result,
       classes,
-      scratchcard
+      scratchcard,
     };
-  }
+  },
 });
 </script>
 
 <style lang="scss">
-@import 'index.scss';
+@import "index.scss";
 </style>

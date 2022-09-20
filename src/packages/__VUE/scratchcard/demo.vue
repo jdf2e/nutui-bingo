@@ -11,9 +11,15 @@
       content="<em>1000<em><strong>元</strong>"
     ></nutbig-scratch-card>
     <h2>刮开层支持图片</h2>
-    <nutbig-scratch-card content="1000万" :coverImg="coverImage"></nutbig-scratch-card>
+    <nutbig-scratch-card
+      content="1000万"
+      :coverImg="coverImage"
+    ></nutbig-scratch-card>
     <h2>事件回调</h2>
-    <nutbig-scratch-card content="1000万" @open="opencard"></nutbig-scratch-card>
+    <nutbig-scratch-card
+      content="1000万"
+      @open="opencard"
+    ></nutbig-scratch-card>
     <h2>设置刮开比列</h2>
     <nutbig-scratch-card
       content="1000万"
@@ -25,17 +31,17 @@
 </template>
 
 <script lang="ts">
-import { ref,onMounted } from 'vue';
-import { createComponent } from '../../utils/create';
-const { createDemo } = createComponent('scratch-card');
+import { ref, onMounted } from "vue";
+import { createComponent } from "../../utils/create";
+const { createDemo } = createComponent("scratch-card");
 export default createDemo({
   props: {},
   setup() {
     const opencard = () => {
-      alert('刮开事件完成');
+      alert("刮开事件完成");
     };
-    return {opencard };
-  }
+    return { opencard };
+  },
 });
 </script>
 
