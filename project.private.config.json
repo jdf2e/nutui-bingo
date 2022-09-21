@@ -9,6 +9,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "pages/turntable/index",
+          "pathName": "pages/turntable/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

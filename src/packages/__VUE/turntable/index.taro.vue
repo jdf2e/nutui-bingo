@@ -13,22 +13,21 @@
         :class="envApp == 'WEAPP' ? '' : 'mlcanvas'"
         canvas-id="canvasWx"
         ref="canvasDom"
-        type="33"
         :style="envApp == 'WEAPP' ? '' : getRotateAngle(0)"
       >
       </canvas>
       <!-- <canvas id="canvasWx" canvas-id="canvasWx" ref="canvasDom" type="2d" :style="getRotateAngle(0)">
       </canvas> -->
-      <view class="prize">
+      <view class="prize" v-if="prizeList.length > 0">
         <view
-          v-for="(item, index) in prizeList"
+          v-for="(item, index) of prizeList"
           class="item"
           :style="getRotateAngle(index)"
           :key="index"
         >
-          <view class="drawTable-name">{{ item.prizeName }}</view>
+          <view class="drawTable-name">{{ item["prizeName"] }}</view>
           <view class="drawTable-img">
-            <img :src="item.prizeImg" />
+            <img :src="item['prizeImg']" />
           </view>
         </view>
       </view>
@@ -39,16 +38,8 @@
 
 <script lang="ts">
 import Taro from "@tarojs/taro";
-// import { View, Canvas, Image, CoverView } from "@tarojs/components";
-import {
-  ref,
-  toRefs,
-  watch,
-  computed,
-  onMounted,
-  nextTick,
-  reactive,
-} from "vue";
+import { TPrizeItem } from "./type";
+import { ref, watch, computed, onMounted, reactive } from "vue";
 import { createComponent } from "../../utils/create";
 const { componentName, create } = createComponent("turntable");
 
@@ -64,6 +55,7 @@ export default create({
     },
     prizeList: {
       required: true,
+      default: () => [],
     },
     prizeIndex: {
       type: Number,
@@ -109,15 +101,12 @@ export default create({
   },
   emits: ["click", "start-turns", "end-turns"],
   setup(props, { emit }) {
-    let {
-      width,
-      height,
-      prizeList,
-      turnsNumber,
-      styleOpt,
-      turnsTime,
-      pointerStyle,
-    } = reactive(props);
+    const envApp = ref("WEB");
+
+    const { width, height, turnsNumber, styleOpt, turnsTime, pointerStyle } =
+      reactive(props);
+
+    let prizeList: TPrizeItem[] = reactive(props?.prizeList);
 
     const classes = computed(() => {
       const prefixCls = componentName;
@@ -125,50 +114,13 @@ export default create({
         [prefixCls]: true,
       };
     });
-    const getRandomColor = function () {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
-      return "rgb(" + r + "," + g + "," + b + ")";
-    };
-    onMounted(() => {
-      envApp.value = Taro.getEnv();
-      setTimeout(() => {
-        init();
-        // initWeapp();
-        // const context:any = Taro.createCanvasContext('canvasWx');
-        // const angle = (Math.PI * 2) / 6; // 每个奖项所占角度数
-        // for (var i = 0; i < 6; i++) {
-        //   var startAngle = i * angle;
-        //   var endAngle = (i + 1) * angle;
-        //   context.beginPath();
-        //   context.moveTo(150, 150);
-        //   context.arc(150, 150, 150, startAngle, endAngle, false);
-        //   /*随机颜色*/
-        //   context.fillStyle = getRandomColor();
-        //   // context.setFillStyle('blue')
-        //   context.fill();
-        // }
-        // context.draw()
-      }, 800);
-    });
+    // const getRandomColor = function () {
+    //   const r = Math.floor(Math.random() * 256);
+    //   const g = Math.floor(Math.random() * 256);
+    //   const b = Math.floor(Math.random() * 256);
+    //   return "rgb(" + r + "," + g + "," + b + ")";
+    // };
 
-    watch(
-      () => props.prizeList,
-      (list, prevList) => {
-        prizeList = list;
-        init();
-      }
-    );
-
-    watch(
-      () => props.prizeIndex,
-      (nIndex, prevIndex) => {
-        rotate(nIndex);
-      }
-    );
-
-    const envApp = ref("WEB");
     // 用来锁定转盘，避免同时多次点击转动
     const lock = ref(false);
     // 剩余抽奖次数
@@ -176,11 +128,11 @@ export default create({
     // 开始转动的角度
     const startRotateDegree = ref(0);
     // 设置指针默认指向的位置,现在是默认指向2个扇形之间的边线上
-    const rotateAngle = ref<string | number>(0);
+    const rotateAngle = ref<string>("0");
     const rotateTransition = ref("");
 
-    const turntableDom: any = ref(null);
-    const canvasDom: any = ref(null);
+    const turntableDom = ref(null);
+    const canvasDom = ref(null);
     const rorateDeg = ref(360 / prizeList.length);
 
     // 根据index计算每一格要旋转的角度的样式
@@ -194,16 +146,16 @@ export default create({
     const init = () => {
       const data = styleOpt;
       const prizeNum = prizeList.length;
-      const { prizeBgColors, borderColor } = data;
+      const { prizeBgColors } = data;
       // 开始绘画
-      const canvas = canvasDom.value;
-      const luckdraw = turntableDom.value;
+      // const canvas = canvasDom.value;
+      // const luckdraw = turntableDom.value;
       // const ctx = canvas.getContext('2d');
-      const ctx: any = Taro.createCanvasContext("canvasWx");
+      const ctx = Taro.createCanvasContext("canvasWx");
       // const canvasW = (canvas.width = luckdraw.clientWidth); // 画板的高度
       // const canvasH = (canvas.height = luckdraw.clientHeight); // 画板的宽度
-      const canvasW = width.replace(/px/g, ""); // 画板的高度
-      const canvasH = height.replace(/px/g, ""); // 画板的宽度
+      const canvasW = Number(width.replace(/px/g, "")); // 画板的高度
+      const canvasH = Number(height.replace(/px/g, "")); // 画板的宽度
       if (envApp.value == "WEAPP") {
         // translate方法重新映射画布上的 (0,0) 位置
         ctx.translate(0, canvasH);
@@ -221,33 +173,20 @@ export default create({
         const startAngle = index * baseAngle;
         const endAngle = (index + 1) * baseAngle;
         ctx.beginPath();
-        if (envApp.value == "WEAPP") {
-          ctx.moveTo(canvasW / 2, canvasH / 2);
-          ctx.arc(
-            canvasW / 2,
-            canvasH / 2,
-            canvasH / 2,
-            startAngle,
-            endAngle,
-            false
-          );
-        } else {
-          ctx.moveTo(canvasW / 2, canvasH / 4);
-          ctx.arc(
-            canvasW / 2,
-            canvasH / 4,
-            canvasH / 4,
-            startAngle,
-            endAngle,
-            false
-          );
-        }
+        ctx.moveTo(canvasW / 2, canvasH / 2);
+        ctx.arc(
+          canvasW / 2,
+          canvasH / 2,
+          canvasH / 2,
+          startAngle,
+          endAngle,
+          false
+        );
         /*随机颜色*/
         if (prizeList[index]["prizeColor"]) {
           ctx.fillStyle = prizeList[index]["prizeColor"]; //设置每个扇形区域的颜色,根据每条数据中单独设置的优先
         } else {
           ctx.fillStyle = prizeBgColors[index]; //设置每个扇形区域的颜色
-          // ctx.fillStyle = getRandomColor(); //设置每个扇形区域的颜色
         }
         ctx.fill();
       }
@@ -298,6 +237,42 @@ export default create({
         lock.value = false;
       }, turnsTimeNum * 1000 + 500);
     };
+
+    watch(
+      () => props.prizeList,
+      (list) => {
+        prizeList = list;
+        init();
+      }
+    );
+
+    watch(
+      () => props.prizeIndex,
+      (nIndex) => {
+        rotate(nIndex);
+      }
+    );
+
+    onMounted(() => {
+      envApp.value = Taro.getEnv();
+      setTimeout(() => {
+        init();
+        // const context:any = Taro.createCanvasContext('canvasWx');
+        // const angle = (Math.PI * 2) / 6; // 每个奖项所占角度数
+        // for (var i = 0; i < 6; i++) {
+        //   var startAngle = i * angle;
+        //   var endAngle = (i + 1) * angle;
+        //   context.beginPath();
+        //   context.moveTo(150, 150);
+        //   context.arc(150, 150, 150, startAngle, endAngle, false);
+        //   /*随机颜色*/
+        //   context.fillStyle = getRandomColor();
+        //   // context.setFillStyle('blue')
+        //   context.fill();
+        // }
+        // context.draw()
+      }, 800);
+    });
 
     return {
       classes,
