@@ -1,5 +1,5 @@
 export type TPrizeItem = {
-  id: string;
+  id: string | number;
   prizeName: string;
   prizeColor: string;
   prizeImg: string;

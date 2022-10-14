@@ -1,6 +1,6 @@
 {
   "name": "@nutui/nutui-bingo-taro",
-  "version": "1.0.0-beat.0",
+  "version": "1.0.0-beta.2",
   "description": "nutui生态之一抽奖组件库",
   "main": "dist/nutbig.umd.js",
   "module": "dist/nutbig.es.js",

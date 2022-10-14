@@ -86,6 +86,10 @@ export default create({
       // 转动需要持续的时间(秒)
       default: 5,
     },
+    lockTime: {
+      // 抽奖间隔(秒)
+      default: 0,
+    },
     pointerStyle: {
       default: () => {
         return {
@@ -99,12 +103,19 @@ export default create({
       },
     },
   },
-  emits: ["click", "start-turns", "end-turns"],
+  emits: ["click", "start-turns", "end-turns", "lock-turns"],
   setup(props, { emit }) {
     const envApp = ref("WEB");
 
-    const { width, height, turnsNumber, styleOpt, turnsTime, pointerStyle } =
-      reactive(props);
+    const {
+      width,
+      height,
+      turnsNumber,
+      styleOpt,
+      turnsTime,
+      pointerStyle,
+      lockTime,
+    } = reactive(props);
 
     let prizeList: TPrizeItem[] = reactive(props?.prizeList);
 
@@ -123,8 +134,10 @@ export default create({
 
     // 用来锁定转盘，避免同时多次点击转动
     const lock = ref(false);
+    // 是否正在转动
+    const rorating = ref(false);
     // 剩余抽奖次数
-    const num = ref(5);
+    // const num = ref(5);
     // 开始转动的角度
     const startRotateDegree = ref(0);
     // 设置指针默认指向的位置,现在是默认指向2个扇形之间的边线上
@@ -195,11 +208,13 @@ export default create({
 
     // 判断是否可以转动
     const canBeRotated = () => {
-      if (num.value <= 0) {
-        // alert('已经没有次数了,继续加油赚积分吧！');
-        return false;
-      }
+      // if (num.value <= 0) {
+      //   return false;
+      // }
       if (lock.value) {
+        if (!rorating.value) {
+          emit("lock-turns");
+        }
         return false;
       }
       return true;
@@ -209,18 +224,14 @@ export default create({
       if (!canBeRotated()) {
         return false;
       }
-      // 开始转动
-      // 先上锁
-      lock.value = true;
-      // 设置在哪里停下，应该与后台交互，这里随机抽取0~5 ,这里应该是后台返回的中奖信息,现在是测试
-      // const index = Math.floor(Math.random() * prizeList.length);
-      // 成功后次数减少一次
-      // num.value--;
-      // prizeIndex = index;
       emit("start-turns");
-      // rotate(prizeIndex);
     };
     // 转动起来
+    const changeLock = () => {
+      setTimeout(() => {
+        lock.value = false;
+      }, lockTime * 1000);
+    };
     const rotate = (index: number) => {
       const turnsTimeNum = turnsTime;
       const rotateAngleValue =
@@ -234,8 +245,19 @@ export default create({
       rotateTransition.value = `transform ${turnsTimeNum}s cubic-bezier(0.250, 0.460, 0.455, 0.995)`;
       setTimeout(() => {
         emit("end-turns");
-        lock.value = false;
+        rorating.value = false;
+        changeLock();
       }, turnsTimeNum * 1000 + 500);
+    };
+
+    const rotateTurn = () => {
+      // 开始转动
+      // 先上锁
+      lock.value = true;
+      rorating.value = true;
+      setTimeout(() => {
+        rotate(props.prizeIndex);
+      }, 300);
     };
 
     watch(
@@ -246,31 +268,17 @@ export default create({
       }
     );
 
-    watch(
-      () => props.prizeIndex,
-      (nIndex) => {
-        rotate(nIndex);
-      }
-    );
+    // watch(
+    //   () => props.prizeIndex,
+    //   (nIndex) => {
+    //     rotate(nIndex);
+    //   }
+    // );
 
     onMounted(() => {
       envApp.value = Taro.getEnv();
       setTimeout(() => {
         init();
-        // const context:any = Taro.createCanvasContext('canvasWx');
-        // const angle = (Math.PI * 2) / 6; // 每个奖项所占角度数
-        // for (var i = 0; i < 6; i++) {
-        //   var startAngle = i * angle;
-        //   var endAngle = (i + 1) * angle;
-        //   context.beginPath();
-        //   context.moveTo(150, 150);
-        //   context.arc(150, 150, 150, startAngle, endAngle, false);
-        //   /*随机颜色*/
-        //   context.fillStyle = getRandomColor();
-        //   // context.setFillStyle('blue')
-        //   context.fill();
-        // }
-        // context.draw()
       }, 800);
     });
 
@@ -285,6 +293,7 @@ export default create({
       rotateTransition,
       pointerStyle,
       startTurns,
+      rotateTurn,
     };
   },
 });
