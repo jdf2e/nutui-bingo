@@ -1,3 +1,11 @@
+## v1.0.6
+
+`2022-10-17`
+
+- :zap: feat(TurnTable): 新增抽奖的间隔时间 @Ymm0008
+- :zap: feat(TurnTable): 新增禁止抽奖时回调函数 @Ymm0008
+- :zap: feat(TurnTable): 新增滚动触发函数 @Ymm0008
+
 ## v1.0.5
 
 `2022-07-12`
