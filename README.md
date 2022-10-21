@@ -2,32 +2,31 @@
 
 ## 特性
 
-- 使用 Vue3 语法，支持 H5
-- 支持按需引用
+- 使用 Vue3 语法
+- 支持 H5 和小程序
 - 详尽的文档和示例
 - 支持 TypeScript
-- 组件适配小程序（已适配：）
 
 ## 组件
 
-- 幸运大转盘(:computer: :iphone:)
-- 跑马灯
-- 九宫格
-- 开心刮刮乐
-- 神秘大礼盒
-- 砸金蛋
-- 老虎机
-- 摇好运
-- 红包雨
-- 娃娃机
-- 你藏我猜
-- 摇骰子
+- 幸运大转盘 :computer: :iphone:
+- 跑马灯 :computer: :iphone:
+- 九宫格 :computer: :iphone:
+- 开心刮刮乐 :computer:
+- 神秘大礼盒 :computer: :iphone:
+- 砸金蛋 :computer: :iphone:
+- 老虎机 :computer: :iphone:
+- 摇好运 :computer:
+- 红包雨 :computer: :iphone:
+- 娃娃机 :computer:
+- 你藏我猜 :computer: :iphone:
+- 摇骰子 :computer: :iphone:
 
 ## 支持环境
 
 - Android 5.0+
 - iOS 9.2+
-- 目前主要适用于 H5 场景
+- 主要适用于 H5 和小程序
 
 ## 构建版本
 
