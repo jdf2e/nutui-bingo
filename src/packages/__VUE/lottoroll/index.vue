@@ -28,23 +28,15 @@
 </template>
 
 <script lang="ts">
-import {
-  reactive,
-  toRefs,
-  ref,
-  onMounted,
-  onUnmounted,
-  nextTick,
-  watch,
-  computed,
-} from "vue";
+import { ref, watch, PropType } from "vue";
 import { createComponent } from "../../utils/create";
+import { TPrizeItem, TOptionsItem } from "./type";
 const { create } = createComponent("lotto-roll");
 
 export default create({
   props: {
     prizeList: {
-      type: Array,
+      type: Array as PropType<TPrizeItem[]>,
       default: () => [],
     },
     turnsTime: {
@@ -65,74 +57,28 @@ export default create({
     const prize = ref(props.prizeIndex);
     watch(
       () => props.prizeIndex,
-      (val, prevVal) => {
+      (val) => {
         prize.value = val;
       }
     );
-
+    const _window: any = window;
     // https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame
-    const animationFun: any =
-      window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.msRequestAnimationFrame ||
-      window.oRequestAnimationFrame ||
-      function (cb) {
-        window.setTimeout(cb, 1000 / 60);
+    const animationFun =
+      _window.requestAnimationFrame ||
+      _window.webkitRequestAnimationFrame ||
+      _window.mozRequestAnimationFrame ||
+      _window.msRequestAnimationFrame ||
+      _window.oRequestAnimationFrame ||
+      function (cb: Function) {
+        _window.setTimeout(cb, 1000 / 60);
       };
 
-    const list = props.prizeList; // 奖品列表
-    const options = ref(null); // 可视区域每列展示的奖品数
-    const startTime = ref(null);
+    const list: TPrizeItem[] = props.prizeList; // 奖品列表
+    const options = ref<Array<TOptionsItem> | null>(); // 可视区域每列展示的奖品数
+    const startTime = ref<number | null>(null);
     const lock = ref(false); //上锁
 
-    const start = () => {
-      if (lock.value) {
-        return false;
-      }
-      setTimeout(() => {
-        startRoll();
-      }, 300);
-    };
-
-    const startRoll = () => {
-      emit("start-turns");
-      lock.value = true;
-      if (options.value) {
-        // 增加动画过程中，再次点击开始，立即结束动画，且置为对应中位置
-        options.value.forEach((item) => {
-          item.isFinished = true;
-          const v = -item.location;
-          item.el.style.transform = "translateY(" + v + "px)";
-        });
-        return;
-      }
-      options.value = Array.from(
-        document.getElementsByClassName("lotto-roll-wrap")
-      ).map((data, i) => {
-        const dom = document.getElementsByClassName("lotto-roll-wrap")[i];
-        const itemHeight =
-          document.getElementsByClassName("lotto-item")[0].offsetHeight;
-        let prizeIdx = prize.value; // 中奖编号
-        if (prizeIdx < 0) {
-          prizeIdx = Math.floor(Math.random() * list.length);
-        }
-        // const prizeIndex = Math.floor(Math.random() * list.length); // 随机生成整数，测试用
-        const opts = {
-          el: dom.querySelector(".lotto-wrap"), //指向奖项元素的父级
-          location: prizeIdx * itemHeight, // 奖品滚动到指定的位置
-          rollTimes:
-            2000 + Math.random() * 500 + i * 500 + 1000 * props.turnsNumber, // 转圈数
-          height: list.length * itemHeight, // 总的高度
-          duration: 6000 + i * 2000 + props.turnsTime, // 动画时间，毫秒数
-          isFinished: false,
-        };
-        return opts;
-      });
-      animationFun(animate);
-    };
-
-    const animate = (timestamp) => {
+    const animate = (timestamp: number) => {
       if (!options.value) {
         return false;
       }
@@ -141,7 +87,7 @@ export default create({
         startTime.value = timestamp; // 动画初始时间
       }
       const timeDiff = timestamp - startTime.value; //动画持续的时间
-      options.value.forEach((item) => {
+      options.value.forEach((item: TOptionsItem) => {
         if (item.isFinished) {
           return;
         }
@@ -164,7 +110,7 @@ export default create({
           item.isFinished = true;
         }
       });
-      if (options.value.every((m) => m.isFinished)) {
+      if (options.value.every((m: TOptionsItem) => m.isFinished)) {
         emit("end-turns");
         lock.value = false;
         options.value = null;
@@ -172,6 +118,53 @@ export default create({
       } else {
         animationFun(animate);
       }
+    };
+    const startRoll = () => {
+      emit("start-turns");
+      if (options.value) {
+        // 增加动画过程中，再次点击开始，立即结束动画，且置为对应中位置
+        options.value.forEach((item: TOptionsItem) => {
+          item.isFinished = true;
+          const v = -(item.location as number);
+          item.el.style.transform = "translateY(" + v + "px)";
+        });
+        return;
+      }
+      const _options = Array.from(
+        document.getElementsByClassName("lotto-roll-wrap")
+      ).map((data, i) => {
+        const dom = document.getElementsByClassName("lotto-roll-wrap")[i];
+        const itemHeight = (
+          document.getElementsByClassName("lotto-item")[0] as HTMLElement
+        ).offsetHeight;
+        let prizeIdx = prize.value; // 中奖编号
+        if (prizeIdx < 0) {
+          prizeIdx = Math.floor(Math.random() * list.length);
+        }
+        // const prizeIndex = Math.floor(Math.random() * list.length); // 随机生成整数，测试用
+        const opts = {
+          el: dom.querySelector(".lotto-wrap"), //指向奖项元素的父级
+          location: prizeIdx * itemHeight, // 奖品滚动到指定的位置
+          rollTimes:
+            2000 + Math.random() * 500 + i * 500 + 1000 * props.turnsNumber, // 转圈数
+          height: list.length * itemHeight, // 总的高度
+          duration: 6000 + i * 2000 + props.turnsTime, // 动画时间，毫秒数
+          isFinished: false,
+        };
+        return opts;
+      });
+      options.value = _options as TOptionsItem[];
+      animationFun(animate);
+    };
+
+    const start = () => {
+      if (lock.value) {
+        return false;
+      }
+      lock.value = true;
+      setTimeout(() => {
+        startRoll();
+      }, 300);
     };
 
     return {

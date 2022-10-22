@@ -31,7 +31,8 @@
 </template>
 
 <script lang="ts">
-import { computed, onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, PropType } from "vue";
+import { TPrizeItem, TOptionsItem } from "./type";
 import Taro, {
   eventCenter,
   getCurrentInstance as getCurrentInstanceTaro,
@@ -42,12 +43,12 @@ const { create } = createComponent("lotto-roll");
 export default create({
   props: {
     prizeList: {
-      type: Array,
+      type: Array as PropType<TPrizeItem[]>,
       default: () => [],
     },
     turnsTime: {
       type: Number,
-      default: 19990,
+      default: 0,
     },
     turnsNumber: {
       type: Number,
@@ -63,19 +64,20 @@ export default create({
     const prize = ref(props.prizeIndex);
     watch(
       () => props.prizeIndex,
-      (val, prevVal) => {
+      (val) => {
         prize.value = val;
       }
     );
 
+    const _window: any = window;
     // https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame
-    const animationFun: any =
-      window.requestAnimationFrame ||
-      (window as any).webkitRequestAnimationFrame ||
-      (window as any).mozRequestAnimationFrame ||
-      (window as any).msRequestAnimationFrame ||
-      (window as any).oRequestAnimationFrame ||
-      function (cb) {
+    const animationFun =
+      _window.requestAnimationFrame ||
+      _window.webkitRequestAnimationFrame ||
+      _window.mozRequestAnimationFrame ||
+      _window.msRequestAnimationFrame ||
+      _window.oRequestAnimationFrame ||
+      function (cb: Function) {
         window.setTimeout(cb, 1000 / 60);
       };
 
@@ -84,7 +86,7 @@ export default create({
     const startTime = ref();
     const lock = ref(false); //上锁
 
-    const lottoRollWrap: any = ref();
+    const lottoRollWrap = ref();
     const lottoWrap = ref();
     onMounted(() => {
       eventCenter.once((getCurrentInstanceTaro() as any).router.onReady, () => {
@@ -98,7 +100,7 @@ export default create({
       });
     });
 
-    const distanceObj = ref<any>([]);
+    const distanceObj = ref<Array<number>>([]);
 
     const animateRun = (timestamp: number) => {
       // const timestamp = 0;
@@ -139,7 +141,7 @@ export default create({
           item.isFinished = true;
         }
       });
-      if (options.value.every((m) => m.isFinished)) {
+      if (options.value.every((m: TOptionsItem) => m.isFinished)) {
         emit("end-turns");
         lock.value = false;
         options.value = null;
@@ -151,10 +153,9 @@ export default create({
 
     const startRoll = () => {
       emit("start-turns");
-      lock.value = true;
       if (options.value) {
         // 增加动画过程中，再次点击开始，立即结束动画，且置为对应中位置
-        options.value.forEach((item) => {
+        options.value.forEach((item: TOptionsItem) => {
           item.isFinished = true;
           const v = -item.location;
           item.el.style.transform = "translateY(" + v + "px)";
@@ -188,6 +189,7 @@ export default create({
       if (lock.value) {
         return false;
       }
+      lock.value = true;
       setTimeout(() => {
         startRoll();
       }, 300);

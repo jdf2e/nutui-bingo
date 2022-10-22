@@ -27,15 +27,7 @@
   </view>
 </template>
 <script lang="ts">
-import {
-  ref,
-  watch,
-  computed,
-  onMounted,
-  reactive,
-  PropType,
-  watchEffect,
-} from "vue";
+import { ref, watch, computed, onMounted, reactive, PropType } from "vue";
 import { TPrizeItem } from "./type";
 import { createComponent } from "../../utils/create";
 const { componentName, create } = createComponent("turntable");
