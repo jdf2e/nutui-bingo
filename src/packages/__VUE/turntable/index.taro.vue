@@ -13,7 +13,7 @@
         :class="envApp == 'WEAPP' ? '' : 'mlcanvas'"
         canvas-id="canvasWx"
         ref="canvasDom"
-        :style="envApp == 'WEAPP' ? '' : getRotateAngle(0)"
+        :style="envApp == 'WEAPP' ? '' : getRotateAngle(0, 'canvas')"
       >
       </canvas>
       <!-- <canvas id="canvasWx" canvas-id="canvasWx" ref="canvasDom" type="2d" :style="getRotateAngle(0)">
@@ -146,13 +146,20 @@ export default create({
 
     const turntableDom = ref(null);
     const canvasDom = ref(null);
+    const canvasDomEle = ref();
     const rorateDeg = ref(360 / prizeList.length);
 
     // 根据index计算每一格要旋转的角度的样式
-    const getRotateAngle = (index: number) => {
+    const getRotateAngle = (index: number, flag?: string) => {
       const angle = (360 / prizeList.length) * index + 180 / prizeList.length;
       return {
-        transform: `rotate(${angle}deg)`,
+        transform: `rotate(${angle}deg)${
+          flag == "canvas" &&
+          canvasDomEle.value?.tagName === "CANVAS" &&
+          envApp.value == "WEB"
+            ? " scale(2)"
+            : ""
+        }`,
       };
     };
     // 初始化圆形转盘canvas
@@ -165,10 +172,13 @@ export default create({
       // const luckdraw = turntableDom.value;
       // const ctx = canvas.getContext('2d');
       const ctx = Taro.createCanvasContext("canvasWx");
+
       // const canvasW = (canvas.width = luckdraw.clientWidth); // 画板的高度
       // const canvasH = (canvas.height = luckdraw.clientHeight); // 画板的宽度
       const canvasW = Number(width.replace(/px/g, "")); // 画板的高度
-      const canvasH = Number(height.replace(/px/g, "")); // 画板的宽度
+      const canvasH =
+        Number(height.replace(/px/g, "")) / (envApp.value == "WEAPP" ? 1 : 2); // 画板的宽度
+
       if (envApp.value == "WEAPP") {
         // translate方法重新映射画布上的 (0,0) 位置
         ctx.translate(0, canvasH);
@@ -278,6 +288,9 @@ export default create({
     onMounted(() => {
       envApp.value = Taro.getEnv();
       setTimeout(() => {
+        const canvasDom: HTMLElement | null =
+          document.getElementById("canvasWx");
+        canvasDomEle.value = canvasDom;
         init();
       }, 800);
     });

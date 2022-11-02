@@ -47,9 +47,13 @@
       width: 100%;
       height: 100%;
     }
-    // .mlcanvas {
-    //   margin-left: -50%;
-    // }
+    .mlcanvas {
+      height: 50% !important;
+      margin-top: 25%;
+      canvas {
+        transform: scale(2);
+      }
+    }
   }
   .prize {
     position: absolute;
