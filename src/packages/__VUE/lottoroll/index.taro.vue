@@ -66,6 +66,10 @@ export default create({
       () => props.prizeIndex,
       (val) => {
         prize.value = val;
+      },
+      {
+        immediate: true,
+        deep: true,
       }
     );
 
@@ -81,7 +85,17 @@ export default create({
         window.setTimeout(cb, 1000 / 60);
       };
 
-    const list = ref(props.prizeList); // 奖品列表
+    const list = ref<TPrizeItem[]>([]); // 奖品列表
+    watch(
+      () => props.prizeList,
+      (val) => {
+        list.value = val;
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
     const options = ref(); // 可视区域每列展示的奖品数
     const startTime = ref();
     const lock = ref(false); //上锁

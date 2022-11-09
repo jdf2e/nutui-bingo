@@ -122,7 +122,7 @@ export default {
       turntable.value.rotateTurn();
     };
     const endTurns = () => {
-      alert("中奖了");
+      console.log("中奖了");
     };
     return {
       turntable,

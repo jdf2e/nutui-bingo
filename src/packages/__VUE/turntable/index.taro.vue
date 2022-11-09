@@ -1,9 +1,5 @@
 <template>
-  <view
-    :class="classes"
-    ref="turntableDom"
-    :style="{ width: width, height: height }"
-  >
+  <view :class="classes" ref="turntableDom" :style="{ width, height }">
     <view
       class="turntable"
       :style="{ transform: rotateAngle, transition: rotateTransition }"
@@ -173,11 +169,12 @@ export default create({
       // const ctx = canvas.getContext('2d');
       const ctx = Taro.createCanvasContext("canvasWx");
 
-      // const canvasW = (canvas.width = luckdraw.clientWidth); // 画板的高度
-      // const canvasH = (canvas.height = luckdraw.clientHeight); // 画板的宽度
-      const canvasW = Number(width.replace(/px/g, "")); // 画板的高度
-      const canvasH =
-        Number(height.replace(/px/g, "")) / (envApp.value == "WEAPP" ? 1 : 2); // 画板的宽度
+      // const canvasW = Number(width.replace(/px/g, "")); // 画板的高度
+      // const canvasH =
+      //   Number(height.replace(/px/g, "")) / (envApp.value == "WEAPP" ? 1 : 2); // 画板的宽度
+      const canvasW = parseFloat(width); // 画板的高度
+      const radis = envApp.value == "WEAPP" ? 1 : 2;
+      const canvasH = parseFloat(height) / radis;
 
       if (envApp.value == "WEAPP") {
         // translate方法重新映射画布上的 (0,0) 位置

@@ -38,7 +38,7 @@ export default createDemo({
   props: {},
   setup() {
     const opencard = () => {
-      alert("刮开事件完成");
+      console.log("刮开事件完成");
     };
     return { opencard };
   },

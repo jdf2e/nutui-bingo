@@ -61,6 +61,18 @@ export default create({
         prize.value = val;
       }
     );
+
+    const list = ref<TPrizeItem[]>([]); // 奖品列表
+    watch(
+      () => props.prizeList,
+      (val) => {
+        list.value = val;
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
     const _window: any = window;
     // https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame
     const animationFun =
@@ -73,7 +85,6 @@ export default create({
         _window.setTimeout(cb, 1000 / 60);
       };
 
-    const list: TPrizeItem[] = props.prizeList; // 奖品列表
     const options = ref<Array<TOptionsItem> | null>(); // 可视区域每列展示的奖品数
     const startTime = ref<number | null>(null);
     const lock = ref(false); //上锁
@@ -139,7 +150,7 @@ export default create({
         ).offsetHeight;
         let prizeIdx = prize.value; // 中奖编号
         if (prizeIdx < 0) {
-          prizeIdx = Math.floor(Math.random() * list.length);
+          prizeIdx = Math.floor(Math.random() * list.value.length);
         }
         // const prizeIndex = Math.floor(Math.random() * list.length); // 随机生成整数，测试用
         const opts = {
@@ -147,7 +158,7 @@ export default create({
           location: prizeIdx * itemHeight, // 奖品滚动到指定的位置
           rollTimes:
             2000 + Math.random() * 500 + i * 500 + 1000 * props.turnsNumber, // 转圈数
-          height: list.length * itemHeight, // 总的高度
+          height: list.value.length * itemHeight, // 总的高度
           duration: 6000 + i * 2000 + props.turnsTime, // 动画时间，毫秒数
           isFinished: false,
         };
