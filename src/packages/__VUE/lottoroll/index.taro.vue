@@ -102,19 +102,32 @@ export default create({
 
     const lottoRollWrap = ref();
     const lottoWrap = ref();
-    onMounted(() => {
-      eventCenter.once((getCurrentInstanceTaro() as any).router.onReady, () => {
-        const query = Taro.createSelectorQuery();
-        query.selectAll(".lotto-roll-wrap").boundingClientRect();
-        query.selectAll(".lotto-wrap").boundingClientRect();
-        query.exec((res) => {
-          lottoRollWrap.value = res[0];
-          lottoWrap.value = res[1];
-        });
+
+    const getLottoRollDom = () => {
+      const query = Taro.createSelectorQuery();
+      query.selectAll(".lotto-roll-wrap").boundingClientRect();
+      query.selectAll(".lotto-wrap").boundingClientRect();
+      query.exec((res) => {
+        lottoRollWrap.value = res[0];
+        lottoWrap.value = res[1];
       });
+    };
+    onMounted(() => {
+      if (Taro.getEnv() == "WEAPP") {
+        eventCenter.once(
+          (getCurrentInstanceTaro() as any).router.onReady,
+          () => {
+            getLottoRollDom();
+          }
+        );
+      } else {
+        Taro.nextTick(() => {
+          getLottoRollDom();
+        });
+      }
     });
 
-    const distanceObj = ref<Array<number>>([]);
+    const distanceObj: any = ref([]);
 
     const animateRun = (timestamp: number) => {
       // const timestamp = 0;
