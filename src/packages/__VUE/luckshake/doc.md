@@ -11,7 +11,7 @@ import { createApp } from "vue";
 // vue
 import { Luckshake } from "@nutui/nutui-bingo";
 // taro
-// 暂不支持
+import { Luckshake } from "@nutui/nutui-bingo-taro";
 
 const app = createApp();
 app.use(Luckshake);
