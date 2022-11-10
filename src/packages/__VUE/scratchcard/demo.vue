@@ -1,6 +1,6 @@
 <template>
   <div class="demo">
-    <h2>基本用法</h2>
+    <h2>基础用法</h2>
     <nutbig-scratch-card content="1000万"></nutbig-scratch-card>
     <h2>内容异步</h2>
     <nutbig-scratch-card :content="text"></nutbig-scratch-card>
@@ -21,11 +21,7 @@
       @open="opencard"
     ></nutbig-scratch-card>
     <h2>设置刮开比列</h2>
-    <nutbig-scratch-card
-      content="1000万"
-      @open="opencard"
-      ratio="0.2"
-    ></nutbig-scratch-card>
+    <nutbig-scratch-card content="1000万" ratio="0.2"></nutbig-scratch-card>
     <p></p>
   </div>
 </template>
@@ -37,10 +33,19 @@ const { createDemo } = createComponent("scratch-card");
 export default createDemo({
   props: {},
   setup() {
+    const text = ref("");
+    const coverImage = ref(
+      "https://img14.360buyimg.com/imagetools/jfs/t1/140506/27/29839/718209/6325a027E7fef5e2c/ef47045e8c4faaa9.png"
+    );
     const opencard = () => {
       console.log("刮开事件完成");
     };
-    return { opencard };
+    onMounted(() => {
+      setTimeout(() => {
+        text.value = "测试";
+      }, 2000);
+    });
+    return { opencard, text, coverImage };
   },
 });
 </script>

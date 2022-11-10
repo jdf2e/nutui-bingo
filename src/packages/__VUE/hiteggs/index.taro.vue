@@ -1,12 +1,17 @@
 <template>
   <div :class="classes">
-    <div v-for="(item, index) in num" :key="index" class="nut-eggs-item" :style="{width:width,height:height}">
+    <div
+      v-for="(item, index) in num"
+      :key="index"
+      class="nut-eggs-item"
+      :style="{ width: width, height: height }"
+    >
       <img
         class="intactImg"
         :src="intactImg"
         alt=""
         @click="hitEggs(index)"
-       v-if="!(arr.indexOf(index) > -1)" 
+        v-if="!(arr.indexOf(index) > -1)"
       />
       <img
         v-if="arr.indexOf(index) > -1"
@@ -25,10 +30,10 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, reactive, ref, toRefs } from "vue";
+import { computed, reactive, ref } from "vue";
 import { createComponent } from "../../utils/create";
-const { componentName, create } = createComponent("luckeggs");
-interface propsType {
+const { componentName, create } = createComponent("hiteggs");
+interface PropsType {
   num: number;
   intactImg: string;
   hammer: string;
@@ -57,18 +62,20 @@ export default create({
       default:
         "//img13.360buyimg.com/imagetools/jfs/t1/219949/29/1870/75442/61776f7aE5d1a8e07/a8de5321e4e8071e.png",
     },
-    width:{
-      type:String,
-      default:'80px'
+    width: {
+      type: String,
+      default: "80px",
     },
-    height:{
-      type:String,
-      default:'80px'
-    }
+    height: {
+      type: String,
+      default: "80px",
+    },
   },
   emits: ["click"],
 
-  setup(props:propsType, { emit }) {
+  setup(props, { emit }) {
+    console.log(333);
+
     const hitIndex = ref();
     const hitClick = ref(false);
     const arr = reactive<any>([]);
@@ -86,7 +93,7 @@ export default create({
         arr.push(index);
         hitIndex.value = props.num + 1;
         hitClick.value = false;
-         emit('click');
+        emit("click");
       }, 1500);
     };
 

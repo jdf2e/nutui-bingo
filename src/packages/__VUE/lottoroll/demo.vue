@@ -11,12 +11,10 @@
       >
       </nutbig-lotto-roll>
       <div class="btnBtn">
-        <nut-button type="danger" @click="startRole" :disabled="startFlag"
-          >中奖（测试）</nut-button
-        >
-        <nut-button type="danger" @click="startRole2" :disabled="startFlag"
-          >不中奖（测试）</nut-button
-        >
+        <button @click="startRole" :disabled="startFlag">中奖（测试）</button>
+        <button @click="startRole2" :disabled="startFlag">
+          不中奖（测试）
+        </button>
       </div>
     </div>
   </div>
@@ -114,7 +112,7 @@ h2 {
 .btnBtn {
   text-align: center;
 }
-.nut-button {
+button {
   margin-top: 20px;
 }
 .disabledClick {

@@ -1,0 +1,110 @@
+.online-part {
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+  border: 1px solid #eee;
+  border-top: 0px;
+  width: 100%;
+  height: 35px;
+  .list {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border-top: 1px dashed #eee;
+    border-right: 1px solid #eee;
+    position: relative;
+    &:last-child {
+      border-right: 0px;
+      border-left: 0px;
+    }
+    &:hover {
+      background-color: #eee;
+      cursor: pointer;
+      & .online-tips {
+        display: block;
+      }
+    }
+    .online-icon {
+      width: 20px;
+      height: 20px;
+    }
+    .online-tips {
+      display: none;
+      position: absolute;
+      top: 0px;
+      left: 53%;
+      padding: 2px 6px;
+      background-color: #333;
+      color: #fff;
+      font-size: 12px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-top-left-radius: 10px;
+    }
+  }
+}
+.online-code {
+  position: relative;
+  .expand {
+    display: none;
+    &.fixed {
+      position: absolute;
+      top: 8px;
+      right: 28px;
+      z-index: 1;
+    }
+    .icon-expand,
+    .icon-unexpand {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    .icon-expand {
+      display: none;
+    }
+    .icon-unexpand {
+      display: block;
+    }
+  }
+  .language-html {
+    max-height: none;
+  }
+  /* 滚动条 */
+  &.win {
+    .language-html {
+      &::-webkit-scrollbar {
+        /*滚动条整体样式*/
+        width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+      }
+      &::-webkit-scrollbar-thumb {
+        /*滚动条里面小方块*/
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        background: #888;
+      }
+      &::-webkit-scrollbar-track {
+        /*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        background: #ffffff;
+      }
+    }
+  }
+
+  &.scroll {
+    .language-html {
+      max-height: 400px;
+    }
+    .expand {
+      display: block;
+    }
+  }
+  &.isExpand {
+    .language-html {
+      max-height: none;
+    }
+  }
+}

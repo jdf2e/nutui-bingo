@@ -10,7 +10,7 @@
         @end-turns="endTurns"
       >
       </nutbig-guess-gift>
-      <nut-button type="primary" @click="gameStart">开始</nut-button>
+      <button type="primary" @click="gameStart">开始</button>
     </div>
   </div>
 </template>
@@ -49,7 +49,6 @@ export default createDemo({
 });
 </script>
 
-<style></style>
 <style lang="scss" scoped>
 #app .demo {
   padding: 57px 0 0 0;
@@ -63,7 +62,7 @@ export default createDemo({
 .show-demo {
   margin-top: 50px;
   padding: 10px;
-  .nut-button {
+  button {
     display: block;
     width: 100px;
     margin: 30px auto;

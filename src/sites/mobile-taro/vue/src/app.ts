@@ -1,11 +1,9 @@
-import { createApp } from 'vue';
-import './app.scss';
-import NutBig from '../../../../packages/nutbig.taro.vue';
-import NutUI from '@nutui/nutui';
-import '@nutui/nutui/dist/style.css';
+import { createApp } from "vue";
+import NutBig from "../../../../packages/nutbig.taro.vue";
+import "./app.scss";
 const App = createApp({
-  onShow(options) {}
+  onShow(options) {},
   // 入口组件不需要实现 render 方法，即使实现了也会被 taro 所覆盖
-}).use(NutBig).use(NutUI);
+}).use(NutBig);
 
 export default App;

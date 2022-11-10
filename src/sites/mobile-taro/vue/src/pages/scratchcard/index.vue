@@ -1,6 +1,6 @@
 <template>
   <div class="demo">
-    <h2>基本用法</h2>
+    <h2>基础用法</h2>
     <nutbig-scratch-card content="1000万"></nutbig-scratch-card>
     <h2>内容异步</h2>
     <nutbig-scratch-card :content="text"></nutbig-scratch-card>
@@ -11,9 +11,15 @@
       content="<em>1000<em><strong>元</strong>"
     ></nutbig-scratch-card>
     <h2>刮开层支持图片</h2>
-    <nutbig-scratch-card content="1000万" :coverImg="coverImage"></nutbig-scratch-card>
+    <nutbig-scratch-card
+      content="1000万"
+      :coverImg="coverImage"
+    ></nutbig-scratch-card>
     <h2>事件回调</h2>
-    <nutbig-scratch-card content="1000万" @open="opencard"></nutbig-scratch-card>
+    <nutbig-scratch-card
+      content="1000万"
+      @open="opencard"
+    ></nutbig-scratch-card>
     <h2>设置刮开比列</h2>
     <nutbig-scratch-card
       content="1000万"
@@ -29,10 +35,10 @@ export default {
   props: {},
   setup() {
     const opencard = () => {
-      console.log('刮开事件完成');
+      console.log("刮开事件完成");
     };
-    return {opencard };
-  }
+    return { opencard };
+  },
 };
 </script>
 

@@ -6,6 +6,7 @@ export default {
     "pages/squarenine/index",
     "pages/luckshake/index",
     "pages/giftbox/index",
+    "pages/hiteggs/index",
     "pages/lottoroll/index",
     "pages/guessgift/index",
     "pages/scratchcard/index",

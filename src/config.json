@@ -105,7 +105,7 @@
       "version": "1.0.0",
       "name": "ScratchCard",
       "taro": true,
-      "tarodoc": true,
+      "tarodoc": false,
       "sort": 1,
       "cName": "刮刮卡抽奖",
       "type": "component",
@@ -162,7 +162,7 @@
     {
       "name": "LuckShake",
       "taro": true,
-      "tarodoc": true,
+      "tarodoc": false,
       "sort": 1,
       "cName": "摇一摇",
       "type": "component",

@@ -17,7 +17,6 @@
 import { ref } from "vue";
 import { createComponent } from "../../utils/create";
 import { reactive } from "@vue/reactivity";
-import { Dialog } from "@nutui/nutui";
 const { createDemo } = createComponent("doll-machine");
 export default createDemo({
   props: {},

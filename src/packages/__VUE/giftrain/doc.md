@@ -8,48 +8,84 @@
 
 ```javascript
 import { createApp } from "vue";
+// vue
 import { GiftRain } from "@nutui/nutui-bingo";
+// taro
+import { GiftRain } from "@nutui/nutui-bingo-taro";
 
 const app = createApp();
 app.use(GiftRain);
 ```
 
-## 代码演示
-
 ### 基础用法
 
+:::demo
+
 ```html
-<nutbig-giftrain
-  ref="rain"
-  width="100%"
-  height="580px"
-  @gameOver="gameOver"
-  @start="start"
-  @click="click"
->
-</nutbig-giftrain>
-<div v-if="!isStart" class="start" @click="onStart">开始</div>
+<template>
+  <nutbig-giftrain
+    ref="rain"
+    width="100%"
+    height="580px"
+    @gameOver="gameOver"
+    @start="start"
+    @click="click"
+  >
+  </nutbig-giftrain>
+  <div v-if="!isStart" class="start" @click="onStart">开始</div>
+</template>
+<script>
+  import { ref } from "vue";
+  export default {
+    setup() {
+      const rain = ref();
+      const isStart = ref(false);
+      const gameOver = () => {
+        isStart.value = false;
+      };
+      const start = () => {
+        isStart.value = true;
+      };
+      const click = () => {
+        console.log("点击");
+      };
+      const onStart = () => {
+        rain.value.startRain();
+      };
+      return { gameOver, isStart, start, click, onStart, rain };
+    },
+  };
+</script>
+<style>
+  .nutbig-giftrain .nutbig-giftrain-content {
+    background: url("//img13.360buyimg.com/imagetools/jfs/t1/156139/35/24533/600373/61974f3eEf612507c/88df16bece0b202f.png")
+      no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+  }
+  .start {
+    width: 100px;
+    height: 30px;
+    background: linear-gradient(
+      135deg,
+      rgba(114, 60, 255, 1) 0%,
+      rgba(111, 58, 255, 1) 63.49938195167575%,
+      rgba(150, 110, 255, 1) 87.35307751528254%,
+      rgba(149, 117, 241, 1) 100%
+    );
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 1);
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+  }
+</style>
 ```
 
-```javascript
- setup() {
-    const rain = ref();
-    const isStart = ref(false)
-    const gameOver = () => {
-      isStart.value = false
-    };
-    const start=()=>{
-      isStart.value = true
-    }
-    const click=()=>{
-      console.log('点击');
-    }
-    const onStart = ()=>{
-      rain.value.startRain()
-    }
-    return { gameOver ,isStart,start,click,onStart,rain};
-  },
-```
+:::
 
 ## API
 

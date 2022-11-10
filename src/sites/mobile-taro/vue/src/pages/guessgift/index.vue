@@ -10,7 +10,7 @@
         @end-turns="endTurns"
       >
       </nutbig-guess-gift>
-      <nut-button type="primary" @click="gameStart">开始</nut-button>
+      <button @click="gameStart">开始</button>
     </div>
   </div>
 </template>
@@ -64,7 +64,7 @@ page view.h5-div.demo {
 .show-demo {
   margin-top: 50px;
   padding: 10px;
-  .nut-button {
+  button {
     display: block;
     width: 100px;
     margin: 30px auto 0;

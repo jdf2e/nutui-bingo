@@ -4,19 +4,10 @@
     <doc-nav></doc-nav>
     <div class="doc-content">
       <div class="doc-content-document">
-        <div class="doc-content-tabs" v-if="isShow() && isShowTaroDoc">
-          <div
-            class="tab-item"
-            :class="{ cur: curKey === item.key }"
-            v-for="item in tabs"
-            :key="item.key"
-            @click="handleTabs(item.key)"
-            >{{ item.text }}</div
-          >
-        </div>
-        <div class="doc-content-tabs" v-if="isShow() && !isShowTaroDoc">
-          <div class="tab-item cur">vue</div>
-          <!-- <div class="tab-item cur">vue/taro</div> -->
+        <div class="doc-content-tabs single">
+          <div class="tab-item cur">
+            {{ isShowTaroDoc ? "vue / taro" : "vue" }}
+          </div>
         </div>
         <router-view />
       </div>
@@ -25,48 +16,48 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, reactive, toRefs, computed } from 'vue';
-import { nav } from '@/config.json';
+import { defineComponent, onMounted, reactive, toRefs, computed } from "vue";
+import { nav } from "@/config.json";
 import {
   onBeforeRouteUpdate,
   RouteLocationNormalized,
   useRoute,
-  useRouter
-} from 'vue-router';
-import Header from '@/sites/doc/components/Header.vue';
-import Nav from '@/sites/doc/components/Nav.vue';
-import Footer from '@/sites/doc/components/Footer.vue';
-import DemoPreview from '@/sites/doc/components/DemoPreview.vue';
-import { RefData } from '@/sites/assets/util/ref';
+  useRouter,
+} from "vue-router";
+import Header from "@/sites/doc/components/Header.vue";
+import Nav from "@/sites/doc/components/Nav.vue";
+import Footer from "@/sites/doc/components/Footer.vue";
+import DemoPreview from "@/sites/doc/components/DemoPreview.vue";
+import { RefData } from "@/sites/assets/util/ref";
 export default defineComponent({
-  name: 'doc',
+  name: "doc",
   components: {
     [Header.name]: Header,
     [Nav.name]: Nav,
     [Footer.name]: Footer,
-    [DemoPreview.name]: DemoPreview
+    [DemoPreview.name]: DemoPreview,
   },
   setup() {
     const route = useRoute();
     const router = useRouter();
-    const excludeTaro = ['/intro', '/start', '/theme', '/joinus', '/starttaro'];
+    const excludeTaro = ["/intro", "/start", "/theme", "/joinus", "/starttaro"];
     const data = reactive({
-      demoUrl: 'demo.html',
-      curKey: 'vue',
+      demoUrl: "demo.html",
+      curKey: "vue",
       tabs: [
         {
-          key: 'vue',
-          text: 'vue'
+          key: "vue",
+          text: "vue",
         },
         {
-          key: 'taro',
-          text: 'taro'
-        }
-      ]
+          key: "taro",
+          text: "taro",
+        },
+      ],
     });
 
     const configNav = computed(() => {
-      let tarodocs = [] as string[];
+      const tarodocs = [] as string[];
       nav.map((item) => {
         // item.packages.forEach((element) => {
         //   let { tarodoc, name } = element;
@@ -75,7 +66,7 @@ export default defineComponent({
         //     tarodocs.push(`${name.toLowerCase()}-taro`);
         //   }
         // });
-        let { tarodoc, name } = item;
+        const { tarodoc, name } = item;
         if (tarodoc) {
           tarodocs.push(name.toLowerCase());
           tarodocs.push(`${name.toLowerCase()}-taro`);
@@ -85,23 +76,27 @@ export default defineComponent({
     });
 
     const isTaro = (router: RouteLocationNormalized) => {
-      return router.path.indexOf('taro') > -1;
+      return router.path.indexOf("taro") > -1;
     };
 
     const isShow = () => {
       return !excludeTaro.includes(route.path);
     };
 
+    // const isShowTaroDoc = computed(() => {
+    //   return (
+    //     configNav.value.findIndex((item) => item === route.path.substr(1)) > -1
+    //   );
+    // });
     const isShowTaroDoc = computed(() => {
-      return (
-        configNav.value.findIndex((item) => item === route.path.substr(1)) > -1
-      );
+      const routename = route.path.toLocaleLowerCase().split("/").pop() || "";
+      return configNav.value.findIndex((item) => item === routename) > -1;
     });
 
     const watchDemoUrl = (router: RouteLocationNormalized) => {
       const { origin, pathname } = window.location;
       RefData.getInstance().currentRoute.value = router.name as string;
-      data.demoUrl = `${origin}${pathname.replace('index.html', '')}demo.html#${
+      data.demoUrl = `${origin}${pathname.replace("index.html", "")}demo.html#${
         router.path
       }`;
     };
@@ -120,21 +115,21 @@ export default defineComponent({
 
     onMounted(() => {
       watchDemoUrl(route);
-      data.curKey = isTaro(route) ? 'taro' : 'vue';
+      data.curKey = isTaro(route) ? "taro" : "vue";
     });
 
     onBeforeRouteUpdate((to) => {
       watchDemoUrl(to);
-      data.curKey = isTaro(to) ? 'taro' : 'vue';
+      data.curKey = isTaro(to) ? "taro" : "vue";
     });
 
     return {
       ...toRefs(data),
       handleTabs,
       isShow,
-      isShowTaroDoc
+      isShowTaroDoc,
     };
-  }
+  },
 });
 </script>
 
@@ -150,36 +145,40 @@ export default defineComponent({
     }
     &-tabs {
       position: absolute;
-      right: 445px;
-      top: 48px;
+      right: 475px;
+      top: 225px;
       display: flex;
-      height: 50px;
+      height: 40px;
       align-items: center;
-      margin-bottom: 20px;
+      justify-content: space-between;
       z-index: 1;
+      padding: 2px;
+      box-sizing: border-box;
+
+      border-radius: 2px;
+      background: #eee;
+      box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px;
+      &.single {
+        padding: 0;
+        .tab-item {
+          line-height: 40px;
+          cursor: auto;
+        }
+      }
       .tab-item {
         position: relative;
-        padding: 10px 25px;
-        height: 100%;
+        padding: 0 10px;
+        line-height: 36px;
         cursor: pointer;
         font-size: 16px;
         color: #323232;
         text-align: center;
-        border-radius: 4px;
+        border-radius: 2px;
+        background: #eee;
         &.cur {
-          color: #fa2c19;
-          &:after {
-            content: ' ';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: #fa2c19;
-          }
-        }
-        &:hover {
-          background-color: #f7f8fa;
+          font-weight: bold;
+          color: #323232;
+          background: #fff;
         }
       }
     }
