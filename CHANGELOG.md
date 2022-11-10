@@ -1,3 +1,11 @@
+## v1.0.7
+
+`2022-11-09`
+
+- :bug: fix(TurnTable): 大转盘 canvas taro 适配 @Ymm0008
+- :bug: fix(LottoRoll): 摇奖机非中奖问题处理，taro 环境适配 @Ymm0008
+- :bug: fix(Scratchcard): 刮刮卡回调优化 @Ymm0008
+
 ## v1.0.6
 
 `2022-10-17`
