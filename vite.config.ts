@@ -99,14 +99,8 @@ export default defineConfig({
     cssCodeSplit: true,
     rollupOptions: {
       input: {
-        vue: resolve(__dirname, "index.html"),
-        // mobile: resolve(__dirname, "demo.html"),
-      },
-      output: {
-        entryFileNames: `demo-${config.version}/[name].js`,
-        chunkFileNames: `demo-${config.version}/[name].js`,
-        assetFileNames: `demo-${config.version}/[name].[ext]`,
-        plugins: [],
+        doc: resolve(__dirname, "index.html"),
+        mobile: resolve(__dirname, "demo.html"),
       },
     },
   },
