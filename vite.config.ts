@@ -53,44 +53,46 @@ export default defineConfig({
     legacy({
       targets: ["defaults", "not IE 11"],
     }),
-    Markdown({
-      // default options passed to markdown-it
-      // see: https://markdown-it.github.io/markdown-it/
-      markdownItOptions: {
-        highlight: function (str, lang) {
-          if (lang && hljs.getLanguage(lang)) {
-            try {
-              return hljs.highlight(lang, str).value;
-            } catch (__) {}
-          }
+    Markdown(),
+    // Markdown({
+    //   // default options passed to markdown-it
+    //   // see: https://markdown-it.github.io/markdown-it/
+    //   markdownItOptions: {
+    //     highlight: function (str, lang) {
+    //       if (lang && hljs.getLanguage(lang)) {
+    //         try {
+    //           return hljs.highlight(lang, str).value;
+    //         } catch (__) {}
+    //       }
 
-          return ""; // 使用额外的默认转义
-        },
-      },
-      markdownItSetup(md) {
-        md.use(require("markdown-it-container"), "demo", {
-          validate: function (params) {
-            return params.trim().match(/^demo\s*(.*)$/);
-          },
+    //       return ""; // 使用额外的默认转义
+    //     },
+    //   },
+    //   markdownItSetup(md) {
+    //     md.use(require("markdown-it-container"), "demo", {
+    //       validate: function (params) {
+    //         return params.trim().match(/^demo\s*(.*)$/);
+    //       },
 
-          render: function (tokens, idx) {
-            const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
-            if (tokens[idx].nesting === 1) {
-              // opening tag
-              const contentHtml = compressText(tokens[idx + 1].content);
-              return (
-                `<demo-block data-type="vue" data-value="${contentHtml}">` +
-                md.utils.escapeHtml(m[1]) +
-                "\n"
-              );
-            } else {
-              // closing tag
-              return "</demo-block>\n";
-            }
-          },
-        });
-      },
-    }),
+    //       render: function (tokens, idx) {
+    //         const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
+    //         if (tokens[idx].nesting === 1) {
+    //           // opening tag
+    //           const contentHtml = compressText(tokens[idx + 1].content);
+
+    //           return (
+    //             `<demo-block data-type="vue" data-value="${contentHtml}">` +
+    //             md.utils.escapeHtml(m[1]) +
+    //             "\n"
+    //           );
+    //         } else {
+    //           // closing tag
+    //           return "</demo-block>\n";
+    //         }
+    //       },
+    //     });
+    //   },
+    // }),
   ],
   build: {
     target: "es2015",

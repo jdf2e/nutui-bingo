@@ -1,20 +1,27 @@
-import * as LZUTF8 from "lzutf8";
+// import * as LZUTF8 from "lzutf8";
+
 function encodeBase64(str: Uint8Array): any {
   // @ts-ignore
-  return LZUTF8.encodeBase64(str);
+  return str;
+
+  // return LZUTF8.encodeBase64(str);
 }
 function decodeBase64(str: string): any {
   // @ts-ignore
-  return LZUTF8.decodeBase64(str);
+  return str;
+
+  // return LZUTF8.decodeBase64(str);
 }
 
 export function compressText(str: string): any {
   // @ts-ignore
-  return encodeBase64(LZUTF8.compress(str, { outputEncoding: "ByteArray" }));
+  return str;
+  // return encodeBase64(LZUTF8.compress(str, { outputEncoding: "ByteArray" }));
 }
 export function decompressText(str: string): any {
   // @ts-ignore
-  return LZUTF8.decompress(decodeBase64(str));
+  return str;
+  // return LZUTF8.decompress(decodeBase64(str));
 }
 
 export function copyCodeHtml(code: string, callback: any): void {
