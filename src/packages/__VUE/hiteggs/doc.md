@@ -19,19 +19,13 @@ app.use(Hiteggs);
 
 ### 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-hiteggs></nutbig-hiteggs>
 </template>
 ```
 
-:::
-
 ### 自定义传入个数
-
-:::demo
 
 ```html
 <template>
@@ -39,11 +33,7 @@ app.use(Hiteggs);
 </template>
 ```
 
-:::
-
 ### 砸击事件
-
-:::demo
 
 ```html
 <template>
@@ -62,8 +52,6 @@ app.use(Hiteggs);
   };
 </script>
 ```
-
-:::
 
 ### Props
 

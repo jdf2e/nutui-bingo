@@ -19,8 +19,6 @@ app.use(ShakeDice);
 
 ### 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-shakedice ref="dice" :id="id"></nutbig-shakedice>
@@ -74,8 +72,6 @@ app.use(ShakeDice);
   }
 </style>
 ```
-
-:::
 
 ### Props
 

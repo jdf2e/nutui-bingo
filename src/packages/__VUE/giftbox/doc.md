@@ -19,8 +19,6 @@ app.use(Giftbox);
 
 ### 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-giftbox
@@ -55,8 +53,6 @@ app.use(Giftbox);
   };
 </script>
 ```
-
-:::
 
 ### Events
 

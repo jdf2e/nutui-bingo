@@ -19,8 +19,6 @@ app.use(GiftRain);
 
 ### 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-giftrain
@@ -84,8 +82,6 @@ app.use(GiftRain);
   }
 </style>
 ```
-
-:::
 
 ## API
 

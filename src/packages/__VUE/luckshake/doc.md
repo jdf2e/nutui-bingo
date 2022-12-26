@@ -25,8 +25,6 @@ app.use(Luckshake);
 - 如果用户可以在手机的设置关闭掉“动作与方向访问”，则设备不支持摇一摇功能；
 - 调用手机震动的 API `navigator.vibrate` 只在安卓系统有效。
 
-:::demo
-
 ```html
 <template>
   <div
@@ -95,8 +93,6 @@ app.use(Luckshake);
   };
 </script>
 ```
-
-:::
 
 ### Props
 

@@ -19,8 +19,6 @@ app.use(SquareNine);
 
 ### 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-squarenine
@@ -103,11 +101,7 @@ app.use(SquareNine);
 </script>
 ```
 
-:::
-
 ### 自定义开始游戏按钮
-
-:::demo
 
 ```html
 <template>
@@ -193,8 +187,6 @@ app.use(SquareNine);
   };
 </script>
 ```
-
-:::
 
 ### Props
 

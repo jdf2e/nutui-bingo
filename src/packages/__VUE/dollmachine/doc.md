@@ -19,8 +19,6 @@ app.use(Dollmachine);
 
 ### 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-doll-machine
@@ -83,8 +81,6 @@ app.use(Dollmachine);
   };
 </script>
 ```
-
-:::
 
 ### Props
 

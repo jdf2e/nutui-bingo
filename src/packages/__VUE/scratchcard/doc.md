@@ -19,19 +19,13 @@ app.use(Scratchcard);
 
 ## 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-scratch-card content="1000万"></nutbig-scratch-card>
 </template>
 ```
 
-:::
-
 ## 异步数据
-
-:::demo
 
 ```html
 <template>
@@ -53,11 +47,7 @@ app.use(Scratchcard);
 </script>
 ```
 
-:::
-
 ## 支持自定义颜色
-
-:::demo
 
 ```html
 <template>
@@ -69,11 +59,7 @@ app.use(Scratchcard);
 </template>
 ```
 
-:::
-
 ## 支持背景是图片
-
-:::demo
 
 ```html
 <template>
@@ -93,11 +79,7 @@ app.use(Scratchcard);
 </script>
 ```
 
-:::
-
 ## 事件回调
-
-:::demo
 
 ```html
 <template>
@@ -116,19 +98,13 @@ app.use(Scratchcard);
 </script>
 ```
 
-:::
-
 ## 设置刮开比例
-
-:::demo
 
 ```html
 <template>
   <nutbig-scratch-card content="1000万" ratio="0.2"></nutbig-scratch-card>
 </template>
 ```
-
-:::
 
 ## Prop
 

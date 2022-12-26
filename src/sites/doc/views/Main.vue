@@ -3,9 +3,11 @@
   <div class="doc-content" :class="themeName()">
     <div class="doc-content-index">
       <div class="content-left">
-        <div class="content-title"> NutUI-Bingo </div>
-        <div class="content-smile"> </div>
-        <div class="content-subTitle">基于 NutUI 的抽奖组件库，助力营销活动和小游戏场景。</div>
+        <div class="content-title">NutUI-Bingo</div>
+        <div class="content-smile"></div>
+        <div class="content-subTitle">
+          基于 NutUI 的抽奖组件库，助力营销活动和小游戏场景。
+        </div>
         <div class="content-button">
           <div class="leftButton" @click="toIntro">
             <div class="leftButtonText">开始使用</div>
@@ -13,8 +15,8 @@
           <div class="rightButton">
             <div class="rightButtonText">扫码体验</div>
             <div class="qrcodepart">
-              <div class="qrcode-text"> 请使用手机扫码体验 </div>
-              <div class="qrcode"> </div>
+              <div class="qrcode-text">请使用手机扫码体验</div>
+              <div class="qrcode"></div>
             </div>
           </div>
           <iframe
@@ -54,9 +56,9 @@
         >
           <img :src="item.img" />
           <div class="desc">
-            <span class="desc-tit">{{item.title}}</span>
+            <span class="desc-tit">{{ item.title }}</span>
             <span class="desc-txt">
-              {{item.desc}}
+              {{ item.desc }}
             </span>
           </div>
         </swiper-slide>
@@ -72,28 +74,33 @@ import {
   reactive,
   toRefs,
   computed,
-  ref
-} from 'vue';
-import Header from '@/sites/doc/components/Header.vue';
-import Footer from '@/sites/doc/components/Footer.vue';
-import router from '../router';
-import { RefData } from '@/sites/assets/util/ref';
-import { ApiService } from '@/sites/service/ApiService';
+  ref,
+} from "vue";
+import Header from "@/sites/doc/components/Header.vue";
+import Footer from "@/sites/doc/components/Footer.vue";
+import router from "../router";
+import { RefData } from "@/sites/assets/util/ref";
+import { ApiService } from "@/sites/service/ApiService";
 
-import SwiperCore, { Autoplay, Pagination, EffectCoverflow,Navigation } from "swiper";
+import SwiperCore, {
+  Autoplay,
+  Pagination,
+  EffectCoverflow,
+  Navigation,
+} from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import 'swiper/swiper-bundle.css';
+import "swiper/swiper-bundle.css";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/navigation/navigation.scss";
-SwiperCore.use([Autoplay, Pagination, EffectCoverflow,Navigation]);
+SwiperCore.use([Autoplay, Pagination, EffectCoverflow, Navigation]);
 
 export default defineComponent({
-  name: 'main',
+  name: "main",
   components: {
     [Header.name]: Header,
     [Footer.name]: Footer,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
   },
   setup() {
     const data = reactive({
@@ -103,68 +110,68 @@ export default defineComponent({
         {
           img: "https://img13.360buyimg.com/imagetools/jfs/t1/6407/16/20895/121076/61ee7758Efa48a526/5a6164476a6f67a8.png",
           title: "幸运大转盘",
-          desc: "大转盘滚动抽奖，可配置奖品、样式等"
+          desc: "大转盘滚动抽奖，可配置奖品、样式等",
         },
         {
           img: "https://img11.360buyimg.com/imagetools/jfs/t1/175841/32/26077/118716/61ee77c8E63f68506/3617992ff001f5da.png",
           title: "跑马灯",
-          desc: "跑马灯转动抽奖，可配置奖品、样式等"
+          desc: "跑马灯转动抽奖，可配置奖品、样式等",
         },
         {
           img: "https://img14.360buyimg.com/imagetools/jfs/t1/208183/30/16424/24043/61ee7b25E5daf8f0c/54b6e0b0370c27dd.png",
           title: "九宫格",
-          desc: "九宫格抽奖，可配置奖品、图片等"
+          desc: "九宫格抽奖，可配置奖品、图片等",
         },
         {
           img: "https://img13.360buyimg.com/imagetools/jfs/t1/109423/18/21052/53432/61ee7795Ec3a96057/79650b95c77200aa.png",
           title: "刮刮卡",
-          desc: "多种场景模式，支持比例、背景等配置"
+          desc: "多种场景模式，支持比例、背景等配置",
         },
         {
           img: "https://img13.360buyimg.com/imagetools/jfs/t1/133881/34/22453/133525/61ee77b1Ed1a9aa5e/158026b920f2e368.png",
           title: "幸运大礼盒",
-          desc: "开箱子场景，支持图片、事件回调等"
+          desc: "开箱子场景，支持图片、事件回调等",
         },
         {
           img: "https://img14.360buyimg.com/imagetools/jfs/t1/90480/31/20134/56354/61ee7ba4Ea361b3f4/51576de0c39ef352.png",
           title: "摇奖机",
-          desc: "可配置转动圈数、时间、事件回调等"
+          desc: "可配置转动圈数、时间、事件回调等",
         },
         {
           img: "https://img12.360buyimg.com/imagetools/jfs/t1/14463/11/20040/131653/61ee7c2aE91adee7d/2d8a8b832dbe8da8.png",
           title: "砸金蛋",
-          desc: "可配置金蛋数量、图片大小等"
+          desc: "可配置金蛋数量、图片大小等",
         },
         {
           img: "https://img12.360buyimg.com/imagetools/jfs/t1/117915/35/27960/112048/61ee77ebE233c034a/245773ac197c6903.png",
           title: "红包雨",
-          desc: "可配置红包雨数量，事件回调等"
+          desc: "可配置红包雨数量，事件回调等",
         },
         {
           img: "https://img12.360buyimg.com/imagetools/jfs/t1/122265/15/21771/169708/61ee7827E55a62803/f4155486b089fa12.png",
           title: "摇一摇",
-          desc: "可配置红包，手机震动，回调函数等"
+          desc: "可配置红包，手机震动，回调函数等",
         },
         {
           img: "https://img12.360buyimg.com/imagetools/jfs/t1/126785/39/21940/107005/61ee7c7dE889de475/6dc701e563f68d1d.png",
           title: "娃娃机",
-          desc: "可配置奖品列表、速度，指定奖品等"
+          desc: "可配置奖品列表、速度，指定奖品等",
         },
         {
           img: "https://img13.360buyimg.com/imagetools/jfs/t1/6981/39/21101/49425/61ee7cc3E505cf90b/239c85be06a89759.png",
           title: "摇骰子",
-          desc: "可配置骰子速度，指定中奖数字等"
+          desc: "可配置骰子速度，指定中奖数字等",
         },
         {
           img: "https://img10.360buyimg.com/imagetools/jfs/t1/214388/21/11592/35437/61ee7d01E7ea1eff3/8ec26d395947a556.png",
           title: "你藏我猜",
-          desc: "可配置交换次数、速度、回调函数等"
+          desc: "可配置交换次数、速度、回调函数等",
         },
       ],
       currentCaseItem: {},
       currentCaseIndex: 0,
-      localTheme: localStorage.getItem('nutui-theme-color'),
-      showAwait: false
+      localTheme: localStorage.getItem("nutui-theme-color"),
+      showAwait: false,
     });
     let swiper_options = reactive({
       autoplay: {
@@ -222,7 +229,6 @@ export default defineComponent({
       //     if (data.casesImages?.length) {
       //       data.currentCaseItem = data.casesImages[data.currentCaseIndex];
       //     }
-
       //     setTimeout(() => {
       //       caseSwiper = new Swiper('.doc-content-cases-content__list', {
       //         direction: 'horizontal',
@@ -246,7 +252,6 @@ export default defineComponent({
       //     }, 500);
       //   }
       // });
-
     });
     const goAwait = () => {
       data.showAwait = true;
@@ -273,13 +278,13 @@ export default defineComponent({
       };
     });
     const toLink = (id: number) => {
-      window.open('//jelly.jd.com/article/' + id);
+      window.open("//jelly.jd.com/article/" + id);
     };
     function toIntro() {
-      router.push({ path: '/intro' });
+      router.push({ path: "/intro" });
     }
     const toDetail = () => {
-      window.open('/cat');
+      window.open("/cat");
     };
     return {
       // mySwiper,
@@ -293,9 +298,9 @@ export default defineComponent({
       onRight,
       toDetail,
       goAwait,
-      hideAwait
+      hideAwait,
     };
-  }
+  },
 });
 </script>
 <style lang="scss">
@@ -310,7 +315,13 @@ export default defineComponent({
   }
 }
 .doc-content {
-  background: linear-gradient(130.16deg, rgba(219,210,255,1) 0%,rgba(247,239,247,1) 26.666302447552447%,rgba(241,240,246,1) 66.69307255244755%,rgba(255,236,203,1) 100%);
+  background: linear-gradient(
+    130.16deg,
+    rgba(219, 210, 255, 1) 0%,
+    rgba(247, 239, 247, 1) 26.666302447552447%,
+    rgba(241, 240, 246, 1) 66.69307255244755%,
+    rgba(255, 236, 203, 1) 100%
+  );
 }
 .doc-content-index {
   .content-left {
@@ -348,7 +359,7 @@ export default defineComponent({
   padding: 0 0 2%;
   // justify-content: space-around;
   align-items: center;
-  background: url('../../assets/images/picture-demo.png') no-repeat;
+  background: url("../../assets/images/picture-demo.png") no-repeat;
   background-size: 726px 523px;
   background-position: right 0;
   .content-left {
@@ -361,14 +372,14 @@ export default defineComponent({
     .content-title {
       // line-height: 36px;
       font-size: 42px;
-      color: #1A1A1A;
+      color: #1a1a1a;
       font-weight: 700;
     }
     .content-subTitle {
       margin-top: 15px;
       font-size: 20px;
       // font-weight: 800;
-      color: #5F50FB;
+      color: #5f50fb;
     }
     .content-button {
       position: relative;
@@ -390,7 +401,8 @@ export default defineComponent({
         height: 50px;
         // background: linear-gradient(135deg, rgba(114,60,255,1) 0%,rgba(111,58,255,1) 63.49938195167575%,rgba(150,110,255,1) 87.35307751528254%,rgba(149,117,241,1) 100%);
         border-radius: 29px;
-        background: url("../../assets/images/btn-bg.png") no-repeat;
+        background: url("https://img14.360buyimg.com/imagetools/jfs/t1/161895/4/29156/12698/63a9040fE495665af/581050cbb4fdb926.png")
+          no-repeat;
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -401,12 +413,12 @@ export default defineComponent({
           align-self: center;
           margin: auto;
           font-size: 20px;
-          color: #723CFF;
+          color: #723cff;
         }
         margin-left: 26px;
         width: 200px;
         height: 50px;
-        border: 3px solid rgba(114,60,255,1);
+        border: 3px solid rgba(114, 60, 255, 1);
         border-radius: 29px;
         cursor: pointer;
         &:hover {
@@ -445,7 +457,7 @@ export default defineComponent({
     .image-demo {
       width: 726px;
       height: 523px;
-      background: url('../../assets/images/picture-demo.png') no-repeat;
+      background: url("../../assets/images/picture-demo.png") no-repeat;
       background-size: 100% 100%;
     }
   }
@@ -455,39 +467,41 @@ export default defineComponent({
   // font-weight: 800;
   margin: 130px 0 50px;
   text-align: center;
-  color: rgba(26,26,26,0.73);
+  color: rgba(26, 26, 26, 0.73);
 }
 .doc-content-cases-content__list {
   width: 1200px;
   margin: 20px auto 100px;
 }
-::v-deep(.swiper-container){
+::v-deep(.swiper-container) {
   .swiper-pagination {
     bottom: 0;
     .swiper-pagination-bullet-active {
-      background: rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.6);
     }
   }
-  .swiper-button-prev{
+  .swiper-button-prev {
     width: 30px;
     height: 30px;
-    background:url("https://img13.360buyimg.com/imagetools/jfs/t1/222242/19/4512/4563/61a871c4E8bd649da/34621f6e83220600.png") no-repeat;
+    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/222242/19/4512/4563/61a871c4E8bd649da/34621f6e83220600.png")
+      no-repeat;
     background-size: 100% 100%;
     &::after {
       display: none;
     }
   }
-  .swiper-button-next{
+  .swiper-button-next {
     width: 30px;
     height: 30px;
-    background:url("https://img13.360buyimg.com/imagetools/jfs/t1/205759/28/17284/4603/61a871c4E74e815ac/9247fb41d5871179.png") no-repeat;
+    background: url("https://img13.360buyimg.com/imagetools/jfs/t1/205759/28/17284/4603/61a871c4E74e815ac/9247fb41d5871179.png")
+      no-repeat;
     background-size: 100% 100%;
     &::after {
       display: none;
     }
   }
 }
-::v-deep(.swiper-wrapper){
+::v-deep(.swiper-wrapper) {
   display: flex;
   transform: translate3d(0, 0, 0);
   transition: all 0.6s ease;
@@ -497,7 +511,7 @@ export default defineComponent({
     height: 390px;
     padding: 30px 28px;
     flex-shrink: 0;
-    background: rgba(255,255,255,1);
+    background: rgba(255, 255, 255, 1);
     border-radius: 19px;
     text-align: center;
     font-size: 18px;
@@ -516,7 +530,7 @@ export default defineComponent({
   }
   .desc {
     span {
-      color: rgba(26,26,26,1);
+      color: rgba(26, 26, 26, 1);
     }
     .desc-tit {
       display: block;

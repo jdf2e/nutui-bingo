@@ -19,8 +19,6 @@ app.use(GuessGift);
 
 ### 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-guess-gift
@@ -75,8 +73,6 @@ app.use(GuessGift);
   }
 </style>
 ```
-
-:::
 
 ### Props
 

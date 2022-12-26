@@ -19,8 +19,6 @@ app.use(LottoRoll);
 
 ## 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-lotto-roll
@@ -106,8 +104,6 @@ app.use(LottoRoll);
   };
 </script>
 ```
-
-:::
 
 ### Props
 

@@ -19,8 +19,6 @@ app.use(Turntable);
 
 ### 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-turntable
@@ -146,8 +144,6 @@ app.use(Turntable);
   };
 </script>
 ```
-
-:::
 
 ### Props
 

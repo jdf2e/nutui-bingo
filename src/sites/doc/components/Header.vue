@@ -65,15 +65,15 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, computed, onMounted } from 'vue';
-import Search from './Search.vue';
-import { header, versions, nav } from '@/config.json';
-import { version } from './../../../../package.json';
-import { RefData } from '@/sites/assets/util/ref';
+import { defineComponent, reactive, computed, onMounted } from "vue";
+import Search from "./Search.vue";
+import { header, versions, nav } from "@/config.json";
+import { version } from "./../../../../package.json";
+import { RefData } from "@/sites/assets/util/ref";
 export default defineComponent({
-  name: 'doc-header',
+  name: "doc-header",
   components: {
-    Search
+    Search,
   },
   setup() {
     let packages = [] as any[];
@@ -81,12 +81,12 @@ export default defineComponent({
       packages.push(item);
     });
     const data = reactive({
-      theme: 'black',
+      theme: "black",
       // headerBg: 'url(' + require('../../assets/images/header-bg.png') + ')',
-      verson: '3.x',
+      verson: "3.x",
       navIndex: 0,
       activeIndex: 0,
-      isShowSelect: false
+      isShowSelect: false,
     });
     const handleFocus = () => {
       console.log(1);
@@ -96,16 +96,16 @@ export default defineComponent({
     };
 
     const toHome = () => {
-      RefData.getInstance().currentRoute.value = '/';
+      RefData.getInstance().currentRoute.value = "/";
     };
 
     const isActive = computed(() => {
       let value = RefData.getInstance().currentRoute.value;
       return function (name: string) {
         const lName = name.toLowerCase();
-        if (lName === 'component') {
-          if (value.indexOf('-taro') > -1) {
-            value = value.split('-taro')[0];
+        if (lName === "component") {
+          if (value.indexOf("-taro") > -1) {
+            value = value.split("-taro")[0];
           }
           return (
             packages.findIndex((item) => item.name.toLowerCase() === value) > -1
@@ -136,9 +136,9 @@ export default defineComponent({
       checkTheme,
       themeName,
       handleFocus,
-      handleFocusOut
+      handleFocusOut,
     };
-  }
+  },
 });
 </script>
 
@@ -230,7 +230,7 @@ export default defineComponent({
         &.active {
           font-weight: bold;
           &:after {
-            content: '';
+            content: "";
             display: inline-block;
             width: 20px;
             height: 14px;
@@ -238,7 +238,7 @@ export default defineComponent({
             bottom: 13px;
             left: 57%;
             // margin-left: -17.5px;
-            background: url('../../assets/images/nav-item-active.png');
+            background: url("../../assets/images/nav-item-active.png");
             background-size: 100% 100%;
           }
         }
@@ -252,12 +252,12 @@ export default defineComponent({
         height: 26px;
         vertical-align: middle;
         background-repeat: no-repeat;
-        background-image: url('../../assets/images/icon-user.png');
+        background-image: url("../../assets/images/icon-user.png");
         background-size: 26px;
 
         &.gitee {
           margin-left: 8px;
-          background-image: url('../../assets/images/icon-gitee.png');
+          background-image: url("../../assets/images/icon-gitee.png");
         }
       }
     }
@@ -313,8 +313,8 @@ export default defineComponent({
     .header {
       &-logo {
         .logo-link {
-          background: url('../../assets/images/logo.png') no-repeat
-            center/100%;
+          background: url("https://img12.360buyimg.com/imagetools/jfs/t1/47314/4/22413/13243/63a9022eE721fa0a8/b30ec5d3c50e53b4.png")
+            no-repeat center/100%;
         }
         .logo-border {
           background: $theme-red-border;
@@ -359,12 +359,12 @@ export default defineComponent({
       &-box {
         &.select-down {
           .header-select-hd {
-            background-image: url('../../assets/images/icon-select-white-down.png');
+            background-image: url("../../assets/images/icon-select-white-down.png");
           }
         }
         &.select-up {
           .header-select-hd {
-            background-image: url('../../assets/images/icon-select-white-up.png');
+            background-image: url("../../assets/images/icon-select-white-up.png");
           }
         }
       }
@@ -392,8 +392,8 @@ export default defineComponent({
     .header {
       &-logo {
         .logo-link {
-          background: url('../../assets/images/logo.png') no-repeat
-            center/100%;
+          background: url("https://img12.360buyimg.com/imagetools/jfs/t1/47314/4/22413/13243/63a9022eE721fa0a8/b30ec5d3c50e53b4.png")
+            no-repeat center/100%;
         }
         .logo-border {
           background: $theme-white-border;
@@ -438,12 +438,12 @@ export default defineComponent({
       &-box {
         &.select-down {
           .header-select-hd {
-            background-image: url('../../assets/images/icon-select-gray-down.png');
+            background-image: url("../../assets/images/icon-select-gray-down.png");
           }
         }
         &.select-up {
           .header-select-hd {
-            background-image: url('../../assets/images/icon-select-gray-up.png');
+            background-image: url("../../assets/images/icon-select-gray-up.png");
           }
         }
       }
@@ -471,8 +471,8 @@ export default defineComponent({
     .header {
       &-logo {
         .logo-link {
-          background: url('../../assets/images/logo.png') no-repeat
-            center/100%;
+          background: url("https://img12.360buyimg.com/imagetools/jfs/t1/47314/4/22413/13243/63a9022eE721fa0a8/b30ec5d3c50e53b4.png")
+            no-repeat center/100%;
         }
         .logo-border {
           background: $theme-black-border;
@@ -517,12 +517,12 @@ export default defineComponent({
       &-box {
         &.select-down {
           .header-select-hd {
-            background-image: url('../../assets/images/icon-select-white-down.png');
+            background-image: url("../../assets/images/icon-select-white-down.png");
           }
         }
         &.select-up {
           .header-select-hd {
-            background-image: url('../../assets/images/icon-select-white-up.png');
+            background-image: url("../../assets/images/icon-select-white-up.png");
           }
         }
       }

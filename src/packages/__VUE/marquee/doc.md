@@ -19,8 +19,6 @@ app.use(Marquee);
 
 ### 基础用法
 
-:::demo
-
 ```html
 <template>
   <nutbig-marquee
@@ -118,8 +116,6 @@ app.use(Marquee);
   };
 </script>
 ```
-
-:::
 
 ### Props
 
