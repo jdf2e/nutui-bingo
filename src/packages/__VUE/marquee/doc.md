@@ -26,6 +26,7 @@ app.use(Marquee);
     :prize-index="prizeIndex"
     :speed="100"
     :circle="40"
+    :style-opt="styleOpt"
     @start-turns="startTurns"
     @end-turns="endTurns"
   >
@@ -90,9 +91,9 @@ app.use(Marquee);
       ]);
       // 转盘样式的选项
       const styleOpt = reactive({
-        prizeItem: {},
+        itemStyle: {},
         startStyle: {},
-        contentBg: {
+        bgStyle: {
           background: "rgb(255, 231, 149)",
         },
       });
@@ -125,7 +126,7 @@ app.use(Marquee);
 | prize-index | 中奖奖品在列表的索引位置                                                                | Number | -1                                          |
 | speed       | 转动速度                                                                                | Number | 150                                         |
 | circle      | 转动圈数                                                                                | Number | 30                                          |
-| style-opt   | 跑马灯中的样式：contentBg-整个容器样式，prizeItem-每个奖品样式，startStyle-中间按钮样式 | Object | {contentBg: {},prizeItem: {},startStyle:{}} |
+| style-opt   | 跑马灯中的样式：bgStyle-整个容器样式，itemStyle-每个奖品样式，startStyle-中间按钮样式 | Object | {bgStyle: {},itemStyle: {},startStyle:{}} |
 
 ### Events
 
